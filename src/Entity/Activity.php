@@ -173,7 +173,7 @@ class Activity
         return $this;
     }
 
-    public function isPublished(): ?bool
+    public function getisPublished(): ?bool
     {
         return $this->isPublished;
     }

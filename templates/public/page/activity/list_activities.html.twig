@@ -1,0 +1,25 @@
+{% extends 'public/base.html.twig' %}
+
+{% block main %}
+
+    <h1> Les activités </h1>
+
+    <section>
+
+        {% for activity in activities %}
+
+            <article>
+
+                <h2>{{ activity.title }}</h2>
+                <p> {{ activity.description }} </p>
+                <div class="imgActivity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
+                <p> {{ activity.date | date('d/m/Y') }} </p>
+                <a href="{{ path('show_activity', {id: activity.id}) }}"> Voir l'activité </a>
+
+            </article>
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
