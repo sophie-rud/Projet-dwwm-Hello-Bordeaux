@@ -1,0 +1,17 @@
+{% extends 'public/base.html.twig' %}
+
+
+{% block main %}
+
+    <h1> Catégories </h1>
+
+    {% for category in categories %}
+
+        <p> {{ category.nameCategory }} </p>
+        <div class="pictoCategory"> <img src="{{ category.pictogram }}" alt="pictogramme de la catégorie: {{ category.nameCategory }}"> </div>
+
+        <a href="{{ path('show_category', {id: category.id}) }}"> Voir toutes les activités </a>
+
+    {% endfor %}
+
+{% endblock %}

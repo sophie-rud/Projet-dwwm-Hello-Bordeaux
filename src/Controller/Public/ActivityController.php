@@ -35,7 +35,7 @@ class ActivityController extends AbstractController {
             return new Response($html404, 404);
         }
 
-        return $this->render('public/page/activity/showActivity.html.twig', [
+        return $this->render('public/page/activity/show_activity.html.twig', [
             'activity' => $activity
         ]);
     }
