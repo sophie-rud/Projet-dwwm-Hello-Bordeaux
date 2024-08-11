@@ -40,20 +40,22 @@ class ActivityType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'id',
             ])
-            ->add('gallery', EntityType::class, [
+            /* ->add('gallery', FileType::class, [
                 'class' => PictureGallery::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-            ])
+                // demande à Symfony de ne pas gérer automatiquement les photos
+                'mapped' => false,
+            ]) */
             ->add('userAdminOrganizer', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',
             ])
-            ->add('userParticipant', EntityType::class, [
+            /* ->add('userParticipant', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-            ])
+            ]) */
             ->add('valider', SubmitType::class)
         ;
     }

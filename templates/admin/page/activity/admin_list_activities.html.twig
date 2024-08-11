@@ -20,6 +20,8 @@
                 <td>Publié ?</td>
                 <td>Créé le :</td>
                 <td>Mis à jour le :</td>
+                <td>Voir</td>
+                <td>Supprimer</td>
                 <td>Modifier</td>
 
             </tr>
@@ -39,6 +41,7 @@
                 <td>{{ activity.updatedAt | date('d.m.Y') }}</td>
                 <td> <a href="{{ path('admin_show_activity', {id: activity.id}) }}"> Voir l'activité </a> </td>
                 <td> <a href="{{ path('admin_delete_activity', {id: activity.id}) }}"> Supprimer l'activité </a> </td>
+                <td> <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Modifier </a> </td>
             </tr>
 
         {% endfor %}

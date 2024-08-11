@@ -53,6 +53,7 @@ class Activity
      * @var Collection<int, PictureGallery>
      */
     #[ORM\ManyToMany(targetEntity: PictureGallery::class, inversedBy: 'activities')]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $gallery;
 
     #[ORM\ManyToOne(inversedBy: 'activitiesOrganized')]
@@ -63,6 +64,7 @@ class Activity
      * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'activitiesParticipate')]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $userParticipant;
 
     public function __construct()

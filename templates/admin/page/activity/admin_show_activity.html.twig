@@ -6,7 +6,7 @@
 
 {% block main %}
 
-    <h1> Les activités </h1>
+    <h1> Activité </h1>
 
     <section>
 
@@ -16,7 +16,11 @@
                 <p> {{ activity.description }} </p>
                 <div class="imgActivity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
                 <p> {{ activity.date | date('d/m/Y') }} </p>
+
             </article>
+
+            <a href="{{ path('admin_delete_activity', {id: activity.id}) }}"> Supprimer l'activité </a>
+            <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Mettre à jour </a>
 
     </section>
 

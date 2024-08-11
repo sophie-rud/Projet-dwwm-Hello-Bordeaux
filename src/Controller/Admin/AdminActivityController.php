@@ -136,4 +136,29 @@ class AdminActivityController extends AbstractController {
         return $this->redirectToRoute('admin_list_activities');
     }
 
+
+    #[Route('admin/activities/update/{id}', name: 'admin_update_activity')]
+    public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request): Response {
+
+        $activity = $activityRepository->find($id);
+
+        $activityCreateForm = $this->createForm(ActivityType::class, $activity);
+
+        $activityCreateForm->handleRequest($request);
+
+        if($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
+            $entityManager->persist($activity);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Activité enregistrée !');
+        }
+
+        $activityCreateFormView = $activityCreateForm->createView();
+
+        return $this->render('admin/page/activity/admin_update_activity.html.twig', [
+            'activityForm' => $activityCreateFormView
+        ]);
+    }
+
+
 }
