@@ -1,0 +1,23 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block metatitle %}
+{% endblock %}
+
+
+{% block main %}
+
+    <h1> Les activités </h1>
+
+    <section>
+
+            <article>
+
+                <h2>{{ activity.title }}</h2>
+                <p> {{ activity.description }} </p>
+                <div class="imgActivity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
+                <p> {{ activity.date | date('d/m/Y') }} </p>
+            </article>
+
+    </section>
+
+{% endblock %}
