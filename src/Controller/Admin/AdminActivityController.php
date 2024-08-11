@@ -45,7 +45,7 @@ class AdminActivityController extends AbstractController {
         ]);
     }
 
-    #[Route('admin/activities/insert', name: 'admin_activity_insert')]
+    #[Route('admin/activities/insert', name: 'admin_insert_activity')]
     public function insertActivity(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
         $activity = new Activity();
 
@@ -99,6 +99,41 @@ class AdminActivityController extends AbstractController {
         return $this->render('admin/page/activity/admin_insert_activity.html.twig', [
             'activityForm' => $activityCreateFormView
         ]);
+    }
+
+
+    #[Route('admin/activities/delete/{id}', name: 'admin_delete_activity')]
+    public function deleteActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager): Response {
+
+        // Dans $activity, on stocke le résultat de notre recherche par id dans les données de la table Activity
+        $activity = $activityRepository->find($id);
+
+        // Si aucun article n'est trouvé avec l'id recherché, on retourne une page et code d'erreur 404
+        if (!$activity || !$activity->getisPublished()) {
+            $html404 = $this->renderView('public/page/page404.html.twig');
+            return new Response($html404, 404);
+        }
+
+
+        // Le try catch permet d'éxecuter du code tout en récupérant les erreurs potentielles afin de les gérer correctement
+        try {
+            //on prépare la requête
+            $entityManager->remove($activity);
+            // on exécute la requête
+            $entityManager->flush();
+            // permet d'enregistrer un message dans la session de PHP, qui sera affiché grâce à twig sur la prochaine page
+            $this->addFlash('success', 'L\'activité a bien été supprimée !');
+
+        // Si l'exécution du try a échoué, catch est exécuté et on renvoie une réponse http avec un message d'erreur
+        } catch (\Exception $exception) {
+            return $this->renderView('admin/page/error.html.twig', [
+                'errorMessage' => $exception->getMessage()
+                ]);
+        }
+
+
+        // On fait une redirection sur la page d'affichage des activités (liste) de l'administrateur
+        return $this->redirectToRoute('admin_list_activities');
     }
 
 }

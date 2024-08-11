@@ -17,6 +17,20 @@
 
 
     <main>
+        {# Affichage des messages flashes #}
+        {% for message in app.flashes('success') %}
+            <div class="success-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="error-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
         {% block main %}{% endblock %}
     </main>
 
