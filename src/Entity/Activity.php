@@ -177,12 +177,13 @@ class Activity
         return $this;
     }
 
-    public function getisPublished(): ?bool
+    public function getIsPublished(): ?bool
     {
         return $this->isPublished;
+
     }
 
-    public function setPublished(bool $isPublished): static
+    public function setIsPublished(bool $isPublished): static
     {
         $this->isPublished = $isPublished;
 
