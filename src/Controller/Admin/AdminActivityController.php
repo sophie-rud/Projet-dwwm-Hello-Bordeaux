@@ -1,5 +1,6 @@
 <?php
 
+// lié au typage
 declare(strict_types=1);
 
 namespace App\Controller\Admin;
@@ -17,46 +18,64 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
+// la route donnée avant la classe vient en préfixe de toutes les routes des méthodes appelées dans la classe
+#[Route('admin/activities')]
 class AdminActivityController extends AbstractController {
 
-    #[Route('admin/activities/', name: 'admin_list_activities')]
+    // Annotation qui permet de créer une route dès que la fonction adminListActivities est appelée
+    #[Route('/', name: 'admin_list_activities')]
     public function adminListActivities(ActivityRepository $activityRepository): Response {
 
+        // On stocke le résultat de notre select, findAll(), sur la table Activity
         $activities = $activityRepository->findAll();
 
+        // On retourne une réponse http en html
         return $this->render('admin/page/activity/admin_list_activities.html.twig', [
             'activities' => $activities
         ]);
     }
 
 
-    #[Route('/admin/activities/show/{id}', name: 'admin_show_activity')]
+    // Annotation qui permet de créer une route dès que la fonction showActivity est appelée
+    #[Route('/show/{id}', name: 'admin_show_activity')]
     public function showActivity(int $id, ActivityRepository $activityRepository): Response {
 
+        // Dans $activity, on stocke le résultat de notre recherche par id dans les données de la table Activity
         $activity = $activityRepository->find($id);
 
+        // Si aucune activité n'est trouvée avec l'id recherché, on retourne une page et code d'erreur 404
         if (!$activity || !$activity->getisPublished()) {
             $html404 = $this->renderView('public/page/page404.html.twig');
             return new Response($html404, 404);
         }
 
+        // On retourne une réponse http en html
         return $this->render('admin/page/activity/admin_show_activity.html.twig', [
             'activity' => $activity
         ]);
     }
 
-    #[Route('admin/activities/insert', name: 'admin_insert_activity')]
+
+    // Annotation qui permet de créer une route dès que la fonction insertActivity est appelée
+    #[Route('/insert', name: 'admin_insert_activity')]
     public function insertActivity(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
+        // On crée une nouvelle instance de la classe Activity (de l'entité)
         $activity = new Activity();
 
+        // On génère une instance de la classe de gabarit de formulaire, et on la lie avec l'entité Activity
         $activityCreateForm = $this->createForm(ActivityType::class, $activity);
 
+        // On lie le formulaire à la requête
         $activityCreateForm->handleRequest($request);
 
-        if ($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
 
+        // Si le formulaire est soumis (posté) et complété avec des données valides (qui respectent les contraintes de champs)
+        if ($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
+            // On récupère le fichier depuis le formulaire
             $photoFile = $activityCreateForm->get('photo')->getData();
 
+            // Si un fichier photo est bien soumis
             if ($photoFile) {
                 // On récupère le nom du fichier
                 $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -89,7 +108,7 @@ class AdminActivityController extends AbstractController {
 
             // On fait une redirection sur la page du formulaire d'insertion
             // plus logique de retomber sur la liste des articles ou page de mise à jour des articles
-            return $this->redirectToRoute('admin_activity_insert');
+            return $this->redirectToRoute('admin_list_activities');
         }
 
         // Avec la méthode createView(), on génère une instance de 'vue' du formulaire, pour le render
@@ -102,13 +121,13 @@ class AdminActivityController extends AbstractController {
     }
 
 
-    #[Route('admin/activities/delete/{id}', name: 'admin_delete_activity')]
+    #[Route('/delete/{id}', name: 'admin_delete_activity')]
     public function deleteActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager): Response {
 
         // Dans $activity, on stocke le résultat de notre recherche par id dans les données de la table Activity
         $activity = $activityRepository->find($id);
 
-        // Si aucun article n'est trouvé avec l'id recherché, on retourne une page et code d'erreur 404
+        // Si aucune activité n'est trouvée avec l'id recherché, on retourne une page et code d'erreur 404
         if (!$activity || !$activity->getisPublished()) {
             $html404 = $this->renderView('public/page/page404.html.twig');
             return new Response($html404, 404);
@@ -137,24 +156,32 @@ class AdminActivityController extends AbstractController {
     }
 
 
-    #[Route('admin/activities/update/{id}', name: 'admin_update_activity')]
+    #[Route('/update/{id}', name: 'admin_update_activity')]
     public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request): Response {
 
+        // Dans $activity, on stocke le résultat du select par id dans l'entité Activity
         $activity = $activityRepository->find($id);
 
+        // On génère une instance de la classe de gabarit de formulaire, et on la lie avec l'entité Activity
         $activityCreateForm = $this->createForm(ActivityType::class, $activity);
 
+        // On lie le formulaire à la requête sql (Doctrine gère la récupération des données et les stocke dans l'entité)
         $activityCreateForm->handleRequest($request);
 
+        // Sile formulaire est soumis et contient des données valides (qui respectent les contraintes)
         if($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
+            // On prépare la requête sql
             $entityManager->persist($activity);
+            // puis on l'exécute
             $entityManager->flush();
 
+            // Et on affiche un message flash pour informer l'utilisateur de la bonne exécution de sa requête
             $this->addFlash('success', 'Activité enregistrée !');
         }
 
+        // Avec la méthode createView(), on génère une instance de 'vue' du formulaire, pour le render
         $activityCreateFormView = $activityCreateForm->createView();
-
+        // On retourne une réponse http (le fichier html du formulaire)
         return $this->render('admin/page/activity/admin_update_activity.html.twig', [
             'activityForm' => $activityCreateFormView
         ]);

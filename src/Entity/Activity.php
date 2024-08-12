@@ -71,6 +71,8 @@ class Activity
     {
         $this->gallery = new ArrayCollection();
         $this->userParticipant = new ArrayCollection();
+        $this->createdAt = new \DateTime('NOW');
+        $this->updatedAt = new \DateTime('NOW');
     }
 
 

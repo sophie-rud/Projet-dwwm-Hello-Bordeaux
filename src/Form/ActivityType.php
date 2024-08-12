@@ -29,12 +29,12 @@ class ActivityType extends AbstractType
                 // demande à Symfony de ne pas gérer automatiquement les photos
                 'mapped' => false,
             ])
-            ->add('createdAt', null, [
+            /* ->add('createdAt', null, [
                 'widget' => 'single_text'
             ])
             ->add('updatedAt', null, [
                 'widget' => 'single_text'
-            ])
+            ]) */
             ->add('isPublished')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
