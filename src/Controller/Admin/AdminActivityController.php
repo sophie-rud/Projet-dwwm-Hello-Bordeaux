@@ -46,7 +46,7 @@ class AdminActivityController extends AbstractController {
 
         // Si aucune activité n'est trouvée avec l'id recherché, on retourne une page et code d'erreur 404
         if (!$activity || !$activity->getisPublished()) {
-            $html404 = $this->renderView('public/page/page404.html.twig');
+            $html404 = $this->renderView('admin/page/page404.html.twig');
             return new Response($html404, 404);
         }
 
@@ -129,7 +129,7 @@ class AdminActivityController extends AbstractController {
 
         // Si aucune activité n'est trouvée avec l'id recherché, on retourne une page et code d'erreur 404
         if (!$activity || !$activity->getisPublished()) {
-            $html404 = $this->renderView('public/page/page404.html.twig');
+            $html404 = $this->renderView('admin/page/page404.html.twig');
             return new Response($html404, 404);
         }
 
@@ -163,13 +163,15 @@ class AdminActivityController extends AbstractController {
         $activity = $activityRepository->find($id);
 
         // On génère une instance de la classe de gabarit de formulaire, et on la lie avec l'entité Activity
-        $activityCreateForm = $this->createForm(ActivityType::class, $activity);
+        $activityUpdateForm = $this->createForm(ActivityType::class, $activity);
 
         // On lie le formulaire à la requête sql (Doctrine gère la récupération des données et les stocke dans l'entité)
-        $activityCreateForm->handleRequest($request);
+        $activityUpdateForm->handleRequest($request);
 
         // Sile formulaire est soumis et contient des données valides (qui respectent les contraintes)
-        if($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
+        if($activityUpdateForm->isSubmitted() && $activityUpdateForm->isValid()) {
+            // On actualise la date de mise à jour de l'activité
+            $activity->setUpdatedAt(new \DateTime('NOW'));
             // On prépare la requête sql
             $entityManager->persist($activity);
             // puis on l'exécute
@@ -180,10 +182,10 @@ class AdminActivityController extends AbstractController {
         }
 
         // Avec la méthode createView(), on génère une instance de 'vue' du formulaire, pour le render
-        $activityCreateFormView = $activityCreateForm->createView();
+        $activityUpdateFormView = $activityUpdateForm->createView();
         // On retourne une réponse http (le fichier html du formulaire)
         return $this->render('admin/page/activity/admin_update_activity.html.twig', [
-            'activityForm' => $activityCreateFormView
+            'activityForm' => $activityUpdateFormView
         ]);
     }
 
