@@ -1,0 +1,67 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+
+{% block metatitle %} Insert user
+{% endblock %}
+
+
+{% block main %}
+
+    <h1>Créer un admin</h1>
+
+{#
+<form method="post">
+
+    <div>
+        <label for="">Email
+            <input type="email" name="email" />
+        </label>
+    </div>
+
+    <div>
+        <label for="">Mot de passe
+            <input type="password" name="password" />
+        </label>
+    </div>
+
+    <div>
+        <label for="">Pseudo
+            <input type="text" name="username" />
+        </label>
+    </div>
+
+    <div>
+        <label for="">Prénom (pour savoir comment t'appeler lors des activités)
+            <input type="text" name="first_name" />
+        </label>
+    </div>
+
+    <div>
+        <label for="">Date de naissance
+            <input type="date" name="birth_date" />
+        </label>
+    </div>
+
+    <div>
+        <label for="">Numéro de téléphone
+            <input type="tel" name="phone" />
+        </label>
+    </div>
+
+    <div>
+        <label for="">Un espace pour une courte présentation de toi, tes hobbies...
+            <input type="text" name="presentation" />
+        </label>
+    </div>
+
+
+    <input type="submit" value="Créer">
+
+</form>
+ #}
+
+{{ form(userForm) }}
+
+
+
+{% endblock %}
