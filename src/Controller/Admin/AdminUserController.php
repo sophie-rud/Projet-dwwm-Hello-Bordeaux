@@ -7,6 +7,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+#[Route('/admin/user')]
 class AdminUserController extends AbstractController {
 
 
-    #[Route('/admin/user/insert', name: 'admin_user_insert')]
+    #[Route('/', name: 'admin_list_users')]
+    public function adminListUsers(UserRepository $userRepository): Response {
+
+        $users = $userRepository->findAll();
+
+        // On retourne une réponse http en html
+        return $this->render('admin/page/user/admin_list_users.html.twig', [
+            'users' => $users
+        ]);
+    }
+
+    #[Route('/insert', name: 'admin_user_insert')]
     public function insertAdmin(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request): Response
     {
 
@@ -58,6 +72,37 @@ class AdminUserController extends AbstractController {
             'userForm' => $userCreateFormView
         ]);
 
+    }
+
+
+
+
+
+    #[Route('/delete/{id}', name: 'admin_delete_user')]
+    public function deleteUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
+
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            $html404 = $this->renderView('admin/page/page404.html.twig');
+            return new Response($html404, 404);
+        }
+
+
+        try {
+            $entityManager->remove($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'L\'utilisateur a été supprimé !');
+
+        } catch (\Exception $exception) {
+            return $this->renderView('admin/page/error.html.twig', [
+                'errorMessage' => $exception->getMessage()
+            ]);
+        }
+
+
+        return $this->redirectToRoute('admin_list_users');
     }
 
 
