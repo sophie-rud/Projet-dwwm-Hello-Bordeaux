@@ -1,0 +1,53 @@
+{% extends 'public/base.html.twig' %}
+
+{% block metatitle %} Profile
+{% endblock %}
+
+{% block main %}
+
+    <h1> Profil </h1>
+
+    <section>
+
+            <article>
+
+                {# <div class="profilePicture"> <img src="{{ asset('uploads/' ~user.profilePicture) }}" alt="photo de profil de : {{ user.username }}"> </div> #}
+                <h2>{{ user.username }}</h2>
+                <a href="{{ path('user_update_user', {id: user.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/pencil.png') }}" alt="Icône des paramètres"> </div>  </a>
+                <p>{{ user.firstName }}</p>
+                <p> {{ user.presentation }} </p>
+
+            </article>
+
+            <div>
+                <p>Informations personnelles</p>
+
+                <table>
+
+                    <tr>
+                        <td> Email </td>
+                        <td> <p> {{ user.email }} </p> </td>
+                    </tr>
+
+                    <tr>
+                        <td> Numéro de téléphone </td>
+                        <td> <p> {{ user.phone }} </p> </td>
+                    </tr>
+
+                    <tr>
+                        <td> Date de naissance </td>
+                        <td> {{ user.birthDate | date('d.m.Y') }} </td>
+                    </tr>
+
+                </table>
+
+                {# <p> {{ user.registeredAt | date('d/m/Y')}} </p> #}
+
+
+                <a href="{{ path('user_update_user', {id: user.id}) }}"> Modifier mon profil </a>
+                <a href="{{ path('user_delete_user', {id: user.id}) }}"> Supprimer mon profil </a>
+            </div>
+
+    </section>
+
+{% endblock %}
