@@ -7,6 +7,7 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Activity;
+use App\Entity\User;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -59,7 +61,9 @@ class AdminActivityController extends AbstractController {
 
     // Annotation qui permet de créer une route dès que la fonction insertActivity est appelée
     #[Route('/insert', name: 'admin_insert_activity')]
-    public function insertActivity(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
+    public function insertActivity(EntityManagerInterface $entityManager, UserInterface $userInterface, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
+
+
         // On crée une nouvelle instance de la classe Activity (de l'entité)
         $activity = new Activity();
 
@@ -94,9 +98,14 @@ class AdminActivityController extends AbstractController {
                     dd($e->getMessage());
                 }
 
-                // On stocke le nom du fichier dans la propriété image de l'entité article
+                // On stocke le nom du fichier dans la propriété image de l'entité activity
                 $activity->setPhoto($newFilename);
             }
+
+            /* $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); */
+
+            $currentUser = $this->getUser();
+            $activity->setUserAdminOrganizer($currentUser);
 
             // On prépare la requête sql,
             $entityManager->persist($activity);
@@ -116,7 +125,8 @@ class AdminActivityController extends AbstractController {
 
         // On retourne une réponse http (le fichier html du formulaire)
         return $this->render('admin/page/activity/admin_insert_activity.html.twig', [
-            'activityForm' => $activityCreateFormView
+            'activityForm' => $activityCreateFormView,
+            'activity' => $activity,
         ]);
     }
 
@@ -185,7 +195,8 @@ class AdminActivityController extends AbstractController {
         $activityUpdateFormView = $activityUpdateForm->createView();
         // On retourne une réponse http (le fichier html du formulaire)
         return $this->render('admin/page/activity/admin_update_activity.html.twig', [
-            'activityForm' => $activityUpdateFormView
+            'activityForm' => $activityUpdateFormView,
+
         ]);
     }
 

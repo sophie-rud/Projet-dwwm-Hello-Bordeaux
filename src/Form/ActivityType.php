@@ -9,6 +9,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -38,7 +39,7 @@ class ActivityType extends AbstractType
             ->add('isPublished')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nameCategory',
             ])
             /* ->add('gallery', FileType::class, [
                 'class' => PictureGallery::class,
@@ -47,10 +48,14 @@ class ActivityType extends AbstractType
                 // demande à Symfony de ne pas gérer automatiquement les photos
                 'mapped' => false,
             ]) */
-            ->add('userAdminOrganizer', EntityType::class, [
+            /* ->add('userAdminOrganizer', EntityType::class, [
                 'class' => User::class,
-                'choice_label' => 'id',
-            ])
+                'label' => 'Organisateur :',
+                'data' => $options['userAdminOrganizer'], // Définit la valeur par défaut du champ
+                'mapped' => false,
+            ]) */
+
+
             /* ->add('userParticipant', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',
@@ -64,6 +69,7 @@ class ActivityType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Activity::class,
+            /* 'userAdminOrganizer' => null, */
         ]);
     }
 }

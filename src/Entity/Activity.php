@@ -73,6 +73,7 @@ class Activity
         $this->userParticipant = new ArrayCollection();
         $this->createdAt = new \DateTime('NOW');
         $this->updatedAt = new \DateTime('NOW');
+
     }
 
 
