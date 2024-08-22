@@ -19,7 +19,7 @@ class UserType extends AbstractType
             ->add('email')
             /* ->add('roles') */
             ->add('password', PasswordType::class /*, [
-                'hash_property_path' => 'password',
+                'hash_property_path' => 'password', // autre manière de hasher le mdp, nous l'avons fait dans le controller
                 'mapped' => false,
                 ] */ )
             ->add('username')

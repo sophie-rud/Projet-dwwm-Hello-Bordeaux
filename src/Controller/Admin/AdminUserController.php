@@ -16,9 +16,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/admin/user')]
+#[Route('/admin')]
 class AdminUserController extends AbstractController {
-
 
     #[Route('/', name: 'admin_list_users')]
     public function adminListUsers(UserRepository $userRepository): Response {
@@ -38,32 +37,36 @@ class AdminUserController extends AbstractController {
        $user = new User();
 
        $userCreateForm = $this->createForm(UserType::class, $user);
-
        $userCreateForm->handleRequest($request);
 
 
+        if ($userCreateForm->isSubmitted() && $userCreateForm->isValid()) {
 
-        if ($userCreateForm->isSubmitted() && $userCreateForm->isValid())
+            // On récupère la valeur entrée par l'admin dans le champ password
+            $password = $userCreateForm->get('password')->getData();
 
-            // $password = $request->get('password');
 
-        try {
+            try {
+                // on hashe le mot de passe...
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $user,
+                    $password
+                );
 
-                // on hashe le mot de passe et c'est le mdp hashé qu'on enregistre en bdd
-                // $hashedPassword = $passwordHasher->hashPassword($user, $password);
-
-                // $user->setPassword($hashedPassword);
+                // et c'est le mdp hashé qu'on enregistre en bdd (on définit le mdp hashé comme mdp avec le setter)
+                $user->setPassword($hashedPassword);
                 $user->setRoles(['ROLE_ADMIN']);
 
                 $entityManager->persist($user);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Nouvel utilisateur ajouté');
+                $this->addFlash('success', 'Nouvel administrateur ajouté');
 
             } catch(\Exception $exception) {
                 //
                 $this->addFlash('error', $exception->getMessage());
             }
+        }
 
 
         $userCreateFormView = $userCreateForm->createView();
@@ -73,8 +76,6 @@ class AdminUserController extends AbstractController {
         ]);
 
     }
-
-
 
 
 
@@ -88,7 +89,6 @@ class AdminUserController extends AbstractController {
             return new Response($html404, 404);
         }
 
-
         try {
             $entityManager->remove($user);
             $entityManager->flush();
@@ -101,8 +101,61 @@ class AdminUserController extends AbstractController {
             ]);
         }
 
-
         return $this->redirectToRoute('admin_list_users');
+    }
+
+
+
+    #[Route('/update/{id}', name: 'admin_update_admin')]
+    public function updateAdmin(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager, Request $request, User $user, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        /* $user = $userRepository->find($id); */
+        $currentUser = $this->getUser();
+
+
+        if ($currentUser->getId() !== $user->getId()) {
+            /*throw $this->createAccessDeniedException('Vous ne pouvez pas modifier le profil d\'un autre utilisateur.');*/
+            $html403 = $this->renderView('admin/page/page403.html.twig');
+            return new Response($html403, 403);
+        }
+
+        $adminUpdateForm = $this->createForm(UserType::class, $user);
+        $adminUpdateForm->handleRequest($request);
+
+
+        if ($adminUpdateForm->isSubmitted() && $adminUpdateForm->isValid()) {
+
+            // On récupère la valeur entrée par l'utilisateur dans le champ password
+            $password = $adminUpdateForm->get('password')->getData();
+
+            try {
+                // on hashe le mot de passe
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $user,
+                    $password
+                );
+
+                // et c'est le mdp hashé qu'on enregistre en bdd (on définit le mdp hashé comme mdp avec le setter)
+                $user->setPassword($hashedPassword);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre profil a été mis à jour');
+
+            } catch(\Exception $exception) {
+
+                $this->addFlash('error', $exception->getMessage());
+            }
+        }
+
+        $adminUpdateFormView = $adminUpdateForm->createView();
+
+        return $this->render('admin/page/user/admin_update_admin.html.twig', [
+            'adminUpdateForm' => $adminUpdateFormView,
+            'user' => $user,
+        ]);
+
     }
 
 

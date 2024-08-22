@@ -22,31 +22,40 @@ class UserController extends AbstractController {
     #[Route('/inscription', name: 'inscription_user')]
     public function insertUser(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request): Response
     {
-
         $user = new User();
 
         $userCreateForm = $this->createForm(UserType::class, $user);
-
         $userCreateForm->handleRequest($request);
 
 
+        if ($userCreateForm->isSubmitted() && $userCreateForm->isValid()) {
 
-        if ($userCreateForm->isSubmitted() && $userCreateForm->isValid())
+            // On récupère la valeur entrée par l'utilisateur dans le champ password
+            $password = $userCreateForm->get('password')->getData();
 
             try {
+                // on hashe le mot de passe
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $user,
+                    $password
+                );
+
+                // et c'est le mdp hashé qu'on enregistre en bdd (on définit le mdp hashé comme mdp avec le setter)
+                $user->setPassword($hashedPassword);
 
                 $user->setRoles(['ROLE_USER']);
 
                 $entityManager->persist($user);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Votre compte a été créé !');
+                $this->addFlash('success', 'Votre profil a été créé !');
 
             } catch(\Exception $exception) {
 
                 $this->addFlash('error', $exception->getMessage());
             }
 
+        }
 
         $userCreateFormView = $userCreateForm->createView();
 
@@ -82,8 +91,9 @@ class UserController extends AbstractController {
     public function deleteUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
 
         $user = $userRepository->find($id);
+        $currentUser = $this->getUser();
 
-        if (!$user) {
+        if (!$user || $currentUser->getId() !== $user->getId()) {
             $html404 = $this->renderView('public/page/page404.html.twig');
             return new Response($html404, 404);
         }
@@ -93,7 +103,7 @@ class UserController extends AbstractController {
             $entityManager->remove($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre compte a été supprimé !');
+            $this->addFlash('success', 'Votre profil a été supprimé !');
 
         } catch (\Exception $exception) {
             return $this->renderView('public/page/error.html.twig', [
@@ -106,30 +116,46 @@ class UserController extends AbstractController {
 
 
     #[Route('/user/update/{id}', name: 'user_update_user')]
-    public function updateUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function updateUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager, Request $request, User $user, UserPasswordHasherInterface $passwordHasher): Response
     {
+        /*$user = $userRepository->find($id);*/
+        $currentUser = $this->getUser();
 
-        $user = $userRepository->find($id);
+        if ($currentUser->getId() !== $user->getId()) {
+            /*throw $this->createAccessDeniedException('Vous ne pouvez pas modifier le profil d\'un autre utilisateur.');*/
+            $html403 = $this->renderView('admin/page/page403.html.twig');
+            return new Response($html403, 403);
+        }
 
         $userUpdateForm = $this->createForm(UserType::class, $user);
-
         $userUpdateForm->handleRequest($request);
 
 
+        if ($userUpdateForm->isSubmitted() && $userUpdateForm->isValid()) {
 
-        if ($userUpdateForm->isSubmitted() && $userUpdateForm->isValid())
+            // On récupère la valeur entrée par l'utilisateur dans le champ password
+            $password = $userUpdateForm->get('password')->getData();
 
             try {
+                // on hashe le mot de passe
+                $hashedPassword = $passwordHasher->hashPassword(
+                    $user,
+                    $password
+                );
+
+                // et c'est le mdp hashé qu'on enregistre en bdd (on définit le mdp hashé comme mdp avec le setter)
+                $user->setPassword($hashedPassword);
+
                 $entityManager->persist($user);
                 $entityManager->flush();
 
-                $this->addFlash('success', 'Votre compte a été mis à jour');
+                $this->addFlash('success', 'Votre profil a été mis à jour');
 
             } catch(\Exception $exception) {
 
                 $this->addFlash('error', $exception->getMessage());
             }
-
+        }
 
         $userUpdateFormView = $userUpdateForm->createView();
 
