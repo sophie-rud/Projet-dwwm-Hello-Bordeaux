@@ -20,6 +20,8 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
+                # permet de faire une redirection dans le SecurityController
+                default_target_path : app_login
             logout:
                 path: app_logout
                 # where to redirect after logout

@@ -106,18 +106,10 @@ class AdminUserController extends AbstractController {
 
 
 
-    #[Route('/update/{id}', name: 'admin_update_admin')]
-    public function updateAdmin(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager, Request $request, User $user, UserPasswordHasherInterface $passwordHasher): Response
+    #[Route('/update', name: 'admin_update_admin')]
+    public function updateAdmin(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
-        /* $user = $userRepository->find($id); */
-        $currentUser = $this->getUser();
-
-
-        if ($currentUser->getId() !== $user->getId()) {
-            /*throw $this->createAccessDeniedException('Vous ne pouvez pas modifier le profil d\'un autre utilisateur.');*/
-            $html403 = $this->renderView('admin/page/page403.html.twig');
-            return new Response($html403, 403);
-        }
+        $user = $this->getUser();
 
         $adminUpdateForm = $this->createForm(UserType::class, $user);
         $adminUpdateForm->handleRequest($request);
