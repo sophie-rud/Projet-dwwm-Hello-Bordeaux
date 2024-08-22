@@ -7,12 +7,12 @@ namespace App\Controller\Public;
 
 
 use App\Repository\ActivityRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ActivityController extends AbstractController {
-
 
     #[Route('/activities', name: 'list_activities')]
     public function listActivities(ActivityRepository $activityRepository): Response {
@@ -21,6 +21,17 @@ class ActivityController extends AbstractController {
 
         return $this->render('public/page/activity/list_activities.html.twig', [
             'activities' => $activities
+        ]);
+    }
+
+    #[Route('/activities-by-category', name: 'activities_by_category')]
+    public function activitiesByCategory(CategoryRepository $categoryRepository): Response
+    {
+        // Récupère toutes les catégories avec leurs activités associées
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('public/page/activity/activities_by_category.html.twig', [
+            'categories' => $categories,
         ]);
     }
 

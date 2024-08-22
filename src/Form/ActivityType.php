@@ -27,8 +27,7 @@ class ActivityType extends AbstractType
             ->add('description')
             ->add('nbParticipantsMax')
             ->add('photo', FileType::class, [
-                // demande à Symfony de ne pas gérer automatiquement les photos
-                'mapped' => false,
+                'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
             ])
             /* ->add('createdAt', null, [
                 'widget' => 'single_text'
@@ -45,8 +44,7 @@ class ActivityType extends AbstractType
                 'class' => PictureGallery::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-                // demande à Symfony de ne pas gérer automatiquement les photos
-                'mapped' => false,
+                'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
             ]) */
             /* ->add('userAdminOrganizer', EntityType::class, [
                 'class' => User::class,
@@ -54,7 +52,6 @@ class ActivityType extends AbstractType
                 'data' => $options['userAdminOrganizer'], // Définit la valeur par défaut du champ
                 'mapped' => false,
             ]) */
-
 
             /* ->add('userParticipant', EntityType::class, [
                 'class' => User::class,
