@@ -18,10 +18,10 @@ class UserType extends AbstractType
         $builder
             ->add('email')
             /* ->add('roles') */
-            ->add('password', PasswordType::class, [
+            ->add('password', PasswordType::class /*, [
                 'hash_property_path' => 'password',
                 'mapped' => false,
-                ])
+                ] */ )
             ->add('username')
             ->add('firstName')
             ->add('birthDate', null, [

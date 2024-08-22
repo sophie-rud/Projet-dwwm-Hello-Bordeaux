@@ -7,7 +7,6 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Activity;
-use App\Entity\User;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +16,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -61,7 +59,7 @@ class AdminActivityController extends AbstractController {
 
     // Annotation qui permet de créer une route dès que la fonction insertActivity est appelée
     #[Route('/insert', name: 'admin_insert_activity')]
-    public function insertActivity(EntityManagerInterface $entityManager, UserInterface $userInterface, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
+    public function insertActivity(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
 
 
         // On crée une nouvelle instance de la classe Activity (de l'entité)
@@ -103,7 +101,6 @@ class AdminActivityController extends AbstractController {
             }
 
             /* $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); */
-
             $currentUser = $this->getUser();
             $activity->setUserAdminOrganizer($currentUser);
 
@@ -112,11 +109,10 @@ class AdminActivityController extends AbstractController {
             // puis on l'exécute.
             $entityManager->flush();
 
-            // On affiche un message pour informer l'utilisateur du succès de la requête
+            // On affiche un message pour informer l'admin du succès de la requête
             $this->addFlash('success', 'Activité enregistrée !');
 
-            // On fait une redirection sur la page du formulaire d'insertion
-            // plus logique de retomber sur la liste des articles ou page de mise à jour des articles
+            // On fait une redirection sur la liste des activités
             return $this->redirectToRoute('admin_list_activities');
         }
 
