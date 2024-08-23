@@ -52,9 +52,9 @@ class Activity
     /**
      * @var Collection<int, PictureGallery>
      */
-    #[ORM\ManyToMany(targetEntity: PictureGallery::class, inversedBy: 'activities')]
+    #[ORM\ManyToMany(targetEntity: PictureGallery::class, inversedBy: 'activities', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: true)]
-    private Collection $gallery;
+    private Collection $galleries;
 
     #[ORM\ManyToOne(inversedBy: 'activitiesOrganized')]
     #[ORM\JoinColumn(nullable: false)]
@@ -69,7 +69,7 @@ class Activity
 
     public function __construct()
     {
-        $this->gallery = new ArrayCollection();
+        $this->galleries = new ArrayCollection();
         $this->userParticipant = new ArrayCollection();
         $this->createdAt = new \DateTime('NOW');
         $this->updatedAt = new \DateTime('NOW');
@@ -210,23 +210,23 @@ class Activity
     /**
      * @return Collection<int, PictureGallery>
      */
-    public function getGallery(): Collection
+    public function getGalleries(): Collection
     {
-        return $this->gallery;
+        return $this->galleries;
     }
 
-    public function addGallery(PictureGallery $gallery): static
+    public function addGallery(PictureGallery $gallery): self // static
     {
-        if (!$this->gallery->contains($gallery)) {
-            $this->gallery->add($gallery);
+        if (!$this->galleries->contains($gallery)) {
+            $this->galleries->add($gallery);
         }
 
         return $this;
     }
 
-    public function removeGallery(PictureGallery $gallery): static
+    public function removeGallery(PictureGallery $gallery): self // static
     {
-        $this->gallery->removeElement($gallery);
+        $this->galleries->removeElement($gallery);
 
         return $this;
     }

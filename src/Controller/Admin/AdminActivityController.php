@@ -7,8 +7,10 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Activity;
+use App\Entity\PictureGallery;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -57,13 +59,16 @@ class AdminActivityController extends AbstractController {
     }
 
 
+
     // Annotation qui permet de créer une route dès que la fonction insertActivity est appelée
     #[Route('/insert', name: 'admin_insert_activity')]
     public function insertActivity(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
 
-
         // On crée une nouvelle instance de la classe Activity (de l'entité)
         $activity = new Activity();
+
+        /* $originalGalleries = new ArrayCollection(); */
+
 
         // On génère une instance de la classe de gabarit de formulaire, et on la lie avec l'entité Activity
         $activityCreateForm = $this->createForm(ActivityType::class, $activity);
@@ -74,6 +79,26 @@ class AdminActivityController extends AbstractController {
 
         // Si le formulaire est soumis (posté) et complété avec des données valides (qui respectent les contraintes de champs)
         if ($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
+
+
+           /* foreach ($activity->getGalleries() as $gallery) {
+                // $originalGalleries->add($gallery);
+                $entityManager->persist($gallery);
+            }
+
+            // remove the relationship between the gallery and the Activity
+            foreach ($originalGalleries as $gallery) {
+                if (false === $activity->getGalleries()->contains($gallery)) {
+                    // remove the Activity from the Gallery
+                    $gallery->getActivities()->removeElement($activity);
+
+                    $entityManager->persist($gallery);
+
+                }
+            } */
+
+
+
             // On récupère le fichier depuis le formulaire
             $photoFile = $activityCreateForm->get('photo')->getData();
 
@@ -125,6 +150,7 @@ class AdminActivityController extends AbstractController {
             'activity' => $activity,
         ]);
     }
+
 
 
     #[Route('/delete/{id}', name: 'admin_delete_activity')]

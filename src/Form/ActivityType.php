@@ -8,6 +8,7 @@ use App\Entity\PictureGallery;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -40,11 +41,20 @@ class ActivityType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'nameCategory',
             ])
-            /* ->add('gallery', FileType::class, [
+            ->add('galleries', EntityType::class, [
                 'class' => PictureGallery::class,
-                'choice_label' => 'id',
+                'choice_label' => 'pictureName',
                 'multiple' => true,
-                'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
+                'expanded' => true,
+                // 'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
+            ])
+            /* ->add('galleries', CollectionType::class, [
+                'entry_type' => PictureGalleryType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true,
             ]) */
             /* ->add('userAdminOrganizer', EntityType::class, [
                 'class' => User::class,

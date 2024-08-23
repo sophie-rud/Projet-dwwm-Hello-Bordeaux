@@ -24,7 +24,7 @@ class PictureGallery
     /**
      * @var Collection<int, Activity>
      */
-    #[ORM\ManyToMany(targetEntity: Activity::class, mappedBy: 'gallery')]
+    #[ORM\ManyToMany(targetEntity: Activity::class, mappedBy: 'galleries')]
     private Collection $activities;
 
     public function __construct()
@@ -69,17 +69,18 @@ class PictureGallery
         return $this->activities;
     }
 
-    public function addActivity(Activity $activity): static
+    public function addActivity(Activity $activity): self // static
     {
         if (!$this->activities->contains($activity)) {
-            $this->activities->add($activity);
+            // $this->activities->add($activity);
+            $this->activities[] = $activity;
             $activity->addGallery($this);
         }
 
         return $this;
     }
 
-    public function removeActivity(Activity $activity): static
+    public function removeActivity(Activity $activity): self // static
     {
         if ($this->activities->removeElement($activity)) {
             $activity->removeGallery($this);
