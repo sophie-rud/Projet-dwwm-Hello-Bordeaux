@@ -85,7 +85,6 @@ class AdminPictureGalleryController extends AbstractController {
             return $this->redirectToRoute('admin_picture_gallery');
         }
 
-
         $pictureCreateFormView = $pictureCreateForm->createView();
 
         return $this->render('admin/page/picture-gallery/admin_add_picture_in_gallery.html.twig', [
@@ -93,5 +92,43 @@ class AdminPictureGalleryController extends AbstractController {
             'picture' => $picture,
         ]);
     }
+
+
+    #[Route('/delete/{id}', name: 'admin_delete_picture_in_gallery')]
+    public function deletePictureInGallery(int $id, PictureGalleryRepository $pictureGalleryRepository, EntityManagerInterface $entityManager): Response {
+
+        // Dans $activity, on stocke le résultat de notre recherche par id dans les données de la table Activity
+        $picture = $pictureGalleryRepository->find($id);
+
+        // Si aucune activité n'est trouvée avec l'id recherché, on retourne une page et code d'erreur 404
+        if (!$picture) { // || !$picture->getIsPublished()
+            $html404 = $this->renderView('admin/page/page404.html.twig');
+            return new Response($html404, 404);
+        }
+
+
+        // Le try catch permet d'éxecuter du code tout en récupérant les erreurs potentielles afin de les gérer correctement
+        try {
+            //on prépare la requête
+            $entityManager->remove($picture);
+            // on exécute la requête
+            $entityManager->flush();
+            // permet d'enregistrer un message dans la session de PHP, qui sera affiché grâce à twig sur la prochaine page
+            $this->addFlash('success', 'L\'image a été supprimée !');
+
+            // Si l'exécution du try a échoué, catch est exécuté et on renvoie une réponse http avec un message d'erreur
+        } catch (\Exception $exception) {
+            return $this->renderView('admin/page/error.html.twig', [
+                'errorMessage' => $exception->getMessage()
+            ]);
+        }
+
+
+        // On fait une redirection sur la page d'affichage des images de la gallerie
+        return $this->redirectToRoute('admin_picture_gallery');
+    }
+
+
+
 
 }
