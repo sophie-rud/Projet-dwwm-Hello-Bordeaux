@@ -27,7 +27,7 @@ class AdminPictureGalleryController extends AbstractController {
 
         $pictures = $pictureGalleryRepository->findAll();
 
-        return $this->render('admin/page/picture-gallery/admin_add_picture_in_gallery.html.twig', [
+        return $this->render('admin/page/picture-gallery/admin_picture_gallery.html.twig', [
             'pictures' => $pictures
         ]);
     }
@@ -129,6 +129,30 @@ class AdminPictureGalleryController extends AbstractController {
     }
 
 
+    #[Route('/update/{id}', name: 'admin_update_picture_in_gallery')]
+    public function updatePictureInGallery(int $id, PictureGalleryRepository $pictureGalleryRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
 
+        // Dans $activity, on stocke le résultat de notre recherche par id dans les données de la table Activity
+        $picture = $pictureGalleryRepository->find($id);
+
+        $pictureUpdateForm = $this->createForm(PictureGalleryType::class, $picture);
+        $pictureUpdateForm->handleRequest($request);
+
+        if ($pictureUpdateForm->isSubmitted() && $pictureUpdateForm->isValid()) {
+
+            $entityManager->persist($picture);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Image mise à jour !');
+        }
+
+        $pictureUpdateFormView = $pictureUpdateForm->createView();
+
+        return $this->render('admin/page/picture-gallery/admin_update_picture_in_gallery.html.twig', [
+            'pictureUpdateForm' => $pictureUpdateFormView,
+            'picture' => $picture,
+        ]);
+    }
 
 }
