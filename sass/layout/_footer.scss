@@ -1,0 +1,37 @@
+footer {
+  background-color: $claretRed;
+  padding: 12px 50px;
+
+  .footer-nav {
+    @include flex($flex-dir: row, $justify: space-between);
+
+
+    ul {
+      @include flex($flex-dir: row);
+    }
+
+    ul:first-of-type {
+      li {
+        padding: 0 10px;
+      }
+    }
+
+    ul:last-of-type {
+      li {
+        padding: 0 4rem;
+    }
+
+
+      a {
+        font-size: 15px;
+        text-align: center;
+        color: $limestone;
+      }
+    }
+
+    .iconFooter {
+      width: 25px;
+    }
+  }
+
+}

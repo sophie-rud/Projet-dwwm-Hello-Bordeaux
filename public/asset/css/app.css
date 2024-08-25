@@ -19,10 +19,10 @@ img {
 
 #headerTopBar {
   background-color: #FEEFDD;
-  padding: 8px 0;
+  padding: 12px 50px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 0%;
 }
@@ -30,11 +30,11 @@ img {
   width: 100%;
   max-width: 400px;
 }
-#headerTopBar form {
+#headerTopBar .search-container form {
   display: flex;
   justify-content: space-between;
 }
-#headerTopBar input[type=text] {
+#headerTopBar .search-container input[type=text] {
   width: 100%;
   background-color: rgba(115, 21, 52, 0.15);
   color: #731534;
@@ -43,7 +43,7 @@ img {
   font-size: 16px;
   outline: none;
 }
-#headerTopBar button {
+#headerTopBar .search-container button {
   padding: 10px 20px;
   border: none;
   background-color: rgba(115, 21, 52, 0.5);
@@ -52,36 +52,87 @@ img {
   cursor: pointer;
   font-size: 16px;
 }
-#headerTopBar button:hover {
+#headerTopBar .search-container button:hover {
   background-color: #731534;
 }
-#headerTopBar a {
+#headerTopBar .rightPart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0%;
+}
+#headerTopBar .rightPart .iconUser {
+  width: 20px;
+  margin-right: 15px;
+}
+#headerTopBar .rightPart a {
   color: #731534;
+  margin-right: 100px;
+}
+#headerTopBar .rightPart #iconLanguage {
+  width: 45px;
 }
 
 #headerMainBar {
   background-color: #731534;
 }
-
-nav {
+#headerMainBar nav {
   padding: 2% 0;
 }
-nav ul {
+#headerMainBar nav .logo {
+  margin-left: 7%;
+  color: white;
+}
+#headerMainBar nav ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 0%;
 }
-nav ul li {
-  padding: 0 1rem;
+#headerMainBar nav ul li {
+  padding: 0 4rem;
 }
-nav ul li a {
+#headerMainBar nav ul li a {
   text-transform: uppercase;
   font-size: 15px;
   font-weight: bold;
   text-align: center;
   color: #FEEFDD;
+}
+
+footer {
+  background-color: #731534;
+  padding: 12px 50px;
+}
+footer .footer-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0%;
+}
+footer .footer-nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0%;
+}
+footer .footer-nav ul:first-of-type li {
+  padding: 0 10px;
+}
+footer .footer-nav ul:last-of-type li {
+  padding: 0 4rem;
+}
+footer .footer-nav ul:last-of-type a {
+  font-size: 15px;
+  text-align: center;
+  color: #FEEFDD;
+}
+footer .footer-nav .iconFooter {
+  width: 25px;
 }
 
 /*# sourceMappingURL=app.css.map */
