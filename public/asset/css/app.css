@@ -1,5 +1,87 @@
-main {
-  background-color: #a78bfa;
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  width: 100%;
+}
+
+* {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+#headerTopBar {
+  background-color: #FEEFDD;
+  padding: 8px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0%;
+}
+#headerTopBar .search-container {
+  width: 100%;
+  max-width: 400px;
+}
+#headerTopBar form {
+  display: flex;
+  justify-content: space-between;
+}
+#headerTopBar input[type=text] {
+  width: 100%;
+  background-color: rgba(115, 21, 52, 0.15);
+  color: #731534;
+  padding: 10px;
+  border-radius: 15px 0 0 15px;
+  font-size: 16px;
+  outline: none;
+}
+#headerTopBar button {
+  padding: 10px 20px;
+  border: none;
+  background-color: rgba(115, 21, 52, 0.5);
+  color: #FEEFDD;
+  border-radius: 0 15px 15px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+#headerTopBar button:hover {
+  background-color: #731534;
+}
+#headerTopBar a {
+  color: #731534;
+}
+
+#headerMainBar {
+  background-color: #731534;
+}
+
+nav {
+  padding: 2% 0;
+}
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0%;
+}
+nav ul li {
+  padding: 0 1rem;
+}
+nav ul li a {
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #FEEFDD;
 }
 
 /*# sourceMappingURL=app.css.map */
