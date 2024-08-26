@@ -1,8 +1,92 @@
 {%  extends 'public/base.html.twig' %}
 
+{% block metatitle %}Hello Bordeaux{% endblock %}
+
+{% block style %}
+
+
+{% endblock %}
+
 
 {% block main %}
 
-    <h1> Test hello </h1>
+    {% block banner %}
+        <div id="banner">
+        <img src="{{ asset('asset/images/home/panorama_bordeaux.png') }}" alt="panorama Bordeaux">
+        </div>
+    {% endblock banner %}
+
+
+    <section id="infos-pratiques">
+        <h2 class="styleTitle">Informations pratiques</h2>
+        
+        <div id="menuInfosPratiques">
+            <article>
+                <a href=""> <div class ="iconeInfosPratiques"><img src="{{ asset('asset/images/home/demarches.png') }}" alt="icône démarches administratives"></div> </a>
+                <h3>Démarches administratives</h3>
+            </article>
+
+            <article>
+                <a href=""> <div class ="iconeInfosPratiques"><img src="{{ asset('asset/images/home/sante.png') }}" alt="icône santé"></div> </a>
+                <h3>Santé</h3>
+            </article>
+
+            <article>
+                <a href=""> <div class ="iconeInfosPratiques"><img src="{{ asset('asset/images/home/ecoles.png') }}" alt="icône écoles"></div> </a>
+                <h3>Ecoles</h3>
+            </article>
+
+            <article>
+                <a href=""> <div class ="iconeInfosPratiques"><img src="{{ asset('asset/images/home/transport.png') }}" alt="icône transports"></div> </a>
+                <h3>Transports</h3>
+            </article>
+
+            <article>
+                <a href=""> <div class ="iconeInfosPratiques"><img src="{{ asset('asset/images/home/logement.png') }}" alt="icône logement"></div> </a>
+                <h3>Logement</h3>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="découvrir-bordeaux">
+        <h2 class="styleTitle">Découvrir Bordeaux</h2>
+
+        <div id="menuDecouvrirBordeaux">
+            <article>
+                <div> <img src="{{ asset('asset/images/home/balades.jpg') }}" alt="Photo de la place du Palais"> </div>
+                <a href=""> <h3> Circuits pour découvrir la ville </h3> </a>
+            </article>
+
+            <article>
+                <div> <img src="{{ asset('asset/images/home/adresses-bordelaises.jpg') }}" alt="Repas en terrasse"> </div>
+                <a href=""> <h3> Les bonnes adresses bordelaises </h3> </a>
+            </article>
+
+             <article>
+                <div> <img src="{{ asset('asset/images/home/participer-activites.jpg') }}" alt="Photo rue Sainte Colombe"> </div>
+                 <a href="{{ path('list_activities') }}"> <h3> Participer aux activités </h3> </a>
+            </article>
+        </div>
+        
+    </section>
+
+    <section id="activités">
+        <h2 class="styleTitle">Participer aux activités !</h2>
+
+        <div id="carrouselActivites">
+
+        </div>
+        
+        <article id="sortiesSemaine">
+            <div class="imageArticle"><img src="{{ asset('asset/images/home/sorties-semaine.png') }}" alt="Photo des entrepôts Darwin"></div>
+            <div class="textArticle">
+            <h4 class="">Les sorties de la semaine</h4>
+            <p> Vous retrouvez ici une sélection des sorties et des évènements de la semaine, publiées par d'autres réseaux de la ville de Bordeaux !  </p>
+            </div>
+        </article>
+
+    </section>
+
 
 {% endblock %}

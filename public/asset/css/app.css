@@ -8,6 +8,53 @@ img {
 
 * {
   font-family: "Josefin Sans", sans-serif;
+  color: #731534;
+}
+
+h2 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+h4 {
+  font-size: 25px;
+  text-align: center;
+  font-weight: normal;
+}
+
+p {
+  font-size: 1rem;
+}
+
+.styleTitle {
+  position: relative;
+  text-align: center;
+  font-size: 24px;
+  padding: 10px 0 10px 0;
+}
+
+.styleTitle::before,
+.styleTitle::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 1px;
+  background-color: #731534; /* Couleur de la ligne */
+}
+
+.styleTitle::before {
+  right: 0;
+  top: 0;
+}
+
+.styleTitle::after {
+  left: 0;
+  bottom: 0;
 }
 
 * {
@@ -47,13 +94,15 @@ img {
   padding: 10px 20px;
   border: none;
   background-color: rgba(115, 21, 52, 0.5);
-  color: #FEEFDD;
+  font-size: 16px;
   border-radius: 0 15px 15px 0;
   cursor: pointer;
-  font-size: 16px;
 }
 #headerTopBar .search-container button:hover {
   background-color: #731534;
+}
+#headerTopBar .search-container button:hover i {
+  color: #FEEFDD;
 }
 #headerTopBar .rightPart {
   display: flex;
@@ -133,6 +182,93 @@ footer .footer-nav ul:last-of-type a {
 }
 footer .footer-nav .iconFooter {
   width: 25px;
+}
+
+.banner {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 70vh;
+}
+
+#menuInfosPratiques {
+  width: 75%;
+  margin: 7% auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0%;
+}
+
+article {
+  width: 15%;
+}
+article h3 {
+  text-align: center;
+  padding-top: 8%;
+}
+article .iconeInfosPratiques {
+  width: 100%;
+}
+article .iconeInfosPratiques img {
+  border-radius: 15%;
+}
+
+#menuDecouvrirBordeaux {
+  width: 75%;
+  margin: 7% auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0%;
+}
+#menuDecouvrirBordeaux article {
+  width: 30%;
+}
+#menuDecouvrirBordeaux article h3 {
+  font-weight: bold;
+}
+#menuDecouvrirBordeaux article h3:hover {
+  opacity: 65%;
+  transform: scale(1.1);
+}
+#menuDecouvrirBordeaux article img {
+  border-radius: 30px;
+}
+
+#sortiesSemaine {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0%;
+  background-color: rgba(115, 21, 52, 0.3);
+  margin: 7% 0;
+}
+#sortiesSemaine .imageArticle {
+  width: 50%;
+}
+#sortiesSemaine .textArticle {
+  padding: 0 10%;
+}
+#sortiesSemaine .textArticle h4 {
+  position: relative;
+  padding: 5px 0;
+}
+#sortiesSemaine .textArticle h4::after {
+  content: "";
+  position: absolute;
+  width: 93%;
+  height: 1px;
+  background-color: #731534; /* Couleur de la ligne */
+  right: -22%;
+  bottom: 0;
+}
+#sortiesSemaine .textArticle p {
+  margin: 9% 0;
 }
 
 /*# sourceMappingURL=app.css.map */

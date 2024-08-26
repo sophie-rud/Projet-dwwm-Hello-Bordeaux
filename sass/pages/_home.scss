@@ -1,0 +1,101 @@
+.banner {
+  //background-image: url(../images/panorama_bordeaux.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 70vh;
+}
+
+
+// ---------- Section 1 : Informations pratiques ----------
+
+  #menuInfosPratiques {
+    width: 75%;
+    margin: 7% auto;
+    @include flex($flex-dir: row, $justify: space-between, $align:flex-start);
+  }
+
+  article {
+    width: 15%;
+
+    h3 {
+      text-align: center;
+      padding-top: 8%;
+    }
+
+    .iconeInfosPratiques {
+      width: 100%;
+
+      img {
+        border-radius: 15%;
+      }
+    }
+  }
+
+
+// ---------- Section 2 : Découvrir Bordeaux ----------
+
+#menuDecouvrirBordeaux {
+  width: 75%;
+  margin: 7% auto;
+  @include flex($flex-dir: row, $justify: space-between, $align:flex-start);
+
+  article {
+    width: 30%;
+
+    h3 {
+      font-weight: bold;
+    }
+
+    h3:hover {
+      opacity: 65%;
+      transform: scale(1.1);
+    }
+
+    img {
+      border-radius: 30px;
+    }
+  }
+}
+
+
+// ---------- Section 3 : Participer aux activités ----------
+
+
+
+
+#sortiesSemaine {
+  width: 100%;
+  @include flex($flex-dir: row, $justify: space-between);
+  background-color: rgba( 115, 21, 52, 0.3);
+  margin: 7% 0;
+
+
+  .imageArticle {
+    width: 50%;
+  }
+
+  .textArticle {
+    padding: 0 10%;
+
+    h4 {
+      position: relative;
+      padding: 5px 0;
+    }
+
+    h4::after {
+      content: '';
+      position: absolute;
+      width: 93%;
+      height: 1px;
+      background-color: $claretRed; /* Couleur de la ligne */
+      right: -22%;
+      bottom: 0;
+    }
+
+    p {
+      margin: 9% 0;
+    }
+  }
+
+}

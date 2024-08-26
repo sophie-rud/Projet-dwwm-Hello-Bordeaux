@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" >
 
-    <link href="{{ asset('asset/css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('asset/css/app.css') }}" rel="stylesheet" />
+
 </head>
 
 
@@ -21,15 +22,15 @@
             <div class="search-container">
                 <form action="/search" method="GET">
                     <input type="text" placeholder="Rechercher..." name="search">
-                    <button type="submit">Rechercher</button>
+                    <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                 </form>
             </div>
 
             <div class="rightPart">
-                <img class="iconUser" src="{{ asset('asset/images/circle-user-solid.png') }}" alt="icon user connection">
+                <img class="iconUser" src="{{ asset('asset/images/icons/circle-user-solid.png') }}" alt="icon user connection">
                 <a href="{{ path('app_login') }}">Espace utilisateur</a>
 
-                <div id="iconLanguage"> <img src="{{ asset('asset/images/french_flag.jpg') }}" alt="Icon french flag"> </div>
+                <div id="iconLanguage"> <img src="{{ asset('asset/images/icons/french_flag.jpg') }}" alt="Icon french flag"> </div>
             </div>
         </div>
 
@@ -61,16 +62,18 @@
         {% endfor %}
 
 
-        {% block main %}{% endblock %}
+        {% block main %}
+            {% block banner %}{% endblock %}
+        {% endblock %}
     </main>
 
 
     <footer>
         <nav class="footer-nav">
             <ul>
-                <li> <a href="https://www.facebook.com/?locale=fr_FR" target="_blank"> <div class="iconFooter"> <img src="{{ asset('asset/images/icon-facebook.png') }}" alt="icon facebook"> </div> </a> </li>
-                <li> <a href="https://www.pinterest.fr/" target="_blank"> <div class="iconFooter"> <img src="{{ asset('asset/images/icon-pinterest.png') }}" alt="icon pinterest"> </div> </a> </li>
-                <li> <a href="https://www.instagram.com/" target="_blank"> <div class="iconFooter"> <img src="{{ asset('asset/images/icon-instagram.png') }}" alt="icon instagram"> </div> </a> </li>
+                <li> <a href="https://www.facebook.com/?locale=fr_FR" target="_blank"> <div class="iconFooter"> <img src="{{ asset('asset/images/icons/icon-facebook.png') }}" alt="icon facebook"> </div> </a> </li>
+                <li> <a href="https://www.pinterest.fr/" target="_blank"> <div class="iconFooter"> <img src="{{ asset('asset/images/icons/icon-pinterest.png') }}" alt="icon pinterest"> </div> </a> </li>
+                <li> <a href="https://www.instagram.com/" target="_blank"> <div class="iconFooter"> <img src="{{ asset('asset/images/icons/icon-instagram.png') }}" alt="icon instagram"> </div> </a> </li>
             </ul>
             <ul>
                 <li> <a href=""> Mentions légales </a> </li>
@@ -78,7 +81,7 @@
                 <li> <a href=""> Sites utiles </a> </li>
                 <li> <a href=""> Applications </a> </li>
             </ul>
-            <a href="#top"> <div class="iconFooter"> <img src="{{ asset('asset/images/arrow-up-solid.png') }}" alt="arrow-up"> </div> </a>
+            <a href="#top"> <div class="iconFooter"> <img src="{{ asset('asset/images/icons/arrow-up-solid.png') }}" alt="arrow-up"> </div> </a>
         </nav>
     </footer>
 
