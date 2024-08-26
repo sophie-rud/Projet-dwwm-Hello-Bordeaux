@@ -111,13 +111,14 @@ p {
   align-items: center;
   gap: 0%;
 }
-#headerTopBar .rightPart .iconUser {
-  width: 20px;
-  margin-right: 15px;
-}
 #headerTopBar .rightPart a {
   color: #731534;
   margin-right: 100px;
+}
+#headerTopBar .rightPart a .fa-circle-user {
+  color: #731534;
+  font-size: 18px;
+  margin-right: 5px;
 }
 #headerTopBar .rightPart #iconLanguage {
   width: 45px;
@@ -153,7 +154,7 @@ p {
 
 footer {
   background-color: #731534;
-  padding: 12px 50px;
+  padding: 15px 50px;
 }
 footer .footer-nav {
   display: flex;
@@ -181,7 +182,9 @@ footer .footer-nav ul:last-of-type a {
   color: #FEEFDD;
 }
 footer .footer-nav .iconFooter {
-  width: 25px;
+  font-size: 28px;
+  color: #FEEFDD;
+  margin: 0 5px;
 }
 
 .banner {

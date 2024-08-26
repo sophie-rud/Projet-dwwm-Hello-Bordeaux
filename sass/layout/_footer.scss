@@ -1,6 +1,6 @@
 footer {
   background-color: $claretRed;
-  padding: 12px 50px;
+  padding: 15px 50px;
 
   .footer-nav {
     @include flex($flex-dir: row, $justify: space-between);
@@ -30,7 +30,9 @@ footer {
     }
 
     .iconFooter {
-      width: 25px;
+      font-size: 28px;
+      color: $limestone;
+      margin: 0 5px;
     }
   }
 
