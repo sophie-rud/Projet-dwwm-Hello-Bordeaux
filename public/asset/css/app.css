@@ -15,7 +15,7 @@ h1 {
   font-size: 35px;
   font-weight: normal;
   text-align: center;
-  margin-top: 30px;
+  padding-top: 30px;
 }
 
 h2 {
@@ -356,6 +356,79 @@ article .iconeInfosPratiques img {
   font-size: 16px;
   padding: 10px 0;
   border-radius: 0 0 10px 10px;
+}
+
+body {
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 2%;
+}
+
+main {
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 67vh;
+}
+main form {
+  width: 45%;
+  display: block;
+  background-color: rgba(115, 21, 52, 0.3);
+  border-radius: 25px;
+  padding: 30px;
+  margin: auto;
+}
+main form .inputWrapper {
+  position: relative;
+  margin: 50px 0;
+  background-color: #FEEFDD;
+}
+main form .inputWrapper input, main form .inputWrapper label {
+  display: block;
+  width: 100%;
+}
+main form .inputWrapper label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #731534;
+  font-family: Josefin Sans, sans-serif;
+  transition: 0.5s;
+}
+main form .inputWrapper input {
+  border: none;
+  border-bottom: solid 1px #FEEFDD;
+  background-color: transparent;
+  padding: 3px 0;
+  font-size: 16px;
+}
+main form .inputWrapper input:not(:placeholder-shown) + label, main form .inputWrapper input:focus + label {
+  transform: translateY(-30px);
+}
+main .btn {
+  background-color: #731534;
+  border-radius: 50px;
+  border: solid 1px #731534;
+  color: #FEEFDD;
+  width: 100%;
+  padding: 6px 0;
+}
+main .btn:hover {
+  background-color: #FEEFDD;
+  border: solid 1px #FEEFDD;
+  color: #731534;
+}
+main .btn-inscription {
+  display: block;
+  background-color: rgba(115, 21, 52, 0.7);
+  border: transparent;
+  width: 45%;
+  margin: 30px auto;
+  text-align: center;
+  font-size: 15px;
 }
 
 /*# sourceMappingURL=app.css.map */
