@@ -2,19 +2,42 @@
 
 {% block main %}
 
-    <h1> Les activités </h1>
+    <h1> {{ activity.title }} </h1>
 
-    <section>
+    <section id="section-show-activity">
 
         {% if activity.isPublished %}
 
-            <article>
+            <article class="show-activity">
 
-                <h2>{{ activity.title }}</h2>
-                <p> {{ activity.description }} </p>
-                <div class="imgActivity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
-                <p> {{ activity.date | date('d/m/Y')}} </p>
+                <div class="img-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div>
+
+                <div class="infos-activity">
+                    <div class="group-title">
+                        <div class="pictogram"> <img src="{{ activity.category.pictogram }}" alt="icône {{ activity.category.nameCategory }}"> </div>
+                        <h2>{{ activity.title }}</h2>
+                    </div>
+                    <p> <i class="fa-regular fa-calendar-check"></i> {{ activity.date | date('d/m/Y')}} </p>
+                    {# <div class="location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <p> {{ activity.place }} </p>
+                    </div> #}
+                    <p> <i class="fa-solid fa-location-dot"></i> {{ activity.place }} </p>
+                    <p class="time"> <i class="fa-regular fa-clock"></i> {{ activity.time | date('H:i') }} </p>
+
+                </div>
+
+                <p class="text-activity"> {{ activity.description }} </p>
             </article>
+
+            <a class="btn-style" href=""> Participer </a>
+
+            <div class="participants">
+                <p>Participants</p>
+                <div>
+                    {# boucle for #}
+                </div>
+            </div>
 
         {% endif %}
 

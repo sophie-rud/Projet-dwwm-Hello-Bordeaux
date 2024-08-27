@@ -2,8 +2,10 @@
 
 {% block title %}Log in!{% endblock %}
 
-{% block main %}
+{% block classMain %}class="main-login"{% endblock classMain %}
 
+{% block main %}
+<div class="main-login">
     <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 
     <form method="post">
@@ -45,13 +47,11 @@
         <button class="btn btn-lg btn-primary" type="submit">
             Sign in
         </button>
-
-
-
+        
     </form>
 
-    <a class="btn btn-inscription" href="{{ path('inscription_user') }}"> Pas encore inscrit ? Créez un compte ! </a>
+    <a class="btn-inscription" href="{{ path('inscription_user') }}"> Pas encore inscrit ? Créez un compte ! </a>
 
 
-
+</div>
 {% endblock %}

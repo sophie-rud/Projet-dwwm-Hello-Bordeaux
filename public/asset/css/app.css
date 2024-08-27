@@ -358,6 +358,73 @@ article .iconeInfosPratiques img {
   border-radius: 0 0 10px 10px;
 }
 
+#section-show-activity {
+  width: 75%;
+  margin: auto;
+}
+#section-show-activity .show-activity {
+  background-color: #FEEFDD;
+  border-radius: 25px;
+  width: 100%;
+  margin: 2% auto;
+  padding: 15px 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0%;
+}
+#section-show-activity .show-activity .img-activity {
+  width: 100%;
+  border-radius: 25px;
+  object-fit: cover;
+  overflow: hidden;
+  background-color: #a78bfa;
+}
+#section-show-activity .show-activity .infos-activity {
+  background-color: rgba(115, 21, 52, 0.3);
+  border-radius: 20px;
+  padding: 40px 10px;
+  margin: 0 20px;
+  width: 100%;
+}
+#section-show-activity .show-activity .infos-activity p {
+  padding: 6px 0;
+}
+#section-show-activity .show-activity .group-title {
+  padding-bottom: 20px;
+}
+#section-show-activity .show-activity .text-activity {
+  padding: 10px 30px;
+}
+#section-show-activity .show-activity .location, #section-show-activity .show-activity .group-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0%;
+}
+#section-show-activity .btn-style {
+  display: block;
+  background-color: rgba(115, 21, 52, 0.7);
+  border-radius: 50px;
+  border: transparent;
+  width: 35%;
+  margin: 15px auto;
+  text-align: center;
+  font-size: 15px;
+  color: #FEEFDD;
+  padding: 6px 0;
+}
+#section-show-activity .participants {
+  background-color: #FEEFDD;
+  border-radius: 50px;
+  width: 100%;
+  margin-top: 6%;
+  margin-bottom: 4%;
+  padding: 5px 25px;
+}
+
 body {
   min-height: 100vh;
 }
@@ -366,7 +433,7 @@ h1 {
   margin-bottom: 2%;
 }
 
-main {
+main .main-login {
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
   background-size: cover;
   background-repeat: no-repeat;
@@ -424,11 +491,14 @@ main .btn:hover {
 main .btn-inscription {
   display: block;
   background-color: rgba(115, 21, 52, 0.7);
+  border-radius: 50px;
   border: transparent;
   width: 45%;
   margin: 30px auto;
   text-align: center;
   font-size: 15px;
+  color: #FEEFDD;
+  padding: 6px 0;
 }
 
 /*# sourceMappingURL=app.css.map */

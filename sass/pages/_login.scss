@@ -7,11 +7,15 @@ h1 {
 }
 
 main {
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 67vh;
+
+  .main-login {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 67vh;
+  }
+
 
   form {
     width: 45%;
@@ -26,7 +30,6 @@ main {
       position: relative;
       margin: 50px 0;
       background-color: $limestone;
-
 
 
       input, label {
@@ -59,7 +62,6 @@ main {
 
   }
 
-
   .btn {
     background-color: $claretRed;
     border-radius: 50px;
@@ -78,12 +80,16 @@ main {
   .btn-inscription {
     display: block;
     background-color: rgba(115, 21, 52, 0.7);
+    border-radius: 50px;
     border: transparent;
     width: 45%;
     margin: 30px auto;
     text-align: center;
     font-size: 15px;
+    color: $limestone;
+    padding: 6px 0;
   }
 }
+
 
 

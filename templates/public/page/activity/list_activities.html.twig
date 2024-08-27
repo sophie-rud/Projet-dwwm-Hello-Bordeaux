@@ -14,7 +14,9 @@
             <article class="container-activity">
 
                 <div class="info-activity">
-                    <div class="img-activity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
+
+                    <div class="img-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div>
+                    {# <div class="img-activity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div> #}
 
                     <div class="top-activity">
                         <div class="pictogram"> <img src="{{ activity.category.pictogram }}" alt="icône {{ activity.category.nameCategory }}"> </div>
@@ -26,7 +28,7 @@
                             <i class="fa-solid fa-location-dot"></i>
                             <p> {{ activity.place }} </p>
                         </div>
-                        {# <p class="time"> {{ activity.time }} </p> #}
+                        <p class="time"> {{ activity.time | date('H:i') }} </p>
                     </div>
                 </div>
 
