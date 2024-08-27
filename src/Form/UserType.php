@@ -6,6 +6,7 @@ use App\Entity\Activity;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,6 +35,9 @@ class UserType extends AbstractType
                 'choice_label' => 'id',
                 'multiple' => true,
             ]) */
+            ->add('profilePicture', FileType::class, [
+            'mapped' => false,
+            ])
             ->add('enregistrer', SubmitType::class)
         ;
     }

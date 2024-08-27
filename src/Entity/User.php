@@ -61,10 +61,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Activity::class, mappedBy: 'userParticipant')]
     private Collection $activitiesParticipate;
 
+    // #[ORM\Column(nullable: false)]
+    // private ?\DateTimeImmutable $registeredAt = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $registeredAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePicture = null;
+
+    #[ORM\Column(nullable: false)]
+    private ?bool $isActive = null;
+
     public function __construct()
     {
         $this->activitiesOrganized = new ArrayCollection();
         $this->activitiesParticipate = new ArrayCollection();
+        $this->registeredAt = new \DateTime('NOW');
+        $this->isActive = true;
     }
 
     public function getId(): ?int
@@ -254,6 +268,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->activitiesParticipate->removeElement($activitiesParticipate)) {
             $activitiesParticipate->removeUserParticipant($this);
         }
+
+        return $this;
+    }
+
+    public function getRegisteredAt(): ?\DateTimeImmutable
+    {
+        return $this->registeredAt;
+    }
+
+    public function setRegisteredAt(?\DateTimeImmutable $registeredAt): static
+    {
+        $this->registeredAt = $registeredAt;
+
+        return $this;
+    }
+
+    public function getProfilePicture(): ?string
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?string $profilePicture): static
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setActive(?bool $isActive): static
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

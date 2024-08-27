@@ -10,10 +10,13 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 #[Route('/admin')]
@@ -31,7 +34,7 @@ class AdminUserController extends AbstractController {
     }
 
     #[Route('/insert', name: 'admin_user_insert')]
-    public function insertAdmin(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request): Response
+    public function insertAdmin(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response
     {
 
        $user = new User();
@@ -42,9 +45,36 @@ class AdminUserController extends AbstractController {
 
         if ($userCreateForm->isSubmitted() && $userCreateForm->isValid()) {
 
+            // On récupère le fichier depuis le formulaire
+            $pictureFile = $userCreateForm->get('profilePicture')->getData();
+
+            // Si un fichier photo est bien soumis
+            if ($pictureFile) {
+                // On récupère le nom du fichier
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // On "nettoie" le nom du fichier avec $slugger->slug() (retire les caractères spéciaux...)
+                $safeFilename = $slugger->slug($originalFilename);
+                // On ajoute un identifiant unique au nom
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
+
+
+                try {
+                    // On récupère le chemin de la racine du projet
+                    $rootPath = $params->get('kernel.project_dir');
+                    // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
+                    $pictureFile->move($rootPath . '/public/uploads', $newFilename);
+                } catch (FileException $e) {
+                    dd($e->getMessage());
+                }
+
+                // On stocke le nom du fichier dans la propriété image de l'entité activity
+                $user->setProfilePicture($newFilename);
+            }
+
+
+
             // On récupère la valeur entrée par l'admin dans le champ password
             $password = $userCreateForm->get('password')->getData();
-
 
             try {
                 // on hashe le mot de passe...
@@ -107,7 +137,7 @@ class AdminUserController extends AbstractController {
 
 
     #[Route('/update', name: 'admin_update_admin')]
-    public function updateAdmin(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    public function updateAdmin(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $passwordHasher, SluggerInterface $slugger, ParameterBagInterface $params): Response
     {
         $user = $this->getUser();
 
@@ -116,6 +146,33 @@ class AdminUserController extends AbstractController {
 
 
         if ($adminUpdateForm->isSubmitted() && $adminUpdateForm->isValid()) {
+
+            // On récupère le fichier depuis le formulaire
+            $pictureFile = $adminUpdateForm->get('profilePicture')->getData();
+
+            // Si un fichier photo est bien soumis
+            if ($pictureFile) {
+                // On récupère le nom du fichier
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // On "nettoie" le nom du fichier avec $slugger->slug() (retire les caractères spéciaux...)
+                $safeFilename = $slugger->slug($originalFilename);
+                // On ajoute un identifiant unique au nom
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureFile->guessExtension();
+
+
+                try {
+                    // On récupère le chemin de la racine du projet
+                    $rootPath = $params->get('kernel.project_dir');
+                    // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
+                    $pictureFile->move($rootPath . '/public/uploads', $newFilename);
+                } catch (FileException $e) {
+                    dd($e->getMessage());
+                }
+
+                // On stocke le nom du fichier dans la propriété image de l'entité activity
+                $user->setProfilePicture($newFilename);
+            }
+
 
             // On récupère la valeur entrée par l'utilisateur dans le champ password
             $password = $adminUpdateForm->get('password')->getData();

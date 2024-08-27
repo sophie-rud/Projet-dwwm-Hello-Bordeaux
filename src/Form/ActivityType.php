@@ -25,6 +25,9 @@ class ActivityType extends AbstractType
             ->add('date', null, [
                 'widget' => 'single_text'
             ])
+            ->add('time', null, [
+                'widget' => 'single_text'
+            ])
             ->add('description')
             ->add('nbParticipantsMax')
             ->add('photo', FileType::class, [

@@ -67,6 +67,9 @@ class Activity
     #[ORM\JoinColumn(nullable: true)]
     private Collection $userParticipant;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: false)]
+    private ?\DateTimeInterface $time = null;
+
     public function __construct()
     {
         $this->galleries = new ArrayCollection();
@@ -263,6 +266,18 @@ class Activity
     public function removeUserParticipant(User $userParticipant): static
     {
         $this->userParticipant->removeElement($userParticipant);
+
+        return $this;
+    }
+
+    public function getTime(): ?\DateTimeInterface
+    {
+        return $this->time;
+    }
+
+    public function setTime(?\DateTimeInterface $time): static
+    {
+        $this->time = $time;
 
         return $this;
     }
