@@ -1,7 +1,7 @@
 
 #headerTopBar {
   background-color: $limestone;
-  padding: 12px 50px;
+  padding: 10px 50px;
   @include flex($flex-dir:row, $justify:space-between);
 
   .search-container {
@@ -20,12 +20,12 @@
       color: $claretRed;
       padding: 10px;
       border-radius: 15px 0 0 15px;
-      font-size: 16px;
+      font-size: 14px;
       outline: none;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 9px 15px;
       border: none;
       background-color: rgba( 115, 21, 52, 0.5);
       // color: $limestone;
@@ -83,8 +83,8 @@
 
         a {
           text-transform: uppercase;
-          font-size: 15px;
-          font-weight: bold;
+          font-size: 14px;
+          //font-weight: bold;
           text-align: center;
           color: $limestone;
         }

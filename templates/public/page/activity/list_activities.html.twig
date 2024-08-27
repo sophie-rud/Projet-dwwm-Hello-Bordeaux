@@ -2,21 +2,37 @@
 
 {% block main %}
 
-    <h1> Les activités </h1>
+    <h1 class="styleTitle"> Participer aux activités </h1>
 
-    <section>
+
+    <section id="section-activities">
 
         {% for activity in activities %}
 
             {{ activity.category.nameCategory }}
 
-            <article>
+            <article class="container-activity">
 
-                <h2>{{ activity.title }}</h2>
-                <p> {{ activity.description }} </p>
-                <div class="imgActivity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
-                <p> {{ activity.date | date('d/m/Y') }} </p>
-                <a href="{{ path('show_activity', {id: activity.id}) }}"> Voir l'activité </a>
+                <div class="info-activity">
+                    <div class="img-activity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
+
+                    <div class="top-activity">
+                        <div class="pictogram"> <img src="{{ activity.category.pictogram }}" alt="icône {{ activity.category.nameCategory }}"> </div>
+                        <p> {{ activity.date | date('d/m/Y') }} </p>
+                    </div>
+
+                    <div class="appointment-activity">
+                        <div class="location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p> {{ activity.place }} </p>
+                        </div>
+                        {# <p class="time"> {{ activity.time }} </p> #}
+                    </div>
+                </div>
+
+                <div class="title-activity">
+                    <a href="{{ path('show_activity', {id: activity.id}) }}"> <h2>{{ activity.title }}</h2> </a>
+                </div>
 
             </article>
 

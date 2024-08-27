@@ -1,0 +1,79 @@
+
+#section-activities {
+  @include flex($flex-dir: row);
+  margin: 3% 0;
+}
+
+
+
+.container-activity {
+
+  width: 21%;
+  height: 450px;
+  color: $limestone;
+  overflow: hidden;
+  border-radius: 10px;
+
+  .info-activity {
+    position: relative;
+  }
+
+  .img-activity img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    overflow: hidden;
+    opacity: 0.8;
+  }
+
+  .top-activity {
+    position: absolute;
+    top: 0;
+    @include flex($flex-dir: row, $justify: space-around);
+    width: 100%;
+    padding: 2px 0;
+    background-color: rgba(115, 21, 52, 0.5);
+
+    p {
+      color: $limestone;
+    }
+
+
+    .pictogram {
+      width: 16px;
+    }
+  }
+
+  .appointment-activity {
+    position: absolute;
+    bottom: 0;
+    @include flex($flex-dir: row, $justify: space-around);
+    width: 100%;
+    padding: 0 20px;
+    //font-size: 14px;
+    background-color: rgba(254, 239, 221, 0.5);
+
+    p, i {
+      color: $claretRed;
+      font-size: 13px;
+    }
+
+    .location {
+      @include flex($flex-dir: row, $justify: space-between);
+    }
+
+    i {
+      margin-right: 5px;
+    }
+
+  }
+
+  .title-activity h2 {
+    color: $limestone;
+    background-color: $claretRed;
+    font-size: 16px;
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px;
+  }
+
+}
