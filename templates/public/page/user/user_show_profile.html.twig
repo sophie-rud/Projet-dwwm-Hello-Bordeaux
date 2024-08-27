@@ -1,51 +1,72 @@
 {% extends 'public/base.html.twig' %}
 
-{% block metatitle %} Profile
+{% block metatitle %} Mon profil
 {% endblock %}
+
+{% block username %} {{ user.username }} {% endblock username %}
+{% block deconnection %}
+    <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+{% endblock deconnection %}
 
 {% block main %}
 
     <h1> Profil </h1>
 
-    <section>
+    <section id="section-profile">
 
-            <article>
+            <div class="profil">
 
-                {# <div class="profilePicture"> <img src="{{ asset('uploads/' ~user.profilePicture) }}" alt="photo de profil de : {{ user.username }}"> </div> #}
-                <h2>{{ user.username }}</h2>
-                <a href="{{ path('user_update_user', {id: user.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/pencil.png') }}" alt="Icône des paramètres"> </div>  </a>
-                <p>{{ user.firstName }}</p>
-                <p> {{ user.presentation }} </p>
+                <div class="userId">
+                    <div class="username">
+                        <div class="profilePicture"> <img src="{{ asset('uploads/' ~user.profilePicture) }}" alt="photo de profil de : {{ user.username }}"> </div>
+                        <h2>{{ user.username }}</h2>
+                    </div>
+                    <p>{{ user.firstName }}  <span class="small-font">(visible uniquement par les admins)</span></p>
+                </div>
 
-            </article>
+                <div class="presentation">
+                    <h3>Présentation</h3>
+                    <p> {{ user.presentation }} </p>
+                </div>
 
-            <div>
-                <p>Informations personnelles</p>
+                <a href="{{ path('user_update_user', {id: user.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
-                <table>
+            </div>
 
-                    <tr>
-                        <td> Email </td>
-                        <td> <p> {{ user.email }} </p> </td>
-                    </tr>
+            <div class="infos-personnelles">
+                <h3>Informations personnelles</h3>
 
-                    <tr>
-                        <td> Numéro de téléphone </td>
-                        <td> <p> {{ user.phone }} </p> </td>
-                    </tr>
+                <div class="tableau">
+                    <table>
 
-                    <tr>
-                        <td> Date de naissance </td>
-                        <td> {{ user.birthDate | date('d.m.Y') }} </td>
-                    </tr>
+                        <tr>
+                            <td> Email </td>
+                            <td> <p> {{ user.email }} </p> </td>
+                        </tr>
 
-                </table>
+                        <tr>
+                            <td> Numéro de téléphone </td>
+                            <td> <p> {{ user.phone }} </p> </td>
+                        </tr>
 
-                {# <p> {{ user.registeredAt | date('d/m/Y')}} </p> #}
+                        <tr>
+                            <td> Date de naissance </td>
+                            <td> {{ user.birthDate | date('d.m.Y') }} </td>
+                        </tr>
 
 
-                <a href="{{ path('user_update_user', {id: user.id}) }}"> Modifier mon profil </a>
-                <a href="{{ path('user_delete_user', {id: user.id}) }}"> Supprimer mon profil </a>
+                        <tr>
+                            <td> Inscrit·e le : </td>
+                            <td> {{ user.registeredAt | date('d/m/Y')}} </td>
+                        </tr>
+
+                    </table>
+
+                    <div class="icon-action">
+                        <a href="{{ path('user_update_user', {id: user.id}) }}"> <i class="fa-solid fa-gear"></i> </a>
+                        <a href="{{ path('user_delete_user', {id: user.id}) }}"> <i class="fa-regular fa-trash-can"></i> </a>
+                    </div>
+                </div>
             </div>
 
     </section>

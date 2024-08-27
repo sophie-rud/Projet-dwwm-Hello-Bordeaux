@@ -27,8 +27,8 @@
             </div>
 
             <div class="rightPart">
-                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i> Espace utilisateur</a>
-
+                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i> {% block username %} Espace utilisateur {% endblock %} </a>
+                {% block deconnection %} {% endblock %}
                 <div id="iconLanguage"> <img src="{{ asset('asset/images/icons/french_flag.jpg') }}" alt="Icon french flag"> </div>
             </div>
         </div>

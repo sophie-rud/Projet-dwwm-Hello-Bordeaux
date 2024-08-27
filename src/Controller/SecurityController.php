@@ -14,12 +14,12 @@ class SecurityController extends AbstractController
     {
         $currentUser = $this->getUser();
 
-        if ($currentUser ==! null && $this->isGranted('ROLE_ADMIN')) {
+        if ($currentUser !== null && $this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('admin_list_activities');
         }
 
-        if ($currentUser ==! null && $this->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('user_show_profile');
+        if ($currentUser !== null && $this->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('user_show_profile', ['id' => $currentUser->getId()]);
         }
 
 

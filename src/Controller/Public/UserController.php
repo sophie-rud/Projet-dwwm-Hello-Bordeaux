@@ -106,6 +106,7 @@ class UserController extends AbstractController {
         // Dans $user, on stocke le résultat de notre recherche par id dans les données de la table User
         $user = $userRepository->find($id);
 
+
         // Si aucun user n'est trouvé avec l'id recherché, on retourne une page et code d'erreur 404
         if (!$user) {
             $html404 = $this->renderView('public/page/page404.html.twig');
@@ -150,7 +151,7 @@ class UserController extends AbstractController {
     #[Route('/user/update/{id}', name: 'user_update_user')]
     public function updateUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager, Request $request, User $user, UserPasswordHasherInterface $passwordHasher, SluggerInterface $slugger, ParameterBagInterface $params): Response
     {
-        /*$user = $userRepository->find($id);*/
+        $user = $userRepository->find($id);
         $currentUser = $this->getUser();
 
         if ($currentUser->getId() !== $user->getId()) {

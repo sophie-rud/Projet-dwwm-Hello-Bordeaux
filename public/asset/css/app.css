@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   scroll-behavior: smooth;
 }
@@ -62,6 +63,10 @@ p {
 .styleTitle::after {
   left: 0;
   bottom: 0;
+}
+
+.small-font {
+  font-size: 11px;
 }
 
 * {
@@ -499,6 +504,86 @@ main .btn-inscription {
   font-size: 15px;
   color: #FEEFDD;
   padding: 6px 0;
+}
+
+#section-profile {
+  width: 75%;
+  margin: auto;
+}
+#section-profile .profil {
+  background-color: rgba(115, 21, 52, 0.5);
+  border-radius: 20px;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5%;
+}
+#section-profile .profil .profilePicture {
+  width: 110px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#section-profile .profil .profilePicture img {
+  width: 100%;
+  height: 100%; /* L'image occupe toute la hauteur du conteneur */
+  object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
+}
+#section-profile .profil a {
+  align-self: flex-start;
+  font-size: 20px;
+}
+#section-profile .profil .username {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 5%;
+  padding-bottom: 5%;
+}
+#section-profile .profil .presentation {
+  width: 70%;
+  padding: 0 80px;
+}
+#section-profile .profil .presentation p {
+  color: #FEEFDD;
+}
+#section-profile .infos-personnelles {
+  background-color: rgba(115, 21, 52, 0.3);
+  border-radius: 20px;
+  margin: 15px 0;
+  padding: 20px 50px;
+}
+#section-profile .infos-personnelles h3 {
+  margin-bottom: 12px;
+  text-align: center;
+}
+#section-profile .infos-personnelles .tableau {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0%;
+}
+#section-profile .infos-personnelles .tableau tr td:first-of-type {
+  width: 200px;
+  height: 20px;
+}
+#section-profile .infos-personnelles .tableau .icon-action {
+  align-self: flex-start;
+}
+#section-profile .infos-personnelles .tableau .icon-action a {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.small-font {
+  font-size: 11px;
 }
 
 /*# sourceMappingURL=app.css.map */

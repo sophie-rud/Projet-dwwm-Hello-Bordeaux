@@ -61,11 +61,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Activity::class, mappedBy: 'userParticipant')]
     private Collection $activitiesParticipate;
 
-    // #[ORM\Column(nullable: false)]
-    // private ?\DateTimeImmutable $registeredAt = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $registeredAt = null;
+    #[ORM\Column(nullable: false)]
+    private ?\DateTimeImmutable $registeredAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilePicture = null;
@@ -77,7 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->activitiesOrganized = new ArrayCollection();
         $this->activitiesParticipate = new ArrayCollection();
-        $this->registeredAt = new \DateTime('NOW');
+        $this->registeredAt = new \DateTimeImmutable('NOW');
         $this->isActive = true;
     }
 
