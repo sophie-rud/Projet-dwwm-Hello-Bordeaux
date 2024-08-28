@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" >
+    {% block bootstrap %} {% endblock %}
 
     <link href="{{ asset('asset/css/app.css') }}" rel="stylesheet" />
-
 </head>
 
 
@@ -28,7 +28,10 @@
             </div>
 
             <div class="rightPart">
-                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i> Espace utilisateur</a>
+                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i> {% block username %} {{ app.user.username }} {% endblock %} </a>
+                {% block deconnection %}
+                    <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                {% endblock %}
                 <div id="iconLanguage"> <img src="{{ asset('asset/images/icons/french_flag.jpg') }}" alt="Icon french flag"> </div>
             </div>
         </div>
@@ -39,7 +42,7 @@
                 <a class="logo" href="{{ path('home') }}">LOGO</a>
                 <ul>
                     <li> <a href="{{ path('admin_list_categories') }}"> Gérer les catégories </a> </li>
-                    <li> <a href="{{ path('admin_list_activities') }}"> Gérer les articles </a> </li>
+                    <li> <a href="{{ path('admin_list_activities') }}"> Gérer les activités </a> </li>
                     <li> <a href="{{ path('admin_picture_gallery') }}"> Galerie photos </a> </li>
                     <li> <a href="{{ path('app_logout') }}"> Se déconnecter </a> </li>
                 </ul>

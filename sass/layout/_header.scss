@@ -67,11 +67,13 @@
 #headerMainBar {
   background-color: $claretRed;
 
-  nav {
-    padding: 2% 0;
+  .header-nav {
+    padding: 25px 0;
+    @include flex($justify: flex-start);
 
     .logo {
       margin-left: 7%;
+      margin-right: 12%;
       color: white;
     }
 
@@ -79,7 +81,7 @@
       @include flex($flex-dir: row);
 
       li {
-        padding: 0 4rem;
+        padding: 0 2rem;
 
         a {
           text-transform: uppercase;
