@@ -15,12 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActivityController extends AbstractController {
 
     #[Route('/activities', name: 'list_activities')]
-    public function listActivities(ActivityRepository $activityRepository): Response {
+    public function listActivities(ActivityRepository $activityRepository, CategoryRepository $categoryRepository): Response {
 
         $activities = $activityRepository->findAll();
+        $categories = $categoryRepository->findAll();
 
         return $this->render('public/page/activity/list_activities.html.twig', [
-            'activities' => $activities
+            'activities' => $activities,
+            'categories' => $categories,
         ]);
     }
 

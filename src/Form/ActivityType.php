@@ -32,6 +32,7 @@ class ActivityType extends AbstractType
             ->add('nbParticipantsMax')
             ->add('photo', FileType::class, [
                 'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
+                'required' => false,
             ])
             /* ->add('createdAt', null, [
                 'widget' => 'single_text'
@@ -71,7 +72,9 @@ class ActivityType extends AbstractType
                 'choice_label' => 'id',
                 'multiple' => true,
             ]) */
-            ->add('valider', SubmitType::class)
+            ->add('valider', SubmitType::class, [
+            'label' => 'Publier l\'activité',
+        ])
         ;
     }
 

@@ -194,6 +194,9 @@ class AdminActivityController extends AbstractController {
         // Dans $activity, on stocke le résultat du select par id dans l'entité Activity
         $activity = $activityRepository->find($id);
 
+        // on récupère l'image actuelle avant de traiter le formulaire
+        $currentPhoto = $activity->getPhoto();
+
         // On génère une instance de la classe de gabarit de formulaire, et on la lie avec l'entité Activity
         $activityUpdateForm = $this->createForm(ActivityType::class, $activity);
 
@@ -227,6 +230,9 @@ class AdminActivityController extends AbstractController {
 
                 // On stocke le nom du fichier dans la propriété image de l'entité activity
                 $activity->setPhoto($newFilename);
+
+                // Si aucun fichier n'est uploadé, conserver l'image existante
+                $activity->setPhoto($currentPhoto);
             }
 
 

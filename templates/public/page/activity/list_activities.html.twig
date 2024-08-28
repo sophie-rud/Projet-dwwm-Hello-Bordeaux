@@ -26,10 +26,12 @@
     {# Affichage des activités #}
     <section id="section-activities">
 
-        {# Boucle pour l'affichage d'une activité #}
-        {% for activity in activities %}
+        {% for category in categories %}
+            <h2>{{ category.nameCategory }}</h2>
 
-            {{ activity.category.nameCategory }}
+        <div class="activities">
+        {# Boucle pour l'affichage d'une activité #}
+        {% for activity in category.activities %}
 
             <article class="container-activity">
 
@@ -53,10 +55,14 @@
                 </div>
 
                 <div class="title-activity">
-                    <a href="{{ path('show_activity', {id: activity.id}) }}"> <h2>{{ activity.title }}</h2> </a>
+                    <a href="{{ path('show_activity', {id: activity.id}) }}"> <h3>{{ activity.title }}</h3> </a>
                 </div>
 
             </article>
+
+        {% endfor %}
+
+        </div>
 
         {% endfor %}
 
