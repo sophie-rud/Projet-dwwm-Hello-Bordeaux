@@ -354,21 +354,47 @@ article .iconeInfosPratiques img {
   margin: 9% 0;
 }
 
-#section-activities {
+#section-activities-by-category {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   gap: 0%;
   margin: 3% 0;
 }
 
+.activities-one-category {
+  width: 80%;
+  margin: 2% auto;
+}
+.activities-one-category .title-category {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0%;
+  margin-bottom: 15px;
+  position: relative;
+}
+.activities-one-category .title-category h2 {
+  z-index: 10;
+}
+.activities-one-category .activities {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0%;
+  background-color: rgba(255, 191, 85, 0.1);
+}
+
 .container-activity {
   width: 21%;
-  height: 450px;
+  height: 300px;
   color: #FEEFDD;
   overflow: hidden;
   border-radius: 10px;
+  margin: 0 3%;
 }
 .container-activity .info-activity {
   position: relative;
@@ -424,12 +450,27 @@ article .iconeInfosPratiques img {
 .container-activity .appointment-activity i {
   margin-right: 5px;
 }
-.container-activity .title-activity h2 {
+.container-activity .title-activity h3 {
   color: #FEEFDD;
   background-color: #731534;
   font-size: 16px;
   padding: 10px 0;
   border-radius: 0 0 10px 10px;
+}
+
+.title-bg-style {
+  text-align: start;
+}
+
+.title-bg-style::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(255, 191, 85, 0.5);
+  width: 150px;
+  height: 15px;
+  left: 80px;
+  bottom: 0;
+  z-index: 1;
 }
 
 #section-show-activity {

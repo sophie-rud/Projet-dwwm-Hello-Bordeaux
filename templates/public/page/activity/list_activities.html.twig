@@ -23,46 +23,54 @@
         </div>
     </section>
 
-    {# Affichage des activités #}
-    <section id="section-activities">
+    {# Affichage des activités par catégories (avec des boucles for) #}
+    <section id="section-activities-by-category">
 
+        {# Boucle pour l'affichage d'une catégorie #}
         {% for category in categories %}
-            <h2>{{ category.nameCategory }}</h2>
 
-        <div class="activities">
-        {# Boucle pour l'affichage d'une activité #}
-        {% for activity in category.activities %}
+        <section class="activities-one-category">
+            <div class="title-category title-bg-style">
+                <div class="icon-category"> <img src="{{ asset('uploads/'~category.pictogram) }}" alt="pictogramme {{ category.nameCategory }}"> </div>
+                <h2>{{ category.nameCategory }}</h2>
+            </div>
 
-            <article class="container-activity">
+            <div class="activities">
+                {# Boucle pour l'affichage d'une activité parmi les activités référencées par catérgorie #}
+                {% for activity in category.activities %}
 
-                <div class="info-activity">
+                    <article class="container-activity">
 
-                    <div class="img-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div>
-                    {# <div class="img-activity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div> #}
+                        <div class="info-activity">
 
-                    <div class="top-activity">
-                        <div class="pictogram"> <img src="{{ activity.category.pictogram }}" alt="icône {{ activity.category.nameCategory }}"> </div>
-                        <p> {{ activity.date | date('d/m/Y') }} </p>
-                    </div>
+                            <div class="img-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div>
+                            {# <div class="img-activity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div> #}
 
-                    <div class="appointment-activity">
-                        <div class="location">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p> {{ activity.place }} </p>
+                            <div class="top-activity">
+                                <div class="pictogram"> <img src="{{ activity.category.pictogram }}" alt="icône {{ activity.category.nameCategory }}"> </div>
+                                <p> {{ activity.date | date('d/m/Y') }} </p>
+                            </div>
+
+                            <div class="appointment-activity">
+                                <div class="location">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <p> {{ activity.place }} </p>
+                                </div>
+                                <p class="time"> {{ activity.time | date('H:i') }} </p>
+                            </div>
                         </div>
-                        <p class="time"> {{ activity.time | date('H:i') }} </p>
-                    </div>
-                </div>
 
-                <div class="title-activity">
-                    <a href="{{ path('show_activity', {id: activity.id}) }}"> <h3>{{ activity.title }}</h3> </a>
-                </div>
+                        <div class="title-activity">
+                            <a href="{{ path('show_activity', {id: activity.id}) }}"> <h3>{{ activity.title }}</h3> </a>
+                        </div>
 
-            </article>
+                    </article>
 
-        {% endfor %}
+                {% endfor %}
 
-        </div>
+            </div>
+
+        </section>
 
         {% endfor %}
 
