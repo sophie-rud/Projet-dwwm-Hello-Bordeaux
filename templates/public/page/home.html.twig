@@ -71,22 +71,61 @@
         
     </section>
 
-    <section id="activités">
+    <section id="activites">
         <h2 class="styleTitle">Participer aux activités !</h2>
 
-        <div id="carrouselActivites">
+        <div id="carousel">
+            <div class="owl-carousel owl-theme">
+                {% for activity in activities %}
+                    {% if activity.isPublished %}
+                        <a href="{{ path('show_activity', {'id': activity.id}) }}">
+                            <div class="view-activity">
+                                <div class="photo-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div>
+                                <h3> {{ activity.title }} </h3>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
 
         </div>
         
         <article id="sortiesSemaine">
             <div class="imageArticle"><img src="{{ asset('asset/images/home/sorties-semaine.png') }}" alt="Photo des entrepôts Darwin"></div>
             <div class="textArticle">
-            <h4 class="">Les sorties de la semaine</h4>
-            <p> Vous retrouvez ici une sélection des sorties et des évènements de la semaine, publiées par d'autres réseaux de la ville de Bordeaux !  </p>
+                <h4 class="">Les sorties de la semaine</h4>
+                <p> Vous retrouvez ici une sélection des sorties et des évènements de la semaine, publiées par d'autres réseaux de la ville de Bordeaux !  </p>
             </div>
         </article>
 
     </section>
 
+{% endblock %}
 
+{% block javascript %}
+        <script src="{{ asset('asset/js/owl_carousel/owl.carousel.js') }}"></script>
+        <script>
+                    $(document).ready(function(){
+                        $(".owl-carousel").owlCarousel({
+                            margin:20,
+                            nav:true,
+                            loop : true,
+                            autoplay:true,
+                            autoplayTimeout:3000,
+                            autoplayHoverPause:true,
+
+                            responsive:{
+                                0:{
+                                    items:1
+                                },
+                                600:{
+                                    items:3
+                                },
+                                1000:{
+                                    items:5
+                                }
+                            }
+                        });
+                    });
+        </script>
 {% endblock %}

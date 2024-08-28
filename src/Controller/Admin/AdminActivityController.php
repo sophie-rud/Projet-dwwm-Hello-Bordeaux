@@ -189,7 +189,7 @@ class AdminActivityController extends AbstractController {
 
 
     #[Route('/update/{id}', name: 'admin_update_activity')]
-    public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request): Response {
+    public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
 
         // Dans $activity, on stocke le résultat du select par id dans l'entité Activity
         $activity = $activityRepository->find($id);
@@ -202,6 +202,35 @@ class AdminActivityController extends AbstractController {
 
         // Sile formulaire est soumis et contient des données valides (qui respectent les contraintes)
         if($activityUpdateForm->isSubmitted() && $activityUpdateForm->isValid()) {
+
+            // On récupère le fichier depuis le formulaire
+            $photoFile = $activityUpdateForm->get('photo')->getData();
+
+            // Si un fichier photo est bien soumis
+            if ($photoFile) {
+                // On récupère le nom du fichier
+                $originalFilename = pathinfo($photoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // On "nettoie" le nom du fichier avec $slugger->slug() (retire les caractères spéciaux...)
+                $safeFilename = $slugger->slug($originalFilename);
+                // On ajoute un identifiant unique au nom
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
+
+
+                try {
+                    // On récupère le chemin de la racine du projet
+                    $rootPath = $params->get('kernel.project_dir');
+                    // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
+                    $photoFile->move($rootPath . '/public/uploads', $newFilename);
+                } catch (FileException $e) {
+                    dd($e->getMessage());
+                }
+
+                // On stocke le nom du fichier dans la propriété image de l'entité activity
+                $activity->setPhoto($newFilename);
+            }
+
+
+
             // On actualise la date de mise à jour de l'activité
             $activity->setUpdatedAt(new \DateTime('NOW'));
             // On prépare la requête sql

@@ -252,6 +252,65 @@ article .iconeInfosPratiques img {
   border-radius: 30px;
 }
 
+#carousel {
+  background-color: rgba(87, 199, 223, 0.2);
+  padding: 60px 0 7px 0;
+  margin-top: 2%;
+}
+
+.owl-carousel {
+  width: 70%;
+  margin: auto;
+}
+.owl-carousel .view-activity {
+  position: relative;
+}
+.owl-carousel .view-activity .photo-activity {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.owl-carousel .view-activity .photo-activity img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.owl-carousel .view-activity h3 {
+  color: #FEEFDD;
+  background-color: rgba(115, 21, 52, 0.4);
+  padding: 4px;
+  width: 90%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50%;
+}
+
+.view-activity:hover .photo-activity::after {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.view-activity:hover .photo-activity img {
+  filter: brightness(150%);
+}
+.view-activity:hover h3 {
+  color: #731534;
+  background-color: transparent;
+  font-weight: bold;
+  transform: scale(1.1);
+}
+
 #sortiesSemaine {
   width: 100%;
   display: flex;
@@ -278,7 +337,7 @@ article .iconeInfosPratiques img {
   width: 93%;
   height: 1px;
   background-color: #731534; /* Couleur de la ligne */
-  right: -22%;
+  right: -5%;
   bottom: 0;
 }
 #sortiesSemaine .textArticle p {
