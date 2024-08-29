@@ -69,6 +69,19 @@ p {
   font-size: 11px;
 }
 
+.profilePicture {
+  border-radius: 55px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profilePicture img {
+  width: 100%;
+  height: 100%; /* L'image occupe toute la hauteur du conteneur */
+  object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -480,7 +493,6 @@ article .iconeInfosPratiques img {
 #section-show-activity .show-activity {
   background-color: #FEEFDD;
   border-radius: 25px;
-  width: 100%;
   margin: 2% auto;
   padding: 15px 25px;
   display: flex;
@@ -506,18 +518,16 @@ article .iconeInfosPratiques img {
 #section-show-activity .show-activity .infos-activity p {
   padding: 6px 0;
 }
-#section-show-activity .show-activity .group-title {
+#section-show-activity .show-activity .infos-activity .group-title {
   padding-bottom: 20px;
-}
-#section-show-activity .show-activity .text-activity {
-  padding: 10px 30px;
-}
-#section-show-activity .show-activity .location, #section-show-activity .show-activity .group-title {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   gap: 0%;
+}
+#section-show-activity .show-activity .text-activity {
+  padding: 10px 30px;
 }
 #section-show-activity .btn-style {
   display: block;
@@ -530,14 +540,50 @@ article .iconeInfosPratiques img {
   font-size: 15px;
   color: #FEEFDD;
   padding: 6px 0;
+  transition: transform 0.3s ease;
 }
-#section-show-activity .participants {
+#section-show-activity .btn-style:hover {
+  background-color: #731534;
+  transform: scale(1.1);
+}
+
+#section-participants {
+  width: 75%;
+  margin: 5% auto;
   background-color: #FEEFDD;
-  border-radius: 50px;
-  width: 100%;
-  margin-top: 6%;
-  margin-bottom: 4%;
-  padding: 5px 25px;
+  border-radius: 25px;
+}
+#section-participants h3 {
+  margin-bottom: 10px;
+  padding: 15px 25px;
+}
+#section-participants .all-participants {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0%;
+  padding: 15px 25px;
+}
+#section-participants .all-participants .one-participant .display-username {
+  display: none;
+}
+#section-participants .all-participants .one-participant .profilePicture {
+  width: 70px;
+  height: 70px;
+  margin: 0 7px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+#section-participants .all-participants .one-participant .profilePicture:hover {
+  transform: scale(1.02);
+}
+#section-participants .all-participants .one-participant .profilePicture:hover + .display-username {
+  display: block;
+  position: absolute;
+  font-size: 13px;
+  margin: 5px 0 0 12px;
+  color: #731534;
 }
 
 body {
@@ -633,16 +679,6 @@ main .btn-inscription {
 #section-profile .profil .profilePicture {
   width: 110px;
   height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#section-profile .profil .profilePicture img {
-  width: 100%;
-  height: 100%; /* L'image occupe toute la hauteur du conteneur */
-  object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
 }
 #section-profile .profil a {
   align-self: flex-start;

@@ -2,13 +2,13 @@
 
 {% block main %}
 
+{% if activity.isPublished %}
+
     <h1> {{ activity.title }} </h1>
 
     <section id="section-show-activity">
 
-        {% if activity.isPublished %}
-
-            <article class="show-activity">
+            <div class="show-activity">
 
                 <div class="img-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div>
 
@@ -23,24 +23,38 @@
                         <p> {{ activity.place }} </p>
                     </div> #}
                     <p> <i class="fa-solid fa-location-dot"></i> {{ activity.place }} </p>
-                    <p class="time"> <i class="fa-regular fa-clock"></i> {{ activity.time | date('H:i') }} </p>
+                    <p> <i class="fa-regular fa-clock"></i> {{ activity.time | date('H:i') }} </p>
 
                 </div>
 
                 <p class="text-activity"> {{ activity.description }} </p>
-            </article>
-
-            <a class="btn-style" href=""> Participer </a>
-
-            <div class="participants">
-                <p>Participants</p>
-                <div>
-                    {# boucle for #}
-                </div>
             </div>
 
+            <a class="btn-style" href="{{ path('inscription_activity', {id: activity.id}) }}"> Participer </a>
+
+    </section>
+
+    <section id="section-participants">
+        <h3>Participants</h3>
+
+        {% if participants is not empty %}
+
+            <div class="all-participants">
+                {% for participant in participants %}
+                    <div class="one-participant">
+                        <div class="profilePicture"> <img src="{{ asset('uploads/' ~participant.profilePicture) }}" alt="photo de profil de : {{ participant.username }}"> </div>
+                        <p class="display-username">{{ participant.username }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <p>Aucun participant n'est inscrit à cette activité pour le moment.</p>
         {% endif %}
 
     </section>
+
+{% endif %}
+
 
 {% endblock %}

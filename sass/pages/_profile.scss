@@ -11,17 +11,6 @@
     .profilePicture {
       width: 110px;
       height: 100px;
-      border-radius: 50%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 100%;
-        height: 100%; /* L'image occupe toute la hauteur du conteneur */
-        object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
-      }
     }
 
     a {

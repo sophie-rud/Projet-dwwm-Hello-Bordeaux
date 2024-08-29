@@ -13,7 +13,7 @@ img {
 }
 
 
-// Titres
+//  ---------- TITRES - TEXTES ----------
 
 h1 {
   font-size: 35px;
@@ -72,4 +72,22 @@ p {
 
 .small-font {
   font-size: 11px;
+}
+
+
+// ---------- IMAGES ----------
+
+  // Effet cercle sur les images de profil
+.profilePicture {
+  border-radius: 55px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%; /* L'image occupe toute la hauteur du conteneur */
+    object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
+  }
 }
