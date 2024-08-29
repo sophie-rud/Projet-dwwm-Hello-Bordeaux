@@ -1,0 +1,120 @@
+
+#section-show-activity {
+  width: 75%;
+  margin: auto;
+
+  .show-activity {
+    background-color: $limestone;
+    border-radius: 25px;
+    margin: 2% auto;
+    padding: 15px 25px;
+    @include flex($justify: space-around);
+
+    // Image de l'activité
+    .img-activity {
+      width: 100%;
+      border-radius: 25px;
+      //height: 200px;
+      object-fit: cover;
+      overflow: hidden;
+      background-color: #a78bfa;
+    }
+
+    // Infos sur l'activité (heure, lieu, date, titre)
+    .infos-activity {
+      background-color: rgba(115, 21, 52, 0.3);
+      border-radius: 20px;
+      padding: 40px 10px;
+      margin: 0 20px;
+      width: 100%;
+      //height: 200px;
+
+      p {
+        padding: 6px 0;
+      }
+
+      .group-title {
+        padding-bottom: 20px;
+        @include flex($justify: space-around);
+      }
+    }
+
+    // Description
+    .text-activity {
+      padding: 10px 30px;
+    }
+  }
+
+  //Bouton d'inscription
+  .btn-style {
+    display: block;
+    background-color: rgba(115, 21, 52, 0.7);
+    border-radius: 50px;
+    border: transparent;
+    width: 35%;
+    margin: 15px auto;
+    text-align: center;
+    font-size: 15px;
+    color: $limestone;
+    padding: 6px 0;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      background-color: $claretRed;
+      transform: scale(1.1);
+    }
+  }
+}
+
+
+  // SECTION PARTICIPANTS
+#section-participants {
+  width: 75%;
+  margin: 5% auto;
+  background-color: $limestone;
+  border-radius: 25px;
+
+  h3 {
+      margin-bottom: 10px;
+      padding: 15px 25px;
+    }
+
+    // Affichage de tous les participants à l'activité
+    .all-participants {
+      @include flex($justify: flex-start);
+      padding: 15px 25px;
+
+      // Affichage d'un participant
+      .one-participant {
+
+        .display-username {
+          display: none;
+        }
+
+        .profilePicture {
+          width: 70px;
+          height: 70px;
+          margin: 0 7px;
+          position: relative;
+          transition: transform 0.3s ease;
+
+          &:hover {
+            transform: scale(1.02);
+
+            + .display-username {
+              display: block;
+              position: absolute;
+              font-size: 13px;
+              margin: 5px 0 0 12px;
+              color: $claretRed;
+            }
+          }
+        }
+      }
+    }
+}
+
+
+
+
+

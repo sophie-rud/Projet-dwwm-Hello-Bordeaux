@@ -1,0 +1,95 @@
+body {
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 2%;
+}
+
+main {
+
+  .main-login {
+    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 67vh;
+  }
+
+
+  form {
+    width: 45%;
+    display: block;
+    background-color: rgba(115, 21, 52, 0.3);
+    border-radius: 25px;
+    padding: 30px;
+    margin: auto;
+
+
+    .inputWrapper {
+      position: relative;
+      margin: 50px 0;
+      background-color: $limestone;
+
+
+      input, label {
+        display: block;
+        width: 100%;
+      }
+
+      label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $claretRed;
+        font-family: Josefin Sans, sans-serif;
+        transition: .5s;
+      }
+
+      input {
+        border: none;
+        border-bottom: solid 1px $limestone;
+        background-color: transparent;
+        padding: 3px 0;
+        font-size: 16px;
+      }
+
+      input:not(:placeholder-shown) + label, input:focus + label {
+        transform: translateY(-30px);
+      }
+
+    }
+
+  }
+
+  .btn {
+    background-color: $claretRed;
+    border-radius: 50px;
+    border: solid 1px $claretRed;
+    color: $limestone;
+    width: 100%;
+    padding: 6px 0;
+  }
+
+  .btn:hover {
+    background-color: $limestone;
+    border: solid 1px $limestone;
+    color: $claretRed;
+  }
+
+  .btn-inscription {
+    display: block;
+    background-color: rgba(115, 21, 52, 0.7);
+    border-radius: 50px;
+    border: transparent;
+    width: 45%;
+    margin: 30px auto;
+    text-align: center;
+    font-size: 15px;
+    color: $limestone;
+    padding: 6px 0;
+  }
+}
+
+
+

@@ -1,0 +1,25 @@
+// abstract
+@import "abstract/variables";
+@import "abstract/mixin";
+
+// base
+@import "base/general";
+@import "base/reset";
+
+//components
+@import "components/carousel";
+
+// layout
+@import "layout/header";
+@import "layout/footer";
+
+// pages
+@import "pages/home";
+@import "pages/activities";
+@import "pages/show-activity";
+@import "pages/login";
+@import "pages/inscription";
+@import "pages/profile";
+
+
+

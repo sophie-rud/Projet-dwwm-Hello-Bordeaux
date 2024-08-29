@@ -1,0 +1,32 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block metatitle %} Picture gallery
+{% endblock %}
+
+
+{% block main %}
+
+
+    <h1> Gallerie photo </h1>
+
+    <section>
+
+        {% for picture in pictures %}
+
+            <article>
+
+                <div class="pictureInGallery"> <img src="{{ picture.filePath }}" alt="Photo : {{ picture.pictureName }}"> </div>
+                <h2>{{ picture.pictureName }}</h2>
+                {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p>
+                <a href="{{ path('show_activity', {id: activity.id}) }}"> Supprimer l'image </a> #}
+
+                <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/pencil.png') }}" alt="Modifier l'image"> </div>  </a>
+                <a href="{{ path('admin_delete_picture_in_gallery', {id: picture.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/trash-can-solid.png') }}" alt="Modifier l'image"> </div>  </a>
+
+            </article>
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block metatitle %}Welcome admin!{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" >
+    {% block bootstrap %} {% endblock %}
+
+    <link href="{{ asset('asset/css/app.css') }}" rel="stylesheet" />
+</head>
+
+
+<body>
+
+    <header>
+
+        <div id="headerTopBar">
+            <div class="search-container">
+                <form action="/search" method="GET">
+                    <input type="text" placeholder="Rechercher..." name="search">
+                    <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
+                </form>
+            </div>
+
+            <div class="rightPart">
+                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i> {% block username %} {{ app.user.username }} {% endblock %} </a>
+                {% block deconnection %}
+                    <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                {% endblock %}
+                <div id="iconLanguage"> <img src="{{ asset('asset/images/icons/french_flag.jpg') }}" alt="Icon french flag"> </div>
+            </div>
+        </div>
+
+
+        <div id="headerMainBar">
+            <nav class="header-nav">
+                <a class="logo" href="{{ path('home') }}">LOGO</a>
+                <ul>
+                    <li> <a href="{{ path('admin_list_categories') }}"> Gérer les catégories </a> </li>
+                    <li> <a href="{{ path('admin_list_activities') }}"> Gérer les activités </a> </li>
+                    <li> <a href="{{ path('admin_picture_gallery') }}"> Galerie photos </a> </li>
+                    <li> <a href="{{ path('app_logout') }}"> Se déconnecter </a> </li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
+
+
+    <main>
+        {# vérifie si des messages flashes ont été enregistrés par un controleur. Si oui, on les affiche #}
+        {% for message in app.flashes('success') %}
+            <div class="success-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="error-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+
+        {% block main %}{% endblock %}
+    </main>
+
+
+    <footer>
+        <nav class="footer-nav">
+            <ul>
+                <li> <a href="https://www.facebook.com/?locale=fr_FR" target="_blank"> <i class="fa-brands fa-square-facebook iconFooter"></i> </a> </li>
+                <li> <a href="https://www.pinterest.fr/" target="_blank"> <i class="fa-brands fa-square-pinterest iconFooter"></i> </a> </li>
+                <li> <a href="https://www.instagram.com/" target="_blank"> <i class="fa-brands fa-instagram iconFooter"></i> </a> </li>
+            </ul>
+            <ul>
+                <li> <a href=""> Mentions légales </a> </li>
+                <li> <a href=""> Contact </a> </li>
+                <li> <a href=""> Sites utiles </a> </li>
+                <li> <a href=""> Applications </a> </li>
+            </ul>
+
+            <a href="#top"> <i class="fa-solid fa-circle-chevron-up iconFooter"></i></a>
+        </nav>
+    </footer>
+
+
+    {% block script %}{% endblock %}
+
+</body>
+
+</html>

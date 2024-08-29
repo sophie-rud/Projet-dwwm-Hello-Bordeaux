@@ -1,0 +1,9 @@
+@mixin flex($flex-dir:row, $justify:center, $align:center, $gap:0%) {
+  display: flex;
+  flex-direction: $flex-dir;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+  // gap pas utile sur justify-content center, seulement avec space around et between
+  // Intéressant de rajouter flex-wrap: $wrap;
+}

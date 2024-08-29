@@ -1,0 +1,53 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block metatitle %}
+{% endblock %}
+
+{% block main %}
+
+<section>
+
+    <table>
+            <tr>
+                <td>Id</td>
+                <td>Titre</td>
+                <td>Catégorie</td>
+                <td>Lieu</td>
+                <td>Date</td>
+                <td>Photo</td>
+                <td>Description</td>
+                <td>Nombre de participants max</td>
+                <td>Publié ?</td>
+                <td>Créé le :</td>
+                <td>Mis à jour le :</td>
+                <td>Voir</td>
+                <td>Supprimer</td>
+                <td>Modifier</td>
+
+            </tr>
+
+        {% for activity in activities %}
+            <tr>
+                <td>{{ activity.id }}</td>
+                <td>{{ activity.title }}</td>
+                <td>{{ activity.category.nameCategory }}</td>
+                <td>{{ activity.place }}</td>
+                <td>{{ activity.date | date('d.m.Y') }}</td>
+                <td> <div class="photoAdminActivity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div> </td>
+                <td>{{ activity.description }}</td>
+                <td>{{ activity.nbParticipantsMax }}</td>
+                <td>{{ activity.isPublished }}</td>
+                <td>{{ activity.createdAt | date('d.m.Y') }}</td>
+                <td>{{ activity.updatedAt | date('d.m.Y') }}</td>
+                <td> <a href="{{ path('admin_show_activity', {id: activity.id}) }}"> Voir l'activité </a> </td>
+                <td> <a href="{{ path('admin_delete_activity', {id: activity.id}) }}"> Supprimer l'activité </a> </td>
+                <td> <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Modifier </a> </td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+</section>
+
+{% endblock %}
