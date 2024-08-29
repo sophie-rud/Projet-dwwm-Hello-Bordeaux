@@ -1,0 +1,31 @@
+.admin-activity-popup-delete {
+  display: none;
+  position: fixed;
+  background-color: $limestone;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 100px;
+  text-align: center;
+
+    p {
+      margin-bottom: 25px;
+    }
+}
+
+
+.a-style-popup {
+  background-color: rgba(115, 21, 52, 0.9);
+  color: $limestone;
+  padding: 10px 15px;
+  margin: 15px 10px;
+}
+
+
+.js-close-popup {
+  background-color: rgba(115, 21, 52, 0.3);
+  border: transparent;
+  padding: 10px 15px;
+  margin: 15px 10px;
+}
+
