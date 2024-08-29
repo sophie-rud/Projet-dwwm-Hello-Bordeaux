@@ -5,34 +5,41 @@
 
 {% block main %}
 
-    <section>
+    <section id="table-categories" class="admin-table">
 
-        <table>
-            <tr>
-                <td>Id</td>
-                <td>Nom</td>
-                <td>Pictogramme</td>
-                <td>Modifier</td>
-                <td>Supprimer</td>
-                {# <td>Voir</td> #}
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>Pictogramme</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
 
-            </tr>
-
+            <tbody>
             {% for category in categories %}
                 <tr>
                     <td>{{ category.id }}</td>
                     <td>{{ category.nameCategory }}</td>
                     <td> <div class="pictoCategory"> <img src="{{ asset('uploads/'~category.pictogram) }}" alt="illustration de : {{ category.nameCategory }}"> </div> </td>
-
-                    <td> <a href="{{ path('admin_delete_category', {id: category.id}) }}"> Supprimer la catégorie </a> </td>
-                    <td> <a href="{{ path('admin_update_category', {id: category.id}) }}"> Modifier </a> </td>
-                    {# <td> <a href="{{ path('admin_show_category', {id: category.id}) }}"> Voir la catégorie </a> </td> #}
+                    <td>
+                        <a href="{{ path('admin_delete_category', {id: category.id}) }}"> Supprimer la catégorie </a>
+                        <a href="{{ path('admin_update_category', {id: category.id}) }}"> Modifier </a>
+                    </td>
                 </tr>
 
             {% endfor %}
+            </tbody>
 
         </table>
 
     </section>
 
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    {# <script>let dataTable = new DataTable('#myTable');</script> #}
 {% endblock %}

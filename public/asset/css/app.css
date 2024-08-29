@@ -198,6 +198,36 @@ a {
   margin: 15px 10px;
 }
 
+.admin-table {
+  width: 95%;
+  margin: auto;
+}
+
+thead {
+  font-weight: bold;
+  background-color: rgba(115, 21, 52, 0.3);
+  height: 25px;
+}
+
+tr:nth-of-type(even) {
+  background-color: rgba(115, 21, 52, 0.15);
+}
+
+.photoAdminActivity {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.photoAdminActivity img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 #headerTopBar {
   background-color: #FEEFDD;
   padding: 10px 50px;
