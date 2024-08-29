@@ -170,7 +170,7 @@ a {
   text-align: center;
 }
 
-.admin-activity-popup-delete {
+.popup-confirmation {
   display: none;
   position: fixed;
   background-color: #FEEFDD;
@@ -180,7 +180,7 @@ a {
   padding: 100px;
   text-align: center;
 }
-.admin-activity-popup-delete p {
+.popup-confirmation p {
   margin-bottom: 25px;
 }
 

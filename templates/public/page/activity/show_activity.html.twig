@@ -30,9 +30,20 @@
                 <p class="text-activity"> {{ activity.description }} </p>
             </div>
 
-            <a class="btn-style" href="{{ path('inscription_activity', {id: activity.id}) }}"> Participer </a>
+            {# Supprimer l'utilisateur (+popup pour valider choix) #}
+            <div class="popup-confirmation" data-popup-target-id="{{ activity.id }}">
+                <h2>{{ activity.title }} le {{ activity.date | date('d/m/Y')}}</h2>
+                <p>Validez-vous votre participation à cette activité ?</p>
+
+                <a href="{{ path('inscription_activity', {id: activity.id}) }}" class="a-style-popup"> Participer </a>
+                <button class="js-close-popup"> Annuler </button>
+            </div>
+
+            <p data-trigger-id="{{ activity.id }}" class="js-popup-confirmation btn-style"> Participer </p>
+
 
     </section>
+
 
     <section id="section-participants">
         <h3>Participants</h3>
@@ -57,4 +68,8 @@
 {% endif %}
 
 
+{% endblock %}
+
+{% block javascript %}
+    <script src="{{ asset('asset/js/main.js') }}"></script>
 {% endblock %}

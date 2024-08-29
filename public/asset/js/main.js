@@ -1,18 +1,18 @@
-// ---------- BOUTONS SUPPRIMER popups
+// ---------- BOUTONS DE CONFIRMATION popups (pour suppression, inscription)
 
-// On récupère tous les éléments ayant pour classe "js-admin-activity-delete" (boutons de suppression)
-const deleteActivityButtons = document.querySelectorAll('.js-admin-activity-delete');
+// On récupère tous les éléments ayant pour classe "js-popup-confirmation" (boutons avec confirmation de choix)
+const confirmationButtons = document.querySelectorAll('.js-popup-confirmation');
 
-// pour chaque bouton de suppression trouvé
-deleteActivityButtons.forEach((deleteActivityButton) => {
+// pour chaque bouton de "confirmation" trouvé
+confirmationButtons.forEach((confirmationButton) => {
     // on ajoute un event listener "click" : au click on éxécute une fonction de callback
-    deleteActivityButton.addEventListener('click', () => {
+    confirmationButton.addEventListener('click', () => {
 
-        // on récupère la valeur de l'attribut data-activity-trigger-id de l'élément cliqué
-        const activityId = deleteActivityButton.dataset.activityTriggerId;
+        // on récupère la valeur de l'attribut data-trigger-id de l'élément cliqué
+        const elementId = confirmationButton.dataset.triggerId;
 
-        // on séléctionne l'élément HTML comportant un attribut data-activity-popup-target-id et dont la valeur est la même que l'id de l'activité
-        const popup = document.querySelector(`[data-activity-popup-target-id="${activityId}"]`);
+        // on séléctionne l'élément HTML comportant un attribut data-popup-target-id et dont la valeur est la même que l'id recherché (de l'activité, de la catégorie, du user...)
+        const popup = document.querySelector(`[data-popup-target-id="${elementId}"]`);
 
         // on passe la popup trouvée en display block pour l'afficher
         popup.style.display = "block";
@@ -20,7 +20,7 @@ deleteActivityButtons.forEach((deleteActivityButton) => {
 })
 
 
-// ---------- BOUTONS ANNULER des suppressions (ferme les popups)
+// ---------- BOUTONS ANNULER (ferme les popups)
 
 // On récupère tous les boutons "Annuler" ayant pour classe "js-close-popup"
 const closePopupButtons = document.querySelectorAll('.js-close-popup');
@@ -32,7 +32,7 @@ closePopupButtons.forEach((closePopupButton) => {
     closePopupButton.addEventListener('click', () => {
 
         // On remonte jusqu'à la popup parente et on la masque
-        const popup = closePopupButton.closest('.admin-activity-popup-delete');
+        const popup = closePopupButton.closest('.popup-confirmation');
         popup.style.display = "none";
     });
 });

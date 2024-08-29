@@ -17,11 +17,20 @@
 
                 <div class="pictureInGallery"> <img src="{{ picture.filePath }}" alt="Photo : {{ picture.pictureName }}"> </div>
                 <h2>{{ picture.pictureName }}</h2>
-                {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p>
-                <a href="{{ path('show_activity', {id: activity.id}) }}"> Supprimer l'image </a> #}
+                {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p> #}
 
                 <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/pencil.png') }}" alt="Modifier l'image"> </div>  </a>
-                <a href="{{ path('admin_delete_picture_in_gallery', {id: picture.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/trash-can-solid.png') }}" alt="Modifier l'image"> </div>  </a>
+
+                {# Supprimer l'image (+popup pour valider choix) #}
+                <div class="popup-confirmation" data-popup-target-id="{{ picture.id }}">
+                    <p>Voulez vous vraiment supprimer l'image ?</p>
+
+                    <a href="{{ path('admin_delete_picture_in_gallery', {id: picture.id}) }}" class="a-style-popup"> Supprimer </a>
+                    <button class="js-close-popup"> Annuler </button>
+                </div>
+
+                <p data-trigger-id="{{ picture.id }}" class="js-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+
 
             </article>
 

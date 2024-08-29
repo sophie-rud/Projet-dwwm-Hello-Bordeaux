@@ -24,8 +24,18 @@
                     <td>{{ category.nameCategory }}</td>
                     <td> <div class="pictoCategory"> <img src="{{ asset('uploads/'~category.pictogram) }}" alt="illustration de : {{ category.nameCategory }}"> </div> </td>
                     <td>
-                        <a href="{{ path('admin_delete_category', {id: category.id}) }}"> Supprimer la catégorie </a>
-                        <a href="{{ path('admin_update_category', {id: category.id}) }}"> Modifier </a>
+                        <a href="{{ path('admin_update_category', {id: category.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
+
+                        {# Supprimer la catégorie (+popup pour valider choix) #}
+                        <div class="popup-confirmation" data-popup-target-id="{{ category.id }}">
+                            <p>Voulez vous vraiment supprimer la catégorie ?</p>
+
+                            <a href="{{ path('admin_delete_category', {id: category.id}) }}" class="a-style-popup"> Supprimer </a>
+                            <button class="js-close-popup"> Annuler </button>
+                        </div>
+
+                        <p data-trigger-id="{{ category.id }}" class="js-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+
                     </td>
                 </tr>
 

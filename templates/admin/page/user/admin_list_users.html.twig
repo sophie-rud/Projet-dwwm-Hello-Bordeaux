@@ -33,8 +33,21 @@
                     {# <td>{{ user.registeredAt | date('d.m.Y') }}</td>
 
                     <td> <a href="{{ path('admin_show_activity', {id: activity.id}) }}"> Voir l'activité </a> </td>
-                    <td> <a href="{{ path('admin_delete_activity', {id: activity.id}) }}"> Supprimer l'activité </a> </td>
                     <td> <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Modifier </a> </td> #}
+
+
+
+                    {# Supprimer l'utilisateur (+popup pour valider choix) #}
+                    <div class="popup-confirmation" data-popup-target-id="{{ user.id }}">
+                        <p>Voulez vous vraiment supprimer cet utilisateur ?</p>
+
+                        <a href="{{ path('admin_delete_user', {id: user.id}) }}" class="a-style-popup"> Supprimer </a>
+                        <button class="js-close-popup"> Annuler </button>
+                    </div>
+
+                    <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+
+
 
                 </tr>
 
