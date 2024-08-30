@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -36,6 +37,7 @@ class AdminUserController extends AbstractController {
     }
 
     #[Route('/insert', name: 'admin_user_insert')]
+    #[IsGranted('ROLE_ADMIN')]
     public function insertAdmin(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response
     {
 
@@ -87,7 +89,16 @@ class AdminUserController extends AbstractController {
 
                 // et c'est le mdp hashé qu'on enregistre en bdd (on définit le mdp hashé comme mdp avec le setter)
                 $user->setPassword($hashedPassword);
-                $user->setRoles(['ROLE_ADMIN']);
+
+
+                // Si l'utilisateur courant est SUPERADMIN, il peut créer un admin
+                if ($this->isGranted('ROLE_SUPERADMIN')) {
+                    $user->setRoles(['ROLE_ADMIN']);
+                } else {
+                    // Sinon, s'il est admin, il crée un utilisateur simple
+                    $user->setRoles(['ROLE_USER']);
+                }
+
 
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -112,6 +123,7 @@ class AdminUserController extends AbstractController {
 
 
     #[Route('/delete/{id}', name: 'admin_delete_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
 
         $user = $userRepository->find($id);
@@ -121,6 +133,17 @@ class AdminUserController extends AbstractController {
             return new Response($html404, 404);
         }
 
+        // On récupère le rôle de l'utilisateur de l'id recherché
+        $roles = $user->getRoles();
+
+        // On vérifie si l'utilisateur courant (qui essaie de supprimer) est un admin ou un super admin
+        if (in_array('ROLE_ADMIN', $roles) && !$this->isGranted('ROLE_SUPERADMIN')) {
+
+            $this->addFlash('error', 'Vous n\'avez pas le droit de supprimer un administrateur.');
+            return $this->redirectToRoute('admin_list_users');
+        }
+
+
         try {
             $entityManager->remove($user);
             $entityManager->flush();
@@ -128,9 +151,10 @@ class AdminUserController extends AbstractController {
             $this->addFlash('success', 'L\'utilisateur a été supprimé !');
 
         } catch (\Exception $exception) {
-            return $this->renderView('admin/page/error.html.twig', [
+            /*return $this->renderView('admin/page/error.html.twig', [
                 'errorMessage' => $exception->getMessage()
-            ]);
+            ]);*/
+            $this->addFlash('error', $exception->getMessage());
         }
 
         return $this->redirectToRoute('admin_list_users');

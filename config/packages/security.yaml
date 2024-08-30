@@ -13,6 +13,22 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        admin:
+            pattern: ^/admin
+            provider: app_user_provider
+            lazy: true
+            form_login:
+                login_path: app_admin_login
+                check_path: app_admin_login
+                enable_csrf: true
+                # permet de faire une redirection dans le SecurityController
+                default_target_path: admin_list_activities
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: home
+
         main:
             lazy: true
             provider: app_user_provider
@@ -33,11 +49,22 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
+
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        # allow unauthenticated users to access the login form
+        - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+        # but require authentication for all other admin routes
         - { path: ^/admin, roles: ROLE_ADMIN }
+
         - { path: ^/user, roles: ROLE_USER }
+
+
 
 when@test:
     security:

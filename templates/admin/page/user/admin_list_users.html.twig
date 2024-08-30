@@ -28,13 +28,11 @@
                     <td>{{ user.email }}</td>
                     <td> <p><strong>{{ user.username }}</strong></p></td>
                     <td>
-                        {% for role in user.roles %}
-                            {% if role == 'ROLE_USER' %}
-                                <p>User</p>
-                            {% elseif role == 'ROLE_ADMIN' %}
+                        {% if 'ROLE_ADMIN' in user.roles %}
                                 <p>Admin</p>
-                            {% endif %}
-                        {% endfor %}
+                            {% elseif 'ROLE_USER' in user.roles %}
+                                <p>User</p>
+                        {% endif %}
                     </td>
                     <td>{{ user.registeredAt | date('d.m.Y') }}</td>
                     <td> {% if not user.isActive %}

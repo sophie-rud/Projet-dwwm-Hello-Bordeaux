@@ -28,9 +28,18 @@
             </div>
 
             <div class="rightPart">
-                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i> {% block username %} {{ app.user.username }} {% endblock %} </a>
+                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i>
+                    {% block username %}
+                        {% if app.user %}
+                            {{ app.user.username }}
+                        {% else %}
+                            Espace utilisateur
+                        {% endif %}
+                    {% endblock %} </a>
                 {% block deconnection %}
-                    <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                    {% if app.user %}
+                        <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                    {% endif %}
                 {% endblock %}
                 <div id="iconLanguage"> <img src="{{ asset('asset/images/icons/french_flag.jpg') }}" alt="Icon french flag"> </div>
             </div>
