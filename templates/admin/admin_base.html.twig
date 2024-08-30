@@ -41,10 +41,10 @@
             <nav class="header-nav">
                 <a class="logo" href="{{ path('home') }}">LOGO</a>
                 <ul>
+                    <li> <a href="{{ path('admin_list_users') }}"> Gérer les utilisateurs </a> </li>
                     <li> <a href="{{ path('admin_list_categories') }}"> Gérer les catégories </a> </li>
                     <li> <a href="{{ path('admin_list_activities') }}"> Gérer les activités </a> </li>
                     <li> <a href="{{ path('admin_picture_gallery') }}"> Galerie photos </a> </li>
-                    <li> <a href="{{ path('app_logout') }}"> Se déconnecter </a> </li>
                 </ul>
             </nav>
         </div>
@@ -56,6 +56,12 @@
         {# vérifie si des messages flashes ont été enregistrés par un controleur. Si oui, on les affiche #}
         {% for message in app.flashes('success') %}
             <div class="success-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('warning') %}
+            <div class="warning-message">
                 {{ message }}
             </div>
         {% endfor %}

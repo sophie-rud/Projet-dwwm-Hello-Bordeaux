@@ -164,7 +164,16 @@ a {
 .error-message {
   width: 100%;
   color: #FEEFDD;
-  background: linear-gradient(107.2deg, rgb(150, 15, 15) 10.6%, rgb(247, 0, 0) 91.1%);
+  background: linear-gradient(107.2deg, rgb(255, 15, 123) 10.6%, rgb(248, 96, 41) 91.1%);
+  padding: 20px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.warning-message {
+  width: 100%;
+  color: #FEEFDD;
+  background: linear-gradient(107.2deg, rgb(255, 215, 138) 10.6%, rgb(244, 118, 45) 91.1%);
   padding: 20px;
   font-size: 25px;
   text-align: center;

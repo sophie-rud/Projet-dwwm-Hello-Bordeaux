@@ -5,58 +5,82 @@
 
 {% block main %}
 
-    <section>
+    <section id="table-users" class="admin-table">
 
-        <table>
-            <tr>
-                <td>Id</td>
-                <td>Email</td>
-                <td>Pseudo</td>
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <td>Email</td>
+                    <td>Pseudo</td>
+                    <td>Rôle</td>
+                    <td>Inscrit·e le :</td>
+                    <td>Bloqué·e</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
 
-                <td>Créé le :</td>
-                <td>Voir</td>
-                <td>Supprimer</td>
-                <td>Bloquer</td>
-
-            </tr>
-
-
+            <tbody>
             {% for user in users %}
 
-            {# {% if user.roles == 'ROLE_ADMIN' %} #}
+            {# {% if user->isGranted('ROLE_ADMIN') %} #}
 
                 <tr>
-                    <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.username }}</td>
+                    <td> <p><strong>{{ user.username }}</strong></p></td>
+                    <td>
+                        {% for role in user.roles %}
+                            {% if role == 'ROLE_USER' %}
+                                <p>User</p>
+                            {% elseif role == 'ROLE_ADMIN' %}
+                                <p>Admin</p>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>{{ user.registeredAt | date('d.m.Y') }}</td>
+                    <td> {% if not user.isActive %}
+                            <a href="{{ path('admin_unblock_user', {id: user.id}) }}"><i class="fa-solid fa-user-slash"></i></a>
+                        {% endif %}
+                    </td>
 
-                    {# <td>{{ user.registeredAt | date('d.m.Y') }}</td>
+                    <td>
+                        {# Bloquer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-confirmation" data-popup-target-id="{{ user.id }}">
+                            <p>Voulez vous bloquer {{ user.username }} ?</p>
 
-                    <td> <a href="{{ path('admin_show_activity', {id: activity.id}) }}"> Voir l'activité </a> </td>
-                    <td> <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Modifier </a> </td> #}
+                            <a href="{{ path('admin_block_user', {id: user.id}) }}" class="a-style-popup"> Bloquer </a>
+                            <button class="js-close-popup"> Annuler </button>
+                        </div>
 
-
-
-                    {# Supprimer l'utilisateur (+popup pour valider choix) #}
-                    <div class="popup-confirmation" data-popup-target-id="{{ user.id }}">
-                        <p>Voulez vous vraiment supprimer cet utilisateur ?</p>
-
-                        <a href="{{ path('admin_delete_user', {id: user.id}) }}" class="a-style-popup"> Supprimer </a>
-                        <button class="js-close-popup"> Annuler </button>
-                    </div>
-
-                    <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+                        <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation"> <i class="fa-solid fa-ban"></i> </p>
 
 
+                        {# Supprimer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-confirmation" data-popup-target-id="{{ user.id }}">
+                            <p>Voulez vous vraiment supprimer cet utilisateur : {{ user.username }} ?</p>
+
+                            <a href="{{ path('admin_delete_user', {id: user.id}) }}" class="a-style-popup"> Supprimer </a>
+                            <button class="js-close-popup"> Annuler </button>
+                        </div>
+
+                        <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+
+                    </td>
 
                 </tr>
 
                 {# {% endif %} #}
 
             {% endfor %}
+            </tbody>
 
         </table>
 
     </section>
 
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
 {% endblock %}
