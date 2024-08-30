@@ -7,6 +7,8 @@
 
     <section id="table-categories" class="admin-table">
 
+        <a class="add-btn-style" href="{{ path('admin_insert_category') }}"> Ajouter une catégorie </a>
+
         <table id="myTable">
             <thead>
                 <tr>
@@ -27,14 +29,14 @@
                         <a href="{{ path('admin_update_category', {id: category.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
                         {# Supprimer la catégorie (+popup pour valider choix) #}
-                        <div class="popup-confirmation" data-popup-target-id="{{ category.id }}">
+                        <div class="popup-confirmation-delete" data-popup-target-id="{{ category.id }}">
                             <p>Voulez vous vraiment supprimer la catégorie ?</p>
 
                             <a href="{{ path('admin_delete_category', {id: category.id}) }}" class="a-style-popup"> Supprimer </a>
                             <button class="js-close-popup"> Annuler </button>
                         </div>
 
-                        <p data-trigger-id="{{ category.id }}" class="js-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+                        <p data-trigger-id="{{ category.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
 
                     </td>
                 </tr>

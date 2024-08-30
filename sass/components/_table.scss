@@ -30,3 +30,12 @@ tr:nth-of-type(even){
     overflow: hidden;
   }
 }
+
+
+.td-flex {
+  @include flex($justify: space-around);
+
+  i {
+    padding: 0 3px;
+  }
+}

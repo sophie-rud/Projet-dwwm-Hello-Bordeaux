@@ -36,7 +36,7 @@ class AdminUserController extends AbstractController {
         ]);
     }
 
-    #[Route('/insert', name: 'admin_user_insert')]
+    #[Route('/insert', name: 'admin_insert_user')]
     #[IsGranted('ROLE_ADMIN')]
     public function insertAdmin(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response
     {
@@ -163,6 +163,7 @@ class AdminUserController extends AbstractController {
 
 
     #[Route('/block/{id}', name: 'admin_block_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function blockUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
 
         $userToBlock = $userRepository->find($id);
@@ -173,11 +174,26 @@ class AdminUserController extends AbstractController {
             return new Response($html404, 404);
         }
 
-        if ($currentUser && $this->isGranted('ROLE_ADMIN')) {
+        if ($currentUser && ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_SUPER_ADMIN'))) {
             $roles = $userToBlock->getRoles();
 
-            // Vérifie si l'utilisateur a uniquement le rôle 'ROLE_USER'
-            if (in_array('ROLE_USER', $roles) && !in_array('ROLE_ADMIN', $roles)) {
+            if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+                // Les SUPER_ADMIN peuvent bloquer les ADMIN et les USER
+                if (in_array('ROLE_ADMIN', $roles) || in_array('ROLE_USER', $roles)) {
+                    if ($userToBlock->isActive()) {
+                        $userToBlock->setActive(false);
+                        $entityManager->flush();
+
+                        $this->addFlash('success', 'L\'utilisateur a été bloqué');
+                    } else {
+                        $this->addFlash('warning', 'L\'utilisateur est déjà bloqué');
+                    }
+                } else {
+                    $this->addFlash('error', 'Cet utilisateur ne peut pas être bloqué.');
+                }
+
+                // Les ADMIN ne peuvent bloquer que les USER (vérifie si l'utilisateur a uniquement le rôle 'ROLE_USER')
+            } else if (in_array('ROLE_USER', $roles) && !in_array('ROLE_ADMIN', $roles) && !in_array('ROLE_SUPER_ADMIN', $roles)) {
                 // Vérifie si l'utilisateur n'est pas déjà bloqué
                 if ($userToBlock->isActive()) {
                     $userToBlock->setActive(false);
@@ -197,6 +213,7 @@ class AdminUserController extends AbstractController {
 
 
     #[Route('/unblock/{id}', name: 'admin_unblock_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function unblockUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
 
         $userToUnblock = $userRepository->find($id);
@@ -211,7 +228,7 @@ class AdminUserController extends AbstractController {
             $roles = $userToUnblock->getRoles();
 
             // Vérifie si l'utilisateur a uniquement le rôle 'ROLE_USER'
-            if (in_array('ROLE_USER', $roles) && !in_array('ROLE_ADMIN', $roles)) {
+            if (in_array('ROLE_USER', $roles) && !in_array('ROLE_ADMIN', $roles) && !in_array('ROLE_SUPER_ADMIN', $roles)) {
                 // Vérifie si l'utilisateur est déjà bloqué
                 if (!$userToUnblock->isActive()) {
                     $userToUnblock->setActive(true);

@@ -179,7 +179,7 @@ a {
   text-align: center;
 }
 
-.popup-confirmation {
+.popup-confirmation-delete, .popup-confirmation-block {
   display: none;
   position: fixed;
   background-color: #FEEFDD;
@@ -189,7 +189,7 @@ a {
   padding: 100px;
   text-align: center;
 }
-.popup-confirmation p {
+.popup-confirmation-delete p, .popup-confirmation-block p {
   margin-bottom: 25px;
 }
 
@@ -235,6 +235,28 @@ tr:nth-of-type(even) {
   height: 100%;
   object-fit: cover;
   overflow: hidden;
+}
+
+.td-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0%;
+}
+.td-flex i {
+  padding: 0 3px;
+}
+
+.add-btn-style {
+  background-color: rgba(115, 21, 52, 0.7);
+  color: #FEEFDD;
+  border-radius: 8px;
+  padding: 8px 25px;
+  display: block;
+  text-align: center;
+  width: 200px;
+  margin: 12px auto;
 }
 
 #headerTopBar {

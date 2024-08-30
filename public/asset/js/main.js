@@ -1,7 +1,7 @@
 // ---------- BOUTONS DE CONFIRMATION popups (pour suppression, inscription)
 
-// On récupère tous les éléments ayant pour classe "js-popup-confirmation" (boutons avec confirmation de choix)
-const confirmationButtons = document.querySelectorAll('.js-popup-confirmation');
+// On récupère tous les éléments ayant pour classe "js-popup-confirmation-delete" (boutons avec confirmation de choix)
+const confirmationButtons = document.querySelectorAll('.js-popup-confirmation-delete');
 
 // pour chaque bouton de "confirmation" trouvé
 confirmationButtons.forEach((confirmationButton) => {
@@ -20,6 +20,17 @@ confirmationButtons.forEach((confirmationButton) => {
 })
 
 
+const confirmationBlockButtons = document.querySelectorAll('.js-popup-confirmation-block');
+confirmationBlockButtons.forEach((confirmationBlockButton) => {
+
+    confirmationBlockButton.addEventListener('click', () => {
+        const elementId = confirmationBlockButton.dataset.blockTriggerId;
+        const popup = document.querySelector(`[data-popup-block-target-id="${elementId}"]`);
+        popup.style.display = "block";
+    });
+})
+
+
 // ---------- BOUTONS ANNULER (ferme les popups)
 
 // On récupère tous les boutons "Annuler" ayant pour classe "js-close-popup"
@@ -32,7 +43,7 @@ closePopupButtons.forEach((closePopupButton) => {
     closePopupButton.addEventListener('click', () => {
 
         // On remonte jusqu'à la popup parente et on la masque
-        const popup = closePopupButton.closest('.popup-confirmation');
+        const popup = closePopupButton.closest('.popup-confirmation-delete, .popup-confirmation-block');
         popup.style.display = "none";
     });
 });

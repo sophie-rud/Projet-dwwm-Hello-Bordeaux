@@ -7,6 +7,8 @@
 
 <section id="table-activities" class="admin-table">
 
+    <a class="add-btn-style" href="{{ path('admin_insert_activity') }}"> Publier une activité </a>
+
     <table id="myTable">
             <thead>
                 <tr>
@@ -51,14 +53,14 @@
                         <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
                         {# Supprimer l'activité (+popup pour valider choix) #}
-                        <div class="popup-confirmation" data-popup-target-id="{{ activity.id }}">
+                        <div class="popup-confirmation-delete" data-popup-target-id="{{ activity.id }}">
                             <p>Voulez vous vraiment supprimer l'activité ?</p>
 
                             <a href="{{ path('admin_delete_activity', {id: activity.id}) }}" class="a-style-popup"> Supprimer </a>
                             <button class="js-close-popup"> Annuler </button>
                         </div>
 
-                        <p data-trigger-id="{{ activity.id }}" class="s-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+                        <p data-trigger-id="{{ activity.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
 
                     </td>
                 </tr>

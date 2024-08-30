@@ -7,9 +7,12 @@
 {% block main %}
 
 
-    <h1> Gallerie photo </h1>
+    <h1> Galerie photo </h1>
 
     <section>
+
+        <a class="add-btn-style" href="{{ path('admin_add_picture_in_gallery') }}"> Ajouter une image </a>
+
 
         {% for picture in pictures %}
 
@@ -22,14 +25,14 @@
                 <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/pencil.png') }}" alt="Modifier l'image"> </div>  </a>
 
                 {# Supprimer l'image (+popup pour valider choix) #}
-                <div class="popup-confirmation" data-popup-target-id="{{ picture.id }}">
+                <div class="popup-confirmation-delete" data-popup-target-id="{{ picture.id }}">
                     <p>Voulez vous vraiment supprimer l'image ?</p>
 
                     <a href="{{ path('admin_delete_picture_in_gallery', {id: picture.id}) }}" class="a-style-popup"> Supprimer </a>
                     <button class="js-close-popup"> Annuler </button>
                 </div>
 
-                <p data-trigger-id="{{ picture.id }}" class="js-popup-confirmation"> <i class="fa-regular fa-trash-can"></i> </p>
+                <p data-trigger-id="{{ picture.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
 
 
             </article>
