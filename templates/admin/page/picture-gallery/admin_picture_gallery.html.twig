@@ -9,36 +9,60 @@
 
     <h1> Galerie photo </h1>
 
-    <section>
+    <section id="table-pictures" class="admin-table">
 
         <a class="add-btn-style" href="{{ path('admin_add_picture_in_gallery') }}"> Ajouter une image </a>
 
 
-        {% for picture in pictures %}
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <td>Photo</td>
+                    <td>Nom</td>
+                    <td>Postée par : </td>
+                    <td>Postée le : </td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
 
-            <article>
+            <tbody>
+            {% for picture in pictures %}
 
-                <div class="pictureInGallery"> <img src="{{ picture.filePath }}" alt="Photo : {{ picture.pictureName }}"> </div>
-                <h2>{{ picture.pictureName }}</h2>
-                {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p> #}
+                <tr>
+                    <td>
+                        <div class="pictureInGallery"> <img src="{{ asset('uploads/'~picture.filePath ) }}" alt="Photo : {{ picture.pictureName }}"> </div>
+                    </td>
+                    <td> <h2>{{ picture.pictureName }}</h2> </td>
+                    <td> {#  <p> {{ picture.postedBy }} </p> #} </td>
+                    <td> {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p> #} </td>
+                    <td>
+                        <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
-                <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <div class="icon"> <img src="{{ asset('asset/images/pencil.png') }}" alt="Modifier l'image"> </div>  </a>
+                        {# Supprimer l'image (+popup pour valider choix) #}
+                        <div class="popup-confirmation-delete" data-popup-target-id="{{ picture.id }}">
+                            <p>Voulez vous vraiment supprimer l'image ?</p>
 
-                {# Supprimer l'image (+popup pour valider choix) #}
-                <div class="popup-confirmation-delete" data-popup-target-id="{{ picture.id }}">
-                    <p>Voulez vous vraiment supprimer l'image ?</p>
+                            <a href="{{ path('admin_delete_picture_in_gallery', {id: picture.id}) }}" class="a-style-popup"> Supprimer </a>
+                            <button class="js-close-popup"> Annuler </button>
+                        </div>
 
-                    <a href="{{ path('admin_delete_picture_in_gallery', {id: picture.id}) }}" class="a-style-popup"> Supprimer </a>
-                    <button class="js-close-popup"> Annuler </button>
-                </div>
+                        <p data-trigger-id="{{ picture.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
+                    </td>
 
-                <p data-trigger-id="{{ picture.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
+                </tr>
 
+            {% endfor %}
+            </tbody>
 
-            </article>
-
-        {% endfor %}
+        </table>
 
     </section>
 
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    {# <script>let dataTable = new DataTable('#myTable');</script> #}
 {% endblock %}

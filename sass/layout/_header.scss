@@ -63,7 +63,7 @@
   }
 }
 
-
+// ---------- Header barre rouge (basse)
 #headerMainBar {
   background-color: $claretRed;
 
@@ -82,6 +82,11 @@
 
       li {
         padding: 0 2rem;
+        text-transform: uppercase;
+        font-size: 14px;
+        //font-weight: bold;
+        text-align: center;
+        color: $limestone;
 
         a {
           text-transform: uppercase;
@@ -91,6 +96,51 @@
           color: $limestone;
         }
 
+      }
+    }
+  }
+}
+
+
+
+// ---------- Header public | Sous-menu des activités
+
+#activites-nav {
+  .sous-menu-activites {
+    display: none!important;
+  }
+}
+
+#activites-nav:hover {
+  position: relative;
+
+  .sous-menu-activites {
+    display: block!important;
+    position: absolute;
+    background-color: rgba( 115, 21, 52, 0.75);
+    width: 300px;
+    top: 0;
+    left: 0;
+    padding-top: 45px;
+    padding-bottom: 10px;
+
+    li {
+      text-align: start;
+      padding: 5px 0;
+
+      a, i {
+        color: rgba( 254, 239, 221, 0.7);
+        padding-left: 30px;
+        transition: transform 330ms ease-in-out;
+
+      }
+    }
+    li:hover {
+      i {
+        transform: translateX(15px);
+      }
+      a {
+        color: $limestone;
       }
     }
   }

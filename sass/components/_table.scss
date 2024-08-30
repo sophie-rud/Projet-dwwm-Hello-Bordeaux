@@ -14,7 +14,7 @@ tr:nth-of-type(even){
   background-color: rgba(115, 21, 52, 0.15);
 }
 
-
+// Tableau des activités
 .photoAdminActivity {
   position: relative;
   width: 130px;
@@ -37,5 +37,22 @@ tr:nth-of-type(even){
 
   i {
     padding: 0 3px;
+  }
+}
+
+// Tableau de la galerie photo
+.pictureInGallery {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
   }
 }

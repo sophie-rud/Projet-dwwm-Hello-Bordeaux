@@ -17,6 +17,7 @@ h1 {
   font-weight: normal;
   text-align: center;
   padding-top: 30px;
+  margin-top: 60px;
 }
 
 h2 {
@@ -248,6 +249,21 @@ tr:nth-of-type(even) {
   padding: 0 3px;
 }
 
+.pictureInGallery {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pictureInGallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
 .add-btn-style {
   background-color: rgba(115, 21, 52, 0.7);
   color: #FEEFDD;
@@ -257,6 +273,13 @@ tr:nth-of-type(even) {
   text-align: center;
   width: 200px;
   margin: 12px auto;
+}
+
+.btn-inscrire {
+  background-color: rgba(115, 21, 52, 0.55);
+  color: #FEEFDD !important;
+  border-radius: 20px;
+  padding: 8px 12px;
 }
 
 #headerTopBar {
@@ -344,11 +367,48 @@ tr:nth-of-type(even) {
 }
 #headerMainBar .header-nav ul li {
   padding: 0 2rem;
+  text-transform: uppercase;
+  font-size: 14px;
+  text-align: center;
+  color: #FEEFDD;
 }
 #headerMainBar .header-nav ul li a {
   text-transform: uppercase;
   font-size: 14px;
   text-align: center;
+  color: #FEEFDD;
+}
+
+#activites-nav .sous-menu-activites {
+  display: none !important;
+}
+
+#activites-nav:hover {
+  position: relative;
+}
+#activites-nav:hover .sous-menu-activites {
+  display: block !important;
+  position: absolute;
+  background-color: rgba(115, 21, 52, 0.75);
+  width: 300px;
+  top: 0;
+  left: 0;
+  padding-top: 45px;
+  padding-bottom: 10px;
+}
+#activites-nav:hover .sous-menu-activites li {
+  text-align: start;
+  padding: 5px 0;
+}
+#activites-nav:hover .sous-menu-activites li a, #activites-nav:hover .sous-menu-activites li i {
+  color: rgba(254, 239, 221, 0.7);
+  padding-left: 30px;
+  transition: transform 330ms ease-in-out;
+}
+#activites-nav:hover .sous-menu-activites li:hover i {
+  transform: translateX(15px);
+}
+#activites-nav:hover .sous-menu-activites li:hover a {
   color: #FEEFDD;
 }
 
@@ -837,6 +897,34 @@ main .btn-inscription {
 
 .small-font {
   font-size: 11px;
+}
+
+#section-picture-gallery {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 0%;
+}
+
+.one-picture-in-gallery {
+  margin: 0 3%;
+}
+.one-picture-in-gallery .pictureInGallery {
+  position: relative;
+  width: 200px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.one-picture-in-gallery .pictureInGallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 /*# sourceMappingURL=app.css.map */

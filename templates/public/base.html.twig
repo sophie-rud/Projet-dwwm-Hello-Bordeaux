@@ -35,7 +35,8 @@
                         {% if app.user %}
                             {{ app.user.username }}
                         {% else %}
-                            Espace utilisateur
+                            Se connecter
+                            <a class="btn-inscrire" href="{{ path('inscription_user') }}"> S'inscrire </a>
                         {% endif %}
                     {% endblock %} </a>
 
@@ -53,9 +54,14 @@
             <nav class="header-nav">
                 <a class="logo" href="{{ path('home') }}">LOGO</a>
                 <ul>
-                    <li> <a href="">Informations pratiques</a> </li>
-                    <li> <a href="">Découvrir Bordeaux</a> </li>
-                    <li> <a href="{{ path('list_activities') }}">Les activités</a> </li>
+                    <li> Informations pratiques </li>
+                    <li> Découvrir Bordeaux </li>
+                    <li id="activites-nav"> Les activités
+                        <ul class="sous-menu-activites">
+                            <li> <i class="fa-solid fa-chevron-right"></i> <a href="{{ path('list_activities') }}"> Participer aux activités</a></li>
+                            <li> <i class="fa-solid fa-chevron-right"></i> <a href="{{ path('list-picture_gallery') }}"> Galerie photo</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>

@@ -1,0 +1,28 @@
+{% extends 'public/base.html.twig' %}
+
+{% block metatitle %} Picture gallery
+{% endblock %}
+
+
+{% block main %}
+
+
+    <h1> Galerie photo </h1>
+
+    <section id="section-picture-gallery">
+
+        {% for picture in pictures %}
+
+            <article class="one-picture-in-gallery">
+
+                <div class="pictureInGallery"> <img src="{{ asset('uploads/'~picture.filePath ) }}" alt="Photo : {{ picture.pictureName }}"> </div>
+                <h2>{{ picture.pictureName }}</h2>
+                {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p> #}
+
+            </article>
+
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
