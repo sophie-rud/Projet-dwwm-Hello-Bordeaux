@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
-#[Route('/admin')]
+#[Route('/admin/user')]
 class AdminUserController extends AbstractController {
 
 
@@ -161,53 +161,73 @@ class AdminUserController extends AbstractController {
     }
 
 
-
+    // Route appelée au lancement de la méthode
     #[Route('/block/{id}', name: 'admin_block_user')]
+    // Cette méthode est accessible unique aux utilisateurs ayant au moins le rôle ADMIN
     #[IsGranted('ROLE_ADMIN')]
     public function blockUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
 
+        // On récupère l'id de l'utilisateur à bloquer
         $userToBlock = $userRepository->find($id);
+        // On récupère l'utilisateur actuellement connecté
         $currentUser = $this->getUser();
 
+        // Si l'utilisateur à bloquer n'existe pas, renvoie une page 404
         if (!$userToBlock) {
             $html404 = $this->renderView('admin/page/page404.html.twig');
             return new Response($html404, 404);
         }
 
+        // On vérifie si l'utilisateur actuel a les rôles ADMIN ou SUPER_ADMIN
         if ($currentUser && ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_SUPER_ADMIN'))) {
+            // Récupère les rôles de l'utilisateur à bloquer
             $roles = $userToBlock->getRoles();
 
+            // Si l'utilisateur actuel a le rôle de SUPER_ADMIN
             if ($this->isGranted('ROLE_SUPER_ADMIN')) {
                 // Les SUPER_ADMIN peuvent bloquer les ADMIN et les USER
                 if (in_array('ROLE_ADMIN', $roles) || in_array('ROLE_USER', $roles)) {
+                    // Si l'utilisateur à bloquer est actif (n'est pas déjà bloqué)
                     if ($userToBlock->isActive()) {
+                        // On bloque l'utilisateur (en changeant son statut IsActive en false)
                         $userToBlock->setActive(false);
+                        // On enregistre cette modification dans la base de données
                         $entityManager->flush();
-
+                        // On affiche un message de succès
                         $this->addFlash('success', 'L\'utilisateur a été bloqué');
+
+                        // Sinon (si l'utilisateur est déjà bloqué)
                     } else {
+                        // On affiche un message flash indiquant que l'utilisateur est déjà bloqué
                         $this->addFlash('warning', 'L\'utilisateur est déjà bloqué');
                     }
+
+                    // Sinon (si l'utilisateur ne peut pas être bloqué en raison de son rôle)
                 } else {
                     $this->addFlash('error', 'Cet utilisateur ne peut pas être bloqué.');
                 }
 
-                // Les ADMIN ne peuvent bloquer que les USER (vérifie si l'utilisateur a uniquement le rôle 'ROLE_USER')
+                // Vérifie si l'utilisateur a uniquement le rôle 'ROLE_USER' (car les ADMIN ne peuvent bloquer que les USER)
             } else if (in_array('ROLE_USER', $roles) && !in_array('ROLE_ADMIN', $roles) && !in_array('ROLE_SUPER_ADMIN', $roles)) {
                 // Vérifie si l'utilisateur n'est pas déjà bloqué
                 if ($userToBlock->isActive()) {
+                    // On bloque l'utilisateur (en changeant son statut IsActive en false)
                     $userToBlock->setActive(false);
+                    // On enregistre cette modification dans la base de données
                     $entityManager->flush();
 
+                    // On affiche un message de succès
                     $this->addFlash('success', 'L\'utilisateur a été bloqué');
                 } else {
+                    // Sinon, (si l'utilisateur est déjà bloqué), on affiche un message flash pour l'indiquer
                     $this->addFlash('warning', 'L\'utilisateur est déjà bloqué');
                 }
             } else {
+                // Affiche un message flash d'erreur si les rôles ne permettent pas de bloquer l'utilisateur
                 $this->addFlash('error', 'Cet utilisateur ne peut pas être bloqué.');
             }
         }
-
+        // Redirige vers la liste des utilisateurs après avoir bloquer (ou tenté de bloquer) l'utilisateur
         return $this->redirectToRoute('admin_list_users');
     }
 

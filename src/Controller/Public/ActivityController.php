@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ActivityController extends AbstractController {
 
@@ -48,11 +49,12 @@ class ActivityController extends AbstractController {
     }
 
     #[Route('/activities/inscription/{id}', name: 'inscription_activity')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function inscriptionActivity(Activity $activity, EntityManagerInterface $entityManager): Response
     {
         $currentUser = $this->getUser();
 
-        if (!$activity || !$activity->getisPublished() || !$currentUser) {
+        if (!$activity->getisPublished() || !$currentUser) {
             $html404 = $this->renderView('public/page/page404.html.twig');
             return new Response($html404, 404);
         }

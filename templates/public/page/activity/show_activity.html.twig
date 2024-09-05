@@ -31,7 +31,7 @@
             </div>
 
             {# Supprimer l'utilisateur (+popup pour valider choix) #}
-            <div class="popup-confirmation" data-popup-target-id="{{ activity.id }}">
+            <div class="popup-confirmation-block" data-popup-block-target-id="{{ activity.id }}">
                 <h2>{{ activity.title }} le {{ activity.date | date('d/m/Y')}}</h2>
                 <p>Validez-vous votre participation à cette activité ?</p>
 
@@ -39,7 +39,7 @@
                 <button class="js-close-popup"> Annuler </button>
             </div>
 
-            <p data-trigger-id="{{ activity.id }}" class="js-popup-confirmation btn-style"> Participer </p>
+            <p data-block-trigger-id="{{ activity.id }}" class="js-popup-confirmation-block btn-style"> Participer </p>
 
 
     </section>

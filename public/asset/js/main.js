@@ -1,4 +1,4 @@
-// ---------- BOUTONS DE CONFIRMATION popups (pour suppression, inscription)
+// ---------- BOUTONS DE CONFIRMATION popups (pour suppression)
 
 // On récupère tous les éléments ayant pour classe "js-popup-confirmation-delete" (boutons avec confirmation de choix)
 const confirmationButtons = document.querySelectorAll('.js-popup-confirmation-delete');
@@ -19,6 +19,8 @@ confirmationButtons.forEach((confirmationButton) => {
     });
 })
 
+
+// ---------- BOUTONS DE CONFIRMATION popups (pour confirmation autre que supression)
 
 const confirmationBlockButtons = document.querySelectorAll('.js-popup-confirmation-block');
 confirmationBlockButtons.forEach((confirmationBlockButton) => {
