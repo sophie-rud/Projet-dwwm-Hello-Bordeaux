@@ -14,6 +14,13 @@ tr:nth-of-type(even){
   background-color: rgba(115, 21, 52, 0.15);
 }
 
+
+// Tableau des catégories
+.pictoCategory {
+  width: 3%;
+}
+
+
 // Tableau des activités
 .photoAdminActivity {
   position: relative;
@@ -56,3 +63,5 @@ tr:nth-of-type(even){
     overflow: hidden;
   }
 }
+
+

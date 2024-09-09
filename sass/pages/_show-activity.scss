@@ -35,7 +35,13 @@
 
       .group-title {
         padding-bottom: 20px;
-        @include flex($justify: space-around);
+        @include flex($justify: flex-start);
+
+        .pictogram {
+          width: 5%;
+          padding-right: 10px;
+        }
+
       }
     }
 
@@ -62,6 +68,10 @@
     &:hover {
       background-color: $claretRed;
       transform: scale(1.1);
+
+      a {
+        color: $limestone;
+      }
     }
   }
 }

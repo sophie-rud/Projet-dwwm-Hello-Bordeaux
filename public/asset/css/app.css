@@ -17,7 +17,6 @@ h1 {
   font-weight: normal;
   text-align: center;
   padding-top: 30px;
-  margin-top: 60px;
 }
 
 h2 {
@@ -81,6 +80,10 @@ p {
   width: 100%;
   height: 100%; /* L'image occupe toute la hauteur du conteneur */
   object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
+}
+
+form {
+  margin-bottom: 30px !important;
 }
 
 * {
@@ -223,6 +226,10 @@ tr:nth-of-type(even) {
   background-color: rgba(115, 21, 52, 0.15);
 }
 
+.pictoCategory {
+  width: 3%;
+}
+
 .photoAdminActivity {
   position: relative;
   width: 130px;
@@ -280,6 +287,23 @@ tr:nth-of-type(even) {
   color: #FEEFDD !important;
   border-radius: 20px;
   padding: 8px 12px;
+}
+
+.btn {
+  background-color: #731534;
+  border-radius: 50px;
+  border: solid 1px #731534;
+  color: #FEEFDD;
+  display: block;
+  width: 60%;
+  margin: auto;
+  padding: 6px 0;
+}
+
+.btn:hover {
+  background-color: #FEEFDD;
+  border: solid 1px #FEEFDD;
+  color: #731534;
 }
 
 #headerTopBar {
@@ -559,6 +583,10 @@ article .iconeInfosPratiques img {
 .activities-one-category .title-category h2 {
   z-index: 10;
 }
+.activities-one-category .icon-category {
+  width: 3%;
+  padding-right: 15px;
+}
 .activities-one-category .activities {
   display: flex;
   flex-direction: row;
@@ -648,8 +676,8 @@ article .iconeInfosPratiques img {
   background-color: rgba(255, 191, 85, 0.5);
   width: 150px;
   height: 15px;
-  left: 80px;
-  bottom: 0;
+  left: 50px;
+  bottom: 10px;
   z-index: 1;
 }
 
@@ -689,9 +717,13 @@ article .iconeInfosPratiques img {
   padding-bottom: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   gap: 0%;
+}
+#section-show-activity .show-activity .infos-activity .group-title .pictogram {
+  width: 5%;
+  padding-right: 10px;
 }
 #section-show-activity .show-activity .text-activity {
   padding: 10px 30px;
@@ -712,6 +744,9 @@ article .iconeInfosPratiques img {
 #section-show-activity .btn-style:hover {
   background-color: #731534;
   transform: scale(1.1);
+}
+#section-show-activity .btn-style:hover a {
+  color: #FEEFDD;
 }
 
 #section-participants {
@@ -808,7 +843,9 @@ main .btn {
   border-radius: 50px;
   border: solid 1px #731534;
   color: #FEEFDD;
-  width: 100%;
+  display: block;
+  width: 60%;
+  margin: auto;
   padding: 6px 0;
 }
 main .btn:hover {
@@ -821,7 +858,7 @@ main .btn-inscription {
   background-color: rgba(115, 21, 52, 0.7);
   border-radius: 50px;
   border: transparent;
-  width: 45%;
+  width: 27%;
   margin: 30px auto;
   text-align: center;
   font-size: 15px;
@@ -925,6 +962,10 @@ main .btn-inscription {
   height: 100%;
   object-fit: cover;
   overflow: hidden;
+}
+.one-picture-in-gallery h2 {
+  font-size: 16px;
+  padding: 3px 0;
 }
 
 /*# sourceMappingURL=app.css.map */

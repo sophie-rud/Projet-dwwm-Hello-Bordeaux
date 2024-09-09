@@ -47,7 +47,7 @@
                             {# <div class="img-activity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div> #}
 
                             <div class="top-activity">
-                                <div class="pictogram"> <img src="{{ activity.category.pictogram }}" alt="icône {{ activity.category.nameCategory }}"> </div>
+                                <div class="pictogram"> <img src="{{ asset('uploads/'~activity.category.pictogram) }}" alt="icône {{ activity.category.nameCategory }}"> </div>
                                 <p> {{ activity.date | date('d/m/Y') }} </p>
                             </div>
 

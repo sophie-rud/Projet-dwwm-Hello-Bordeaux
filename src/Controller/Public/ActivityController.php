@@ -49,12 +49,18 @@ class ActivityController extends AbstractController {
     }
 
     #[Route('/activities/inscription/{id}', name: 'inscription_activity')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY', message: 'Vous devez être connecté pour vous inscrire à une activité.')]
     public function inscriptionActivity(Activity $activity, EntityManagerInterface $entityManager): Response
     {
         $currentUser = $this->getUser();
 
-        if (!$activity->getisPublished() || !$currentUser) {
+        // Si l'utilisateur n'est pas connecté, on le redirige vers la page d'inscription ou de connexion
+        if (!$currentUser) {
+            return $this->redirectToRoute('app_login');
+        }
+
+
+        if (!$activity->getisPublished()) {
             $html404 = $this->renderView('public/page/page404.html.twig');
             return new Response($html404, 404);
         }

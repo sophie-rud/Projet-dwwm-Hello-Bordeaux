@@ -14,7 +14,7 @@
 
                 <div class="infos-activity">
                     <div class="group-title">
-                        <div class="pictogram"> <img src="{{ activity.category.pictogram }}" alt="icône {{ activity.category.nameCategory }}"> </div>
+                        <div class="pictogram"> <img src="{{ asset('uploads/'~activity.category.pictogram) }}" alt="icône {{ activity.category.nameCategory }}"> </div>
                         <h2>{{ activity.title }}</h2>
                     </div>
                     <p> <i class="fa-regular fa-calendar-check"></i> {{ activity.date | date('d/m/Y')}} </p>
@@ -30,17 +30,24 @@
                 <p class="text-activity"> {{ activity.description }} </p>
             </div>
 
-            {# Supprimer l'utilisateur (+popup pour valider choix) #}
-            <div class="popup-confirmation-block" data-popup-block-target-id="{{ activity.id }}">
-                <h2>{{ activity.title }} le {{ activity.date | date('d/m/Y')}}</h2>
-                <p>Validez-vous votre participation à cette activité ?</p>
+            {# Vérifie si l'utilisateur est connecté #}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {# Participer à l'activité (+ popup pour valider choix) #}
+                <div class="popup-confirmation-block" data-popup-block-target-id="{{ activity.id }}">
+                    <h2>{{ activity.title }} le {{ activity.date | date('d/m/Y')}}</h2>
+                    <p>Validez-vous votre participation à cette activité ?</p>
 
-                <a href="{{ path('inscription_activity', {id: activity.id}) }}" class="a-style-popup"> Participer </a>
-                <button class="js-close-popup"> Annuler </button>
-            </div>
+                    <a href="{{ path('inscription_activity', {id: activity.id}) }}" class="a-style-popup"> Participer </a>
+                    <button class="js-close-popup"> Annuler </button>
+                </div>
 
-            <p data-block-trigger-id="{{ activity.id }}" class="js-popup-confirmation-block btn-style"> Participer </p>
-
+                <p data-block-trigger-id="{{ activity.id }}" class="js-popup-confirmation-block btn-style"> Participer </p>
+            {% else %}
+                {# Si l'utilisateur n'est pas connecté, on affiche un message avec lien vers la page de connexion/inscription #}
+                <p class="btn-style">
+                    <a href="{{ path('app_login') }}"> Se connecter </a> pour participer à l'activité.
+                </p>
+            {% endif %}
 
     </section>
 

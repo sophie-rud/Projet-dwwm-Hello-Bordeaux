@@ -67,7 +67,9 @@ main {
     border-radius: 50px;
     border: solid 1px $claretRed;
     color: $limestone;
-    width: 100%;
+    display: block;
+    width: 60%;
+    margin: auto;
     padding: 6px 0;
   }
 
@@ -82,7 +84,7 @@ main {
     background-color: rgba(115, 21, 52, 0.7);
     border-radius: 50px;
     border: transparent;
-    width: 45%;
+    width: 27%;
     margin: 30px auto;
     text-align: center;
     font-size: 15px;

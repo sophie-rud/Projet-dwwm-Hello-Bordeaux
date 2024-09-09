@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class UserType extends AbstractType
 {
@@ -19,10 +21,23 @@ class UserType extends AbstractType
         $builder
             ->add('email')
             /* ->add('roles') */
-            ->add('password', PasswordType::class /*, [
-                'hash_property_path' => 'password', // autre manière de hasher le mdp, nous l'avons fait dans le controller
-                'mapped' => false,
-                ] */ )
+            ->add('password', PasswordType::class , [
+                /*'hash_property_path' => 'password', // autre manière de hasher le mdp, nous l'avons fait dans le controller
+                'mapped' => false,*/
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'Le mot de passe ne peut pas être vide.',
+                    ]),
+                    new Assert\Length([
+                        'min' => 8,
+                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                    ]),
+                    new Assert\Regex([
+                        'pattern' => '/^(?=.*[A-Z])(?=.*\d).{8,}$/',
+                        'message' => 'Le mot de passe doit contenir au moins une majuscule et un chiffre.',
+                    ]),
+                ],
+                ] )
             ->add('username')
             ->add('firstName')
             ->add('birthDate', null, [

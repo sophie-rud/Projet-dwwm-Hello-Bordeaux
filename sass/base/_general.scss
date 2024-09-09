@@ -20,7 +20,7 @@ h1 {
   font-weight: normal;
   text-align: center;
   padding-top: 30px;
-  margin-top: 60px;
+  //margin-top: 60px;
 }
 
 h2 {
@@ -91,4 +91,10 @@ p {
     height: 100%; /* L'image occupe toute la hauteur du conteneur */
     object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
   }
+}
+
+
+// ---------- FORM ----------
+form {
+  margin-bottom: 30px!important;
 }
