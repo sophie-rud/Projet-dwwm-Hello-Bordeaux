@@ -1,0 +1,65 @@
+// Responsive adjustments
+@media (max-width: 1024px) {
+
+  .activities {
+    flex-wrap: wrap;
+    @include flex($justify: space-between, $align: flex-start);
+    //align-content: flex-start;
+
+  }
+
+  .container-activity {
+    width: 30%;
+    margin: 2% 0;
+  }
+
+  .title-activity h3 {
+    font-size: 14px;
+  }
+
+  .icon-category {
+    width: 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .activities-one-category {
+    width: 90%;
+  }
+
+  .container-activity {
+    width: 48%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .img-activity img {
+    height: 200px;
+  }
+
+  .title-activity h3 {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .title-category h2 {
+    font-size: 18px;
+  }
+
+  .container-activity {
+    height: auto;
+    width: 100%;
+    margin: 0 0 15px 0;
+  }
+
+  .img-activity img {
+    height: 150px;
+  }
+
+  .appointment-activity p, .appointment-activity i {
+    font-size: 10px;
+  }
+}

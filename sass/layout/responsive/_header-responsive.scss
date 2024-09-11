@@ -52,12 +52,15 @@
 
 
     .header-nav {
-      padding: 25px 0;
+      padding: 12px 0;
       @include flex();
 
       .logo {
         //display: none;
         width: 10%;
+        padding: 2% 3%;
+        background-color: rgba( 115, 21, 52, 0.5);
+        border-radius: 50px;
       }
 
       // Menu burger

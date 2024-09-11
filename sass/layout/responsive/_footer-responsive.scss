@@ -17,11 +17,15 @@
       ul:last-of-type {
         order: 1; /* Le second <ul> devient le premier */
         @include flex($flex-dir: column);
+
+        li {
+          padding: 5px 0;
+        }
       }
 
       .toTheTop {
         margin-left: auto;
-        order: 3;
+        order: -1;
       }
 
     }
