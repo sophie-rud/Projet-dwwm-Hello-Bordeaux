@@ -1,11 +1,12 @@
-// Responsive adjustments
-@media (max-width: 1024px) {
+// RESPONSIVE
+
+// Responsive pour les écrans jusqu'à 1024px de large
+@media screen and (max-width: 1024px) {
 
   .activities {
     flex-wrap: wrap;
     @include flex($justify: space-between, $align: flex-start);
     //align-content: flex-start;
-
   }
 
   .container-activity {
@@ -22,7 +23,8 @@
   }
 }
 
-@media (max-width: 768px) {
+// Responsive pour les écrans jusqu'à 780px de large (tablette format vertical)
+@media screen and (max-width: 780px) {
   .activities-one-category {
     width: 90%;
   }
@@ -43,8 +45,8 @@
   }
 }
 
-
-@media (max-width: 480px) {
+// Responsive pour les écrans jusqu'à 480px de large (smartphones)
+@media screen and (max-width: 480px) {
   .title-category h2 {
     font-size: 18px;
   }
@@ -52,7 +54,7 @@
   .container-activity {
     height: auto;
     width: 100%;
-    margin: 0 0 15px 0;
+    margin-bottom: 15px;
   }
 
   .img-activity img {

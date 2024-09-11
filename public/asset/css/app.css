@@ -961,22 +961,22 @@ main .btn-inscription {
 }
 
 #section-picture-gallery {
-  width: 70%;
+  width: 80%;
   margin: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
   gap: 0;
+  flex-wrap: wrap;
 }
 
 .one-picture-in-gallery {
-  margin: 0 3%;
+  width: 23%;
 }
 .one-picture-in-gallery .pictureInGallery {
   position: relative;
-  width: 200px;
-  height: 250px;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1213,7 +1213,7 @@ main .btn-inscription {
     width: 90% !important;
   }
 }
-@media (max-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .activities {
     flex-wrap: wrap;
     display: flex;
@@ -1233,7 +1233,7 @@ main .btn-inscription {
     width: 5%;
   }
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 780px) {
   .activities-one-category {
     width: 90%;
   }
@@ -1250,20 +1250,34 @@ main .btn-inscription {
     padding: 8px 0;
   }
 }
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .title-category h2 {
     font-size: 18px;
   }
   .container-activity {
     height: auto;
     width: 100%;
-    margin: 0 0 15px 0;
+    margin-bottom: 15px;
   }
   .img-activity img {
     height: 150px;
   }
   .appointment-activity p, .appointment-activity i {
     font-size: 10px;
+  }
+}
+@media screen and (max-width: 780px) {
+  #section-picture-gallery {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .one-picture-in-gallery {
+    width: 45%;
   }
 }
 

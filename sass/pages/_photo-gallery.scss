@@ -1,16 +1,19 @@
 #section-picture-gallery {
-  width: 70%;
+  width: 80%;
   margin: auto;
   @include flex($justify: space-around, $align: flex-start);
+  flex-wrap: wrap;
 }
 
 .one-picture-in-gallery {
-  margin: 0 3%;
+  //margin: 0 3%;
+  width: 23%;
 
   .pictureInGallery {
     position: relative;
-    width: 200px;
-    height: 250px;
+    //width: 200px;
+    //height: 250px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,4 +31,3 @@
     padding: 3px 0;
   }
 }
-

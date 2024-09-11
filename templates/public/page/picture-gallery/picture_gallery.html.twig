@@ -13,13 +13,13 @@
 
         {% for picture in pictures %}
 
-            <article class="one-picture-in-gallery">
+            <div class="one-picture-in-gallery">
 
                 <div class="pictureInGallery"> <img src="{{ asset('uploads/'~picture.filePath ) }}" alt="Photo : {{ picture.pictureName }}"> </div>
                 <h2>{{ picture.pictureName }}</h2>
                 {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p> #}
 
-            </article>
+            </div>
 
         {% endfor %}
 
