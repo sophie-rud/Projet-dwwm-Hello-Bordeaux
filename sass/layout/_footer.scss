@@ -7,7 +7,7 @@ footer {
 
 
     ul {
-      @include flex($flex-dir: row);
+      @include flex();
     }
 
     ul:first-of-type {

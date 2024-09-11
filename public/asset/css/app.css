@@ -250,7 +250,7 @@ tr:nth-of-type(even) {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 .td-flex i {
   padding: 0 3px;
@@ -313,7 +313,7 @@ tr:nth-of-type(even) {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 #headerTopBar .search-container {
   width: 100%;
@@ -351,7 +351,7 @@ tr:nth-of-type(even) {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 #headerTopBar .rightPart a {
   color: #731534;
@@ -375,28 +375,49 @@ tr:nth-of-type(even) {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 0%;
+  gap: 0;
+}
+#headerMainBar .header-nav ul.menu-burger {
+  display: none;
+  width: 30px;
+  padding: 2%;
+  position: relative;
+  z-index: 3000;
+  background-color: #FEEFDD;
+  border-radius: 10px;
+}
+#headerMainBar .header-nav ul.menu-burger li {
+  margin: 5px 0;
+  width: 100%;
+  height: 3px;
+  padding: 0;
+  background-color: #731534;
+  border-radius: 2px;
 }
 #headerMainBar .header-nav .logo {
   margin-left: 7%;
   margin-right: 12%;
   color: white;
+  width: 4%;
+  padding: 2% 3%;
+  background-color: rgba(115, 21, 52, 0.5);
+  border-radius: 50px;
 }
-#headerMainBar .header-nav ul {
+#headerMainBar .header-nav ul.nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
-#headerMainBar .header-nav ul li {
+#headerMainBar .header-nav ul.nav li {
   padding: 0 2rem;
   text-transform: uppercase;
   font-size: 14px;
-  text-align: center;
+  text-align: start;
   color: #FEEFDD;
 }
-#headerMainBar .header-nav ul li a {
+#headerMainBar .header-nav ul.nav li a {
   text-transform: uppercase;
   font-size: 14px;
   text-align: center;
@@ -412,9 +433,10 @@ tr:nth-of-type(even) {
 }
 #activites-nav:hover .sous-menu-activites {
   display: block !important;
+  text-align: start;
   position: absolute;
   background-color: rgba(115, 21, 52, 0.75);
-  width: 300px;
+  width: 350px;
   top: 0;
   left: 0;
   padding-top: 45px;
@@ -445,14 +467,14 @@ footer .footer-nav {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 footer .footer-nav ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 footer .footer-nav ul:first-of-type li {
   padding: 0 10px;
@@ -485,7 +507,7 @@ footer .footer-nav .iconFooter {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 0%;
+  gap: 0;
 }
 
 article {
@@ -509,7 +531,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 0%;
+  gap: 0;
 }
 #menuDecouvrirBordeaux article {
   width: 30%;
@@ -531,7 +553,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 0%;
+  gap: 0;
   background-color: rgba(115, 21, 52, 0.3);
   margin: 7% 0;
 }
@@ -563,7 +585,7 @@ article .iconeInfosPratiques img {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 0%;
+  gap: 0;
   margin: 3% 0;
 }
 
@@ -576,7 +598,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 0%;
+  gap: 0;
   margin-bottom: 15px;
   position: relative;
 }
@@ -592,7 +614,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 0%;
+  gap: 0;
   background-color: rgba(255, 191, 85, 0.1);
 }
 
@@ -621,7 +643,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  gap: 0%;
+  gap: 0;
   width: 100%;
   padding: 2px 0;
   background-color: rgba(115, 21, 52, 0.5);
@@ -639,7 +661,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  gap: 0%;
+  gap: 0;
   width: 100%;
   padding: 0 20px;
   background-color: rgba(254, 239, 221, 0.5);
@@ -653,7 +675,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 .container-activity .appointment-activity i {
   margin-right: 5px;
@@ -694,7 +716,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 #section-show-activity .show-activity .img-activity {
   width: 100%;
@@ -719,7 +741,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 #section-show-activity .show-activity .infos-activity .group-title .pictogram {
   width: 5%;
@@ -764,7 +786,7 @@ article .iconeInfosPratiques img {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  gap: 0%;
+  gap: 0;
   padding: 15px 25px;
 }
 #section-participants .all-participants .one-participant .display-username {
@@ -918,7 +940,7 @@ main .btn-inscription {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 0%;
+  gap: 0;
 }
 #section-profile .infos-personnelles .tableau tr td:first-of-type {
   width: 200px;
@@ -943,7 +965,7 @@ main .btn-inscription {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  gap: 0%;
+  gap: 0;
 }
 
 .one-picture-in-gallery {
@@ -966,6 +988,211 @@ main .btn-inscription {
 .one-picture-in-gallery h2 {
   font-size: 16px;
   padding: 3px 0;
+}
+
+/* ---------- RESPONSIVE SMARTPHONE ---------- */
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 25px;
+  }
+  h2 {
+    font-size: 23px;
+  }
+  h3 {
+    font-size: 13px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+}
+/* ---------- RESPONSIVE TABLETTE ---------- */
+@media screen and (max-width: 480px) {
+  #headerTopBar {
+    background-color: #731534;
+    padding: 5px 10px;
+  }
+  #headerTopBar .search-container {
+    display: none;
+  }
+  #headerTopBar .rightPart {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+  }
+  #headerTopBar .rightPart a, #headerTopBar .rightPart i {
+    color: #FEEFDD !important;
+  }
+  #headerTopBar .rightPart .loginBlock a {
+    font-size: 12px;
+    order: 1;
+    margin-right: 0;
+  }
+  #headerTopBar .rightPart .loginBlock a .fa-circle-user {
+    margin-right: 2px;
+  }
+  #headerTopBar .rightPart .loginBlock .btn-inscrire {
+    background-color: rgba(254, 239, 221, 0.4) !important;
+  }
+  #headerTopBar .rightPart #iconLanguage {
+    width: 30px;
+    order: -1;
+  }
+  #headerMainBar {
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2)), url(../images/home/panorama_bordeaux.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  #headerMainBar .header-nav {
+    padding: 25px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  #headerMainBar .header-nav .logo {
+    width: 10%;
+  }
+  #headerMainBar .header-nav .menu-burger {
+    display: block !important;
+    margin-left: auto;
+    margin-right: 8%;
+    order: 2;
+  }
+  #headerMainBar .header-nav ul.nav {
+    display: none !important;
+    transition: all 0.3s ease-in-out;
+  }
+  #headerMainBar .header-nav ul.nav.active {
+    display: flex !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    gap: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 50vh;
+    background-color: #731534;
+    padding: 150px 0 0 0;
+    z-index: 2000;
+  }
+  #headerMainBar .header-nav ul.nav.active li {
+    text-align: start;
+    font-weight: normal;
+    margin-left: 2%;
+    width: 80%;
+  }
+  #headerMainBar .header-nav ul.nav.active #activites-nav .sous-menu-activites {
+    display: block !important;
+  }
+  #headerMainBar .header-nav ul.nav.active #activites-nav .sous-menu-activites li {
+    margin: 3%;
+  }
+  #headerMainBar .header-nav ul.nav.active #activites-nav .sous-menu-activites li a {
+    font-size: 12px;
+    color: rgba(254, 239, 221, 0.7);
+  }
+  #headerMainBar .header-nav ul.nav.active #activites-nav:hover {
+    display: none;
+  }
+  #activites-nav:hover {
+    display: none;
+  }
+}
+/* ---------- RESPONSIVE SMARTPHONE ---------- */
+@media screen and (max-width: 480px) {
+  footer .footer-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  footer .footer-nav ul:first-of-type {
+    order: 2; /* Le premier <ul> devient le second */
+    margin: 15px 0;
+  }
+  footer .footer-nav ul:last-of-type {
+    order: 1; /* Le second <ul> devient le premier */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  footer .footer-nav .toTheTop {
+    margin-left: auto;
+    order: 3;
+  }
+}
+/* ---------- RESPONSIVE TABLETTE ---------- */
+/* ---------- RESPONSIVE SMARTPHONE ---------- */
+@media screen and (max-width: 480px) {
+  #banner {
+    display: none;
+  }
+  #menuInfosPratiques {
+    width: 85%;
+  }
+  #menuInfosPratiques article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    width: 18%;
+  }
+  #menuInfosPratiques article h3 {
+    font-size: 9px;
+    padding-top: 8%;
+  }
+  #menuDecouvrirBordeaux {
+    width: 85%;
+  }
+  #menuDecouvrirBordeaux article {
+    width: 30%;
+  }
+  #menuDecouvrirBordeaux article h3 {
+    font-size: 11px;
+    font-weight: bold;
+  }
+  #menuDecouvrirBordeaux article h3:hover {
+    display: none;
+  }
+  #menuDecouvrirBordeaux article img {
+    border-radius: 10px;
+  }
+  #sortiesSemaine {
+    display: block;
+    margin: 5% 0;
+    position: relative;
+  }
+  #sortiesSemaine .imageArticle {
+    width: 100%;
+  }
+  #sortiesSemaine .textArticle h4 {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background-color: rgba(115, 21, 52, 0.8);
+    color: #FEEFDD;
+    padding: 8px 0;
+  }
+  #sortiesSemaine .textArticle h4::after {
+    display: none;
+  }
+  #sortiesSemaine .textArticle p {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */

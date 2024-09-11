@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block metatitle %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> #}
+    <link rel="icon" href="{{ asset('asset/images/favicon-32x32.png') }}" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,30 +31,43 @@
             </div>
 
             <div class="rightPart">
-                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i>
-                    {% block username %}
-                        {% if app.user %}
-                            {{ app.user.username }}
-                        {% else %}
-                            Se connecter
-                            <a class="btn-inscrire" href="{{ path('inscription_user') }}"> S'inscrire </a>
-                        {% endif %}
-                    {% endblock %} </a>
 
-                {% block deconnection %}
-                    {% if app.user %}
-                        <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
-                    {% endif %}
-                {% endblock %}
+                <div class="loginBlock">
+                    <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i>
+                        {% block username %}
+                            {% if app.user %}
+                                {{ app.user.username }}
+                            {% else %}
+                                Se connecter
+                                <a class="btn-inscrire" href="{{ path('inscription_user') }}"> S'inscrire </a>
+                            {% endif %}
+                        {% endblock %} </a>
+
+                    {% block deconnection %}
+                        {% if app.user %}
+                            <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                        {% endif %}
+                    {% endblock %}
+                </div>
+
                 <div id="iconLanguage"> <img src="{{ asset('asset/images/icons/french_flag.jpg') }}" alt="Icon french flag"> </div>
+
+
             </div>
         </div>
 
 
         <div id="headerMainBar">
             <nav class="header-nav">
-                <a class="logo" href="{{ path('home') }}">LOGO</a>
-                <ul>
+                <a class="logo" href="{{ path('home') }}"><img src="{{ asset('asset/images/logo-HB-clair.png') }}" alt="logo Hello Bordeaux"></a>
+
+                <ul class="menu-burger">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+                <ul class="nav">
                     <li> Informations pratiques </li>
                     <li> Découvrir Bordeaux </li>
                     <li id="activites-nav"> Les activités
@@ -107,7 +121,7 @@
                 <li> <a href=""> Sites utiles </a> </li>
                 <li> <a href=""> Applications </a> </li>
             </ul>
-            <a href="#top"> <i class="fa-solid fa-circle-chevron-up iconFooter"></i></a>
+            <a class="toTheTop" href="#top"> <i class="fa-solid fa-circle-chevron-up iconFooter"></i></a>
         </nav>
     </footer>
 
@@ -116,6 +130,18 @@
             src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous">
+    </script>
+
+    <script>
+
+        let burger = document.querySelector('.menu-burger');
+        let menu = document.querySelector('.nav');
+
+        burger.addEventListener('click', () => {
+                menu.classList.toggle('active');
+            }
+        )
+
     </script>
 {% block javascript %} {% endblock %}
 

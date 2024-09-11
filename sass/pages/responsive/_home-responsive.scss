@@ -1,0 +1,85 @@
+/* ---------- RESPONSIVE SMARTPHONE ---------- */
+
+@media screen and (max-width: 480px) {
+
+  #banner {
+    display: none;
+  }
+
+  // ---------- SECTION 1 : Informations pratiques ----------
+
+  #menuInfosPratiques {
+    width: 85%;
+
+    article {
+      @include flex($flex-dir: column, $justify: center);
+      width: 18%;
+
+      h3 {
+        font-size: 9px;
+        padding-top: 8%;
+      }
+    }
+  }
+
+  // ---------- SECTION 2 : Découvrir Bordeaux ----------
+
+  #menuDecouvrirBordeaux {
+    width: 85%;
+
+    article {
+      width: 30%;
+
+      h3 {
+        font-size: 11px;
+        font-weight: bold;
+      }
+
+      h3:hover {
+        display: none;
+      }
+
+      img {
+        border-radius: 10px;
+      }
+    }
+  }
+
+
+  // ---------- SECTION 3 : Participer aux activités ----------
+
+  // ----- ARTICLE : Les sorties de la semaine -----
+  #sortiesSemaine {
+    display: block;
+    margin: 5% 0;
+    position: relative;
+
+
+    .imageArticle {
+      width: 100%;
+    }
+
+    .textArticle {
+
+      h4 {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        background-color: rgba( 115, 21, 52, 0.8);
+        color: $limestone;
+        padding: 8px 0;
+      }
+
+      h4::after {
+        display: none
+      }
+
+      p {
+        display: none
+      }
+    }
+
+  }
+}

@@ -27,4 +27,13 @@
 @import "pages/photo-gallery";
 
 
+// responsive
+  //base
+@import "base/responsive/general-responsive";
 
+  //layout
+@import "layout/responsive/header-responsive";
+@import "layout/responsive/footer-responsive";
+
+//pages
+@import "pages/responsive/home-responsive";

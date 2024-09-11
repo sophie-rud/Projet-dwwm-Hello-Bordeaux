@@ -1,0 +1,129 @@
+@media screen and (max-width: 480px){
+
+
+  #headerTopBar {
+    background-color: $claretRed;
+    padding: 5px 10px;
+
+    .search-container {
+      display: none;
+    }
+
+    .rightPart {
+      @include flex($justify: space-around);
+      width: 100%;
+
+      a, i {
+        color: $limestone!important;
+      }
+
+      .loginBlock {
+        a {
+          font-size: 12px;
+          order: 1;
+          margin-right: 0;
+
+          .fa-circle-user {
+            margin-right: 2px;
+          }
+        }
+        .btn-inscrire {
+          background-color: rgba( 254, 239, 221, 0.4)!important;
+        }
+      }
+
+
+      #iconLanguage {
+        width: 30px;
+        order: -1;
+        //margin-right: auto;
+      }
+
+
+    }
+  }
+
+  // ---------- Header barre basse (background photo)
+  #headerMainBar {
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2)), url(../images/home/panorama_bordeaux.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
+    .header-nav {
+      padding: 25px 0;
+      @include flex();
+
+      .logo {
+        //display: none;
+        width: 10%;
+      }
+
+      // Menu burger
+      .menu-burger {
+        display: block!important;
+        margin-left: auto;
+        margin-right: 8%;
+        order: 2;
+      }
+
+
+      ul.nav{
+        display: none!important;
+        transition: all 0.3s ease-in-out;
+      }
+
+      ul.nav.active{
+        display: flex!important;
+        @include flex($flex-dir: column, $justify: space-evenly, $align: start);
+
+        position: absolute;
+        top:0;
+        width:100%;
+        left:0;
+        height: 50vh;
+        background-color: $claretRed;
+        padding: 150px 0 0 0;
+        z-index:2000;
+
+          li {
+            text-align: start;
+            font-weight: normal;
+            margin-left: 2%;
+            width: 80%;
+          }
+
+        // Sous-menu des activités
+        #activites-nav {
+          .sous-menu-activites {
+            display: block!important;
+
+            li {
+              margin: 3%;
+
+              a {
+                font-size: 12px;
+                color: rgba( 254, 239, 221, 0.7);
+              }
+            }
+          }
+        }
+
+        #activites-nav:hover {
+          display: none
+        }
+      }
+
+    }
+  }
+
+
+  #activites-nav:hover {
+    display: none
+  }
+
+}
+
+
+

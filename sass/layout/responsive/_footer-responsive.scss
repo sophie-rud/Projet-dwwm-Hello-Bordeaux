@@ -1,0 +1,33 @@
+/* ---------- RESPONSIVE SMARTPHONE ---------- */
+@media screen and (max-width: 480px) {
+
+  footer {
+
+    //background-color: yellow;
+
+    .footer-nav {
+      @include flex($flex-dir: column);
+
+
+      ul:first-of-type {
+        order: 2; /* Le premier <ul> devient le second */
+        margin: 15px 0;
+      }
+
+      ul:last-of-type {
+        order: 1; /* Le second <ul> devient le premier */
+        @include flex($flex-dir: column);
+      }
+
+      .toTheTop {
+        margin-left: auto;
+        order: 3;
+      }
+
+    }
+  }
+}
+
+
+/* ---------- RESPONSIVE TABLETTE ---------- */
+// @media screen and (min-width: 481px) and (max-width: 1024px) {}
