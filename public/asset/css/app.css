@@ -904,7 +904,7 @@ main .btn-inscription {
   width: 75%;
   margin: auto;
 }
-#section-profile .profil {
+#section-profile .profile {
   background-color: rgba(115, 21, 52, 0.5);
   border-radius: 20px;
   padding: 40px 30px;
@@ -914,15 +914,15 @@ main .btn-inscription {
   align-items: center;
   gap: 5%;
 }
-#section-profile .profil .profilePicture {
+#section-profile .profile .profilePicture {
   width: 110px;
   height: 100px;
 }
-#section-profile .profil a {
+#section-profile .profile a {
   align-self: flex-start;
   font-size: 20px;
 }
-#section-profile .profil .username {
+#section-profile .profile .username {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -930,12 +930,13 @@ main .btn-inscription {
   gap: 5%;
   padding-bottom: 5%;
 }
-#section-profile .profil .presentation {
+#section-profile .profile .presentation {
   width: 70%;
-  padding: 0 80px;
+  padding: 0 30px;
 }
-#section-profile .profil .presentation p {
+#section-profile .profile .presentation p {
   color: #FEEFDD;
+  text-align: justify;
 }
 #section-profile .infos-personnelles {
   background-color: rgba(115, 21, 52, 0.3);
@@ -947,6 +948,17 @@ main .btn-inscription {
   margin-bottom: 12px;
   text-align: center;
 }
+#section-profile .infos-personnelles .icon-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0;
+}
+#section-profile .infos-personnelles .icon-action a {
+  font-size: 20px;
+  margin: 0 20px;
+}
 #section-profile .infos-personnelles .tableau {
   display: flex;
   flex-direction: row;
@@ -957,13 +969,6 @@ main .btn-inscription {
 #section-profile .infos-personnelles .tableau tr td:first-of-type {
   width: 200px;
   height: 20px;
-}
-#section-profile .infos-personnelles .tableau .icon-action {
-  align-self: flex-start;
-}
-#section-profile .infos-personnelles .tableau .icon-action a {
-  font-size: 20px;
-  margin: 0 5px;
 }
 
 .small-font {
@@ -1331,6 +1336,7 @@ main .btn-inscription {
     width: 90%;
   }
 }
+/* RESPONSIVE MOBILE */
 @media screen and (max-width: 480px) {
   #section-show-activity .show-activity {
     display: flex;
@@ -1369,6 +1375,53 @@ main .btn-inscription {
     justify-content: flex-start;
     align-items: center;
     gap: 0;
+  }
+}
+@media screen and (max-width: 1024px) {
+  #section-profile {
+    width: 90%;
+  }
+  #section-profile .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 5%;
+  }
+  #section-profile .profile div.presentation {
+    width: 100%;
+    padding: 0;
+    margin-top: 40px;
+  }
+  #section-profile .profile div.presentation p {
+    text-align: justify;
+  }
+  #section-profile .profile a {
+    order: -1;
+    margin-left: auto;
+  }
+  #section-profile .infos-personnelles {
+    width: 100%;
+    padding: 20px 10px;
+  }
+}
+/* RESPONSIVE TABLETTE */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+  #section-profile .profile .infos-personnelles {
+    width: 100%;
+    padding: 20px 10px;
+  }
+  /* RESPONSIVE MOBILE */
+}
+@media screen and (min-width: 481px) and (max-width: 1024px) and (max-width: 480px) {
+  #section-profile .profile div.presentation p {
+    font-size: 14px;
+  }
+  #section-profile .infos-personnelles .tableau {
+    width: 90%;
+  }
+  #section-profile .infos-personnelles .tableau tr td {
+    font-size: 14px;
   }
 }
 

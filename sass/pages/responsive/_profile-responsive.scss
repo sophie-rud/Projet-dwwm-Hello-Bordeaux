@@ -1,0 +1,74 @@
+// RESPONSIVE
+
+// RESPONSIVE TABLETTE ET MOBILE
+@media screen and (max-width: 1024px) {
+  #section-profile {
+    width: 90%;
+
+    .profile {
+      @include flex($flex-dir: column, $justify: space-around, $align: flex-start, $gap: 5%);
+
+      div.presentation {
+        width: 100%;
+        padding: 0;
+        margin-top: 40px;
+
+        p {
+          text-align: justify;
+        }
+      }
+
+      a {
+        order: -1;
+        margin-left: auto;
+      }
+    }
+
+    .infos-personnelles {
+      width: 100%;
+      padding: 20px 10px;
+    }
+  }
+}
+
+
+/* RESPONSIVE TABLETTE */
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+
+  #section-profile {
+
+    .profile {
+
+      .infos-personnelles {
+        width: 100%;
+        padding: 20px 10px;
+      }
+    }
+  }
+
+
+  /* RESPONSIVE MOBILE */
+  @media screen and (max-width: 480px) {
+
+    #section-profile {
+
+      .profile {
+        div.presentation {
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .infos-personnelles {
+        .tableau {
+          width: 90%;
+
+          tr td {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
