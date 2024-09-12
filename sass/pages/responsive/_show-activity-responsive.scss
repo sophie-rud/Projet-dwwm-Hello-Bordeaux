@@ -1,7 +1,7 @@
 // RESPONSIVE
 
 /* RESPONSIVE TABLETTE */
-@media screen and (min-width: 769px) and (max-width: 1024px){
+@media screen and (min-width: 481px) and (max-width: 1024px){
 
   #section-show-activity {
     width: 90%;
@@ -16,13 +16,15 @@
 
       // Image de l'activité
       .img-activity {
-        //min-width: 150px;
         width: 40%;
+        min-width: 40%;
       }
 
       .infos-activity {
-        //min-width: 180px;
         width: 50%;
+        min-width: 50%;
+        margin: 0 10px;
+
 
         .group-title {
           .pictogram {
@@ -59,16 +61,28 @@
 }
 
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 480px){
 
   #section-show-activity {
     .show-activity {
       @include flex($flex-dir: column, $justify: space-around, $gap: 20px);
 
+      .img-activity {
+        width: 100%;
+        min-width: 90%;
+      }
+
       .infos-activity {
+        width: 100%;
+        min-width: 90%;
+
         .group-title {
           padding-bottom: 20px;
           @include flex($justify: flex-start);
+
+          .pictogram {
+            width: 15%;
+          }
         }
       }
     }

@@ -1285,7 +1285,7 @@ main .btn-inscription {
   }
 }
 /* RESPONSIVE TABLETTE */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 481px) and (max-width: 1024px) {
   #section-show-activity {
     width: 90%;
     margin: auto;
@@ -1302,9 +1302,12 @@ main .btn-inscription {
   }
   #section-show-activity .show-activity .img-activity {
     width: 40%;
+    min-width: 40%;
   }
   #section-show-activity .show-activity .infos-activity {
     width: 50%;
+    min-width: 50%;
+    margin: 0 10px;
   }
   #section-show-activity .show-activity .infos-activity .group-title .pictogram {
     width: 15%;
@@ -1328,13 +1331,21 @@ main .btn-inscription {
     width: 90%;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
   #section-show-activity .show-activity {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     gap: 20px;
+  }
+  #section-show-activity .show-activity .img-activity {
+    width: 100%;
+    min-width: 90%;
+  }
+  #section-show-activity .show-activity .infos-activity {
+    width: 100%;
+    min-width: 90%;
   }
   #section-show-activity .show-activity .infos-activity .group-title {
     padding-bottom: 20px;
@@ -1343,6 +1354,9 @@ main .btn-inscription {
     justify-content: flex-start;
     align-items: center;
     gap: 0;
+  }
+  #section-show-activity .show-activity .infos-activity .group-title .pictogram {
+    width: 15%;
   }
   #section-show-activity .btn-style {
     width: 100%;
