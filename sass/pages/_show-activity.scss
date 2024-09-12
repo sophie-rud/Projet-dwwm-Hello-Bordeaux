@@ -1,6 +1,6 @@
 
 #section-show-activity {
-  width: 75%;
+  width: 80%;
   margin: auto;
 
   .show-activity {
@@ -13,24 +13,31 @@
     // Image de l'activité
     .img-activity {
       width: 100%;
+      min-width: 200px;
+      height: 218px;
       border-radius: 25px;
-      //height: 200px;
-      object-fit: cover;
       overflow: hidden;
-      background-color: #a78bfa;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
     }
 
     // Infos sur l'activité (heure, lieu, date, titre)
     .infos-activity {
       background-color: rgba(115, 21, 52, 0.3);
       border-radius: 20px;
-      padding: 40px 10px;
+      padding: 20px 10px;
       margin: 0 20px;
       width: 100%;
-      //height: 200px;
+      height: 218px;
+      min-width: 200px;
 
       p {
-        padding: 6px 0;
+        padding: 8px 0;
       }
 
       .group-title {
@@ -41,13 +48,13 @@
           width: 5%;
           padding-right: 10px;
         }
-
       }
     }
 
     // Description
     .text-activity {
       padding: 10px 30px;
+      text-align: justify;
     }
   }
 
@@ -60,14 +67,16 @@
     width: 35%;
     margin: 15px auto;
     text-align: center;
-    font-size: 15px;
-    color: $limestone;
     padding: 6px 0;
     transition: transform 0.3s ease;
+    a {
+      font-size: 15px;
+      color: $limestone;
+    }
 
     &:hover {
       background-color: $claretRed;
-      transform: scale(1.1);
+      transform: scale(1.05);
 
       a {
         color: $limestone;
@@ -79,7 +88,7 @@
 
   // SECTION PARTICIPANTS
 #section-participants {
-  width: 75%;
+  width: 80%;
   margin: 5% auto;
   background-color: $limestone;
   border-radius: 25px;
