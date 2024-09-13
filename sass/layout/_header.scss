@@ -45,10 +45,13 @@
   .rightPart {
     @include flex($flex-dir: row, $justify: space-between);
 
+    .loginBlock {
+      @include flex();
+      margin-right: 50px;
+
       a {
         color: $claretRed;
-        margin-right: 100px;
-
+        font-size: 16px;
 
         .fa-circle-user {
           color: $claretRed;
@@ -56,6 +59,11 @@
           margin-right: 5px;
         }
       }
+      a.btn-inscrire {
+        background-color: rgba( 115, 21, 52, 0.6);
+        margin-left: 15px;
+      }
+    }
 
       #iconLanguage {
         width: 45px;
@@ -74,7 +82,7 @@
 
     ul.menu-burger {
       display: none;
-      width: 30px;
+      width: 10%;
       padding: 2%;
       position: relative;
       z-index: 3000;

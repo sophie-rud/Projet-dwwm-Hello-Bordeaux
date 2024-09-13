@@ -354,14 +354,26 @@ tr:nth-of-type(even) {
   align-items: center;
   gap: 0;
 }
-#headerTopBar .rightPart a {
-  color: #731534;
-  margin-right: 100px;
+#headerTopBar .rightPart .loginBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin-right: 50px;
 }
-#headerTopBar .rightPart a .fa-circle-user {
+#headerTopBar .rightPart .loginBlock a {
+  color: #731534;
+  font-size: 16px;
+}
+#headerTopBar .rightPart .loginBlock a .fa-circle-user {
   color: #731534;
   font-size: 18px;
   margin-right: 5px;
+}
+#headerTopBar .rightPart .loginBlock a.btn-inscrire {
+  background-color: rgba(115, 21, 52, 0.6);
+  margin-left: 15px;
 }
 #headerTopBar .rightPart #iconLanguage {
   width: 45px;
@@ -380,7 +392,7 @@ tr:nth-of-type(even) {
 }
 #headerMainBar .header-nav ul.menu-burger {
   display: none;
-  width: 30px;
+  width: 10%;
   padding: 2%;
   position: relative;
   z-index: 3000;
@@ -603,7 +615,7 @@ article .iconeInfosPratiques img {
   z-index: 10;
 }
 .activities-one-category .icon-category {
-  width: 3%;
+  width: 45px;
   padding-right: 15px;
 }
 .activities-one-category .activities {
@@ -612,26 +624,35 @@ article .iconeInfosPratiques img {
   justify-content: flex-start;
   align-items: center;
   gap: 15px;
+  flex-wrap: wrap;
   background-color: rgba(255, 191, 85, 0.1);
-  padding-left: 2%;
-  padding-top: 2%;
+  padding: 0 2%;
 }
 
 .container-activity {
   width: 21%;
-  height: 300px;
   color: #FEEFDD;
   overflow: hidden;
   border-radius: 10px;
 }
 .container-activity .info-activity {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  height: 250px;
+}
+.container-activity .img-activity {
+  width: 100%;
+  height: inherit;
+  overflow: hidden;
 }
 .container-activity .img-activity img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
-  overflow: hidden;
   opacity: 0.8;
 }
 .container-activity .top-activity {
@@ -651,10 +672,10 @@ article .iconeInfosPratiques img {
   margin-right: 10px;
 }
 .container-activity .top-activity .pictogram {
-  width: 16px;
+  width: 30px;
   padding: 1% 2%;
   background-color: rgba(254, 239, 221, 0.5);
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .container-activity .appointment-activity {
   position: absolute;
@@ -1023,7 +1044,18 @@ main .btn-inscription {
   }
 }
 /* ---------- RESPONSIVE TABLETTE ---------- */
-@media screen and (max-width: 480px) {
+/* @media screen and (min-width: 769px) and (max-width: 1024px) {
+
+  #headerTopBar {
+    padding: 10px 20px;
+
+    .search-container {
+      width: 100%;
+      max-width: 250px;
+    }
+  }
+} */
+@media screen and (max-width: 1024px) {
   #headerTopBar {
     background-color: #731534;
     padding: 5px 10px;
@@ -1034,7 +1066,7 @@ main .btn-inscription {
   #headerTopBar .rightPart {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     gap: 0;
     width: 100%;
@@ -1043,15 +1075,14 @@ main .btn-inscription {
     color: #FEEFDD !important;
   }
   #headerTopBar .rightPart .loginBlock a {
-    font-size: 12px;
-    order: 1;
+    font-size: 16px;
     margin-right: 0;
   }
   #headerTopBar .rightPart .loginBlock a .fa-circle-user {
     margin-right: 2px;
   }
-  #headerTopBar .rightPart .loginBlock .btn-inscrire {
-    background-color: rgba(254, 239, 221, 0.4) !important;
+  #headerTopBar .rightPart .loginBlock a.btn-inscrire {
+    background-color: rgba(254, 239, 221, 0.4);
   }
   #headerTopBar .rightPart #iconLanguage {
     width: 30px;
@@ -1077,7 +1108,7 @@ main .btn-inscription {
     background-color: rgba(115, 21, 52, 0.5);
     border-radius: 50px;
   }
-  #headerMainBar .header-nav .menu-burger {
+  #headerMainBar .header-nav ul.menu-burger {
     display: block !important;
     margin-left: auto;
     margin-right: 8%;
@@ -1091,7 +1122,7 @@ main .btn-inscription {
     display: flex !important;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: start;
     gap: 0;
     position: absolute;
@@ -1126,8 +1157,43 @@ main .btn-inscription {
     display: none;
   }
 }
-/* ---------- RESPONSIVE SMARTPHONE ---------- */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  #headerTopBar .rightPart .loginBlock a {
+    font-size: 15px;
+  }
+  #headerMainBar .header-nav ul.menu-burger {
+    width: 8%;
+  }
+}
+@media screen and (max-width: 1024px) and (max-width: 480px) {
+  #headerTopBar .rightPart .loginBlock a {
+    font-size: 12px;
+  }
+  #headerTopBar .rightPart .loginBlock a .fa-circle-user {
+    margin-right: 2px;
+  }
+  #headerMainBar .header-nav ul.menu-burger {
+    width: 12%;
+  }
+}
+/* ---------- RESPONSIVE TABLETTE format paysage et petit ordinateur ---------- */
+@media screen and (max-width: 1024px) {
+  footer .footer-nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0;
+  }
+  footer .footer-nav ul:last-of-type li {
+    padding: 0 20px;
+  }
+  footer .footer-nav ul:last-of-type li a {
+    font-size: 13px;
+  }
+}
+/* ---------- RESPONSIVE SMARTPHONE et TABLETTE format portrait ---------- */
+@media screen and (max-width: 769px) {
   footer .footer-nav {
     display: flex;
     flex-direction: column;
@@ -1155,7 +1221,6 @@ main .btn-inscription {
     order: -1;
   }
 }
-/* ---------- RESPONSIVE TABLETTE ---------- */
 /* ---------- RESPONSIVE SMARTPHONE ---------- */
 @media screen and (max-width: 480px) {
   #banner {

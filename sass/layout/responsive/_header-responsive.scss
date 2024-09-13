@@ -1,5 +1,17 @@
-@media screen and (max-width: 480px){
+/* @media screen and (min-width: 769px) and (max-width: 1024px) {
 
+  #headerTopBar {
+    padding: 10px 20px;
+
+    .search-container {
+      width: 100%;
+      max-width: 250px;
+    }
+  }
+} */
+
+
+@media screen and (max-width: 1024px){
 
   #headerTopBar {
     background-color: $claretRed;
@@ -10,7 +22,7 @@
     }
 
     .rightPart {
-      @include flex($justify: space-around);
+      @include flex($justify: space-between);
       width: 100%;
 
       a, i {
@@ -19,16 +31,16 @@
 
       .loginBlock {
         a {
-          font-size: 12px;
-          order: 1;
+          font-size: 16px;
+          //order: 1;
           margin-right: 0;
 
           .fa-circle-user {
             margin-right: 2px;
           }
         }
-        .btn-inscrire {
-          background-color: rgba( 254, 239, 221, 0.4)!important;
+        a.btn-inscrire {
+          background-color: rgba( 254, 239, 221, 0.4);
         }
       }
 
@@ -64,11 +76,14 @@
       }
 
       // Menu burger
-      .menu-burger {
+      ul.menu-burger {
         display: block!important;
         margin-left: auto;
         margin-right: 8%;
         order: 2;
+        //width: 80px;
+        //padding: 0;
+
       }
 
 
@@ -79,7 +94,7 @@
 
       ul.nav.active{
         display: flex!important;
-        @include flex($flex-dir: column, $justify: space-evenly, $align: start);
+        @include flex($flex-dir: column, $justify: space-around, $align: start);
 
         position: absolute;
         top:0;
@@ -117,15 +132,45 @@
           display: none
         }
       }
-
     }
   }
-
-
   #activites-nav:hover {
     display: none
   }
 
+
+  // Responsive petites TABLETTES
+  @media screen and (min-width: 769px) {
+
+    #headerTopBar .rightPart .loginBlock {
+      a {
+        font-size: 15px;
+      }
+    }
+
+    #headerMainBar .header-nav ul.menu-burger {
+      width: 8%;
+    }
+  }
+
+
+  // Responsive SMARTPHONE
+  @media screen and (max-width: 480px) {
+
+    #headerTopBar .rightPart .loginBlock {
+      a {
+        font-size: 12px;
+
+        .fa-circle-user {
+          margin-right: 2px;
+        }
+      }
+    }
+
+    #headerMainBar .header-nav ul.menu-burger {
+      width: 12%;
+    }
+  }
 }
 
 
