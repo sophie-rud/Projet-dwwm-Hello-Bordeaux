@@ -64,8 +64,10 @@
             </article>
 
              <article>
-                <div> <img src="{{ asset('asset/images/home/participer-activites.jpg') }}" alt="Photo rue Sainte Colombe"> </div>
-                 <a href="{{ path('list_activities') }}"> <h3> Participer aux activités </h3> </a>
+                 <a href="{{ path('list_activities') }}">
+                    <div> <img src="{{ asset('asset/images/home/participer-activites.jpg') }}" alt="Photo rue Sainte Colombe"> </div>
+                    <h3> Participer aux activités </h3>
+                 </a>
             </article>
         </div>
         
@@ -91,11 +93,13 @@
         </div>
         
         <article id="sortiesSemaine">
-            <div class="imageArticle"><img src="{{ asset('asset/images/home/sorties-semaine.png') }}" alt="Photo des entrepôts Darwin"></div>
-            <div class="textArticle">
-                <h4 class="">Les sorties de la semaine</h4>
-                <p> Vous retrouvez ici une sélection des sorties et des évènements de la semaine, publiées par d'autres réseaux de la ville de Bordeaux !  </p>
-            </div>
+
+                <div class="imageArticle"><a href=""> <img src="{{ asset('asset/images/home/sorties-semaine.png') }}" alt="Photo des entrepôts Darwin"> </a> </div>
+                <div class="textArticle">
+                    <a href=""> <h4> Les sorties de la semaine </h4> </a>
+                    <p> Vous retrouvez ici une sélection des sorties et des évènements de la semaine, publiées par d'autres réseaux de la ville de Bordeaux !  </p>
+                </div>
+
         </article>
 
     </section>
@@ -118,10 +122,15 @@
                                 0:{
                                     items:1
                                 },
-                                600:{
+
+                                481: {
+                                    items:2
+                                },
+
+                                769:{
                                     items:3
                                 },
-                                1000:{
+                                1025:{
                                     items:5
                                 }
                             }

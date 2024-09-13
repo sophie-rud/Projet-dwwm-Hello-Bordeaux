@@ -10,17 +10,20 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
-#[Route('/admin')]
+#[Route('/admin/user')]
 class AdminUserController extends AbstractController {
+
 
     #[Route('/', name: 'admin_list_users')]
     public function adminListUsers(UserRepository $userRepository): Response {
@@ -33,7 +36,8 @@ class AdminUserController extends AbstractController {
         ]);
     }
 
-    #[Route('/insert', name: 'admin_user_insert')]
+    #[Route('/insert', name: 'admin_insert_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function insertAdmin(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response
     {
 
@@ -85,7 +89,16 @@ class AdminUserController extends AbstractController {
 
                 // et c'est le mdp hashé qu'on enregistre en bdd (on définit le mdp hashé comme mdp avec le setter)
                 $user->setPassword($hashedPassword);
-                $user->setRoles(['ROLE_ADMIN']);
+
+
+                // Si l'utilisateur courant est SUPERADMIN, il peut créer un admin
+                if ($this->isGranted('ROLE_SUPERADMIN')) {
+                    $user->setRoles(['ROLE_ADMIN']);
+                } else {
+                    // Sinon, s'il est admin, il crée un utilisateur simple
+                    $user->setRoles(['ROLE_USER']);
+                }
+
 
                 $entityManager->persist($user);
                 $entityManager->flush();
@@ -110,6 +123,7 @@ class AdminUserController extends AbstractController {
 
 
     #[Route('/delete/{id}', name: 'admin_delete_user')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
 
         $user = $userRepository->find($id);
@@ -119,6 +133,17 @@ class AdminUserController extends AbstractController {
             return new Response($html404, 404);
         }
 
+        // On récupère le rôle de l'utilisateur de l'id recherché
+        $roles = $user->getRoles();
+
+        // On vérifie si l'utilisateur courant (qui essaie de supprimer) est un admin ou un super admin
+        if (in_array('ROLE_ADMIN', $roles) && !$this->isGranted('ROLE_SUPERADMIN')) {
+
+            $this->addFlash('error', 'Vous n\'avez pas le droit de supprimer un administrateur.');
+            return $this->redirectToRoute('admin_list_users');
+        }
+
+
         try {
             $entityManager->remove($user);
             $entityManager->flush();
@@ -126,9 +151,116 @@ class AdminUserController extends AbstractController {
             $this->addFlash('success', 'L\'utilisateur a été supprimé !');
 
         } catch (\Exception $exception) {
-            return $this->renderView('admin/page/error.html.twig', [
+            /*return $this->renderView('admin/page/error.html.twig', [
                 'errorMessage' => $exception->getMessage()
-            ]);
+            ]);*/
+            $this->addFlash('error', $exception->getMessage());
+        }
+
+        return $this->redirectToRoute('admin_list_users');
+    }
+
+
+    // Route appelée au lancement de la méthode
+    #[Route('/block/{id}', name: 'admin_block_user')]
+    // Cette méthode est accessible unique aux utilisateurs ayant au moins le rôle ADMIN
+    #[IsGranted('ROLE_ADMIN')]
+    public function blockUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
+
+        // On récupère l'id de l'utilisateur à bloquer
+        $userToBlock = $userRepository->find($id);
+        // On récupère l'utilisateur actuellement connecté
+        $currentUser = $this->getUser();
+
+        // Si l'utilisateur à bloquer n'existe pas, renvoie une page 404
+        if (!$userToBlock) {
+            $html404 = $this->renderView('admin/page/page404.html.twig');
+            return new Response($html404, 404);
+        }
+
+        // On vérifie si l'utilisateur actuel a les rôles ADMIN ou SUPER_ADMIN
+        if ($currentUser && ($this->isGranted('ROLE_ADMIN') || $this->isGranted('ROLE_SUPER_ADMIN'))) {
+            // Récupère les rôles de l'utilisateur à bloquer
+            $roles = $userToBlock->getRoles();
+
+            // Si l'utilisateur actuel a le rôle de SUPER_ADMIN
+            if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+                // Les SUPER_ADMIN peuvent bloquer les ADMIN et les USER
+                if (in_array('ROLE_ADMIN', $roles) || in_array('ROLE_USER', $roles)) {
+                    // Si l'utilisateur à bloquer est actif (n'est pas déjà bloqué)
+                    if ($userToBlock->isActive()) {
+                        // On bloque l'utilisateur (en changeant son statut IsActive en false)
+                        $userToBlock->setActive(false);
+                        // On enregistre cette modification dans la base de données
+                        $entityManager->flush();
+                        // On affiche un message de succès
+                        $this->addFlash('success', 'L\'utilisateur a été bloqué');
+
+                        // Sinon (si l'utilisateur est déjà bloqué)
+                    } else {
+                        // On affiche un message flash indiquant que l'utilisateur est déjà bloqué
+                        $this->addFlash('warning', 'L\'utilisateur est déjà bloqué');
+                    }
+
+                    // Sinon (si l'utilisateur ne peut pas être bloqué en raison de son rôle)
+                } else {
+                    $this->addFlash('error', 'Cet utilisateur ne peut pas être bloqué.');
+                }
+
+                // Vérifie si l'utilisateur a uniquement le rôle 'ROLE_USER' (car les ADMIN ne peuvent bloquer que les USER)
+            } else if (in_array('ROLE_USER', $roles) && !in_array('ROLE_ADMIN', $roles) && !in_array('ROLE_SUPER_ADMIN', $roles)) {
+                // Vérifie si l'utilisateur n'est pas déjà bloqué
+                if ($userToBlock->isActive()) {
+                    // On bloque l'utilisateur (en changeant son statut IsActive en false)
+                    $userToBlock->setActive(false);
+                    // On enregistre cette modification dans la base de données
+                    $entityManager->flush();
+
+                    // On affiche un message de succès
+                    $this->addFlash('success', 'L\'utilisateur a été bloqué');
+                } else {
+                    // Sinon, (si l'utilisateur est déjà bloqué), on affiche un message flash pour l'indiquer
+                    $this->addFlash('warning', 'L\'utilisateur est déjà bloqué');
+                }
+            } else {
+                // Affiche un message flash d'erreur si les rôles ne permettent pas de bloquer l'utilisateur
+                $this->addFlash('error', 'Cet utilisateur ne peut pas être bloqué.');
+            }
+        }
+        // Redirige vers la liste des utilisateurs après avoir bloquer (ou tenté de bloquer) l'utilisateur
+        return $this->redirectToRoute('admin_list_users');
+    }
+
+
+    #[Route('/unblock/{id}', name: 'admin_unblock_user')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function unblockUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
+
+        $userToUnblock = $userRepository->find($id);
+        $currentUser = $this->getUser();
+
+        if (!$userToUnblock) {
+            $html404 = $this->renderView('admin/page/page404.html.twig');
+            return new Response($html404, 404);
+        }
+
+        if ($currentUser && $this->isGranted('ROLE_ADMIN')) {
+            $roles = $userToUnblock->getRoles();
+
+            // Vérifie si l'utilisateur a uniquement le rôle 'ROLE_USER'
+            if (in_array('ROLE_USER', $roles) && !in_array('ROLE_ADMIN', $roles) && !in_array('ROLE_SUPER_ADMIN', $roles)) {
+                // Vérifie si l'utilisateur est déjà bloqué
+                if (!$userToUnblock->isActive()) {
+                    $userToUnblock->setActive(true);
+                    $entityManager->flush();
+
+                    $this->addFlash('success', 'L\'utilisateur a été débloqué');
+                } else {
+                    $this->addFlash('warning', 'L\'utilisateur est déjà bloqué');
+                }
+            } else {
+                $this->addFlash('error', 'Cet utilisateur ne peut pas être débloqué.');
+            }
         }
 
         return $this->redirectToRoute('admin_list_users');

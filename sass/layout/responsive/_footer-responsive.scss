@@ -1,0 +1,51 @@
+/* ---------- RESPONSIVE TABLETTE format paysage et petit ordinateur ---------- */
+
+@media screen and (max-width: 1024px) {
+  footer .footer-nav {
+
+    ul {
+      @include flex($justify: space-around);
+    }
+
+    ul:last-of-type {
+
+      li {
+        padding: 0 20px;
+        a {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+
+
+/* ---------- RESPONSIVE SMARTPHONE et TABLETTE format portrait ---------- */
+@media screen and (max-width: 769px) {
+
+  footer {
+    .footer-nav {
+      @include flex($flex-dir: column);
+
+      ul:first-of-type {
+        order: 2; /* Le premier <ul> devient le second */
+        margin: 15px 0;
+      }
+
+      ul:last-of-type {
+        order: 1; /* Le second <ul> devient le premier */
+        @include flex($flex-dir: column);
+
+        li {
+          padding: 5px 0;
+        }
+      }
+
+      .toTheTop {
+        margin-left: auto;
+        order: -1;
+      }
+    }
+  }
+}

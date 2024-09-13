@@ -10,7 +10,7 @@
 
     <section id="section-profile">
 
-            <div class="profil">
+            <div class="profile">
 
                 <div class="userId">
                     <div class="username">
@@ -31,6 +31,21 @@
 
             <div class="infos-personnelles">
                 <h3>Informations personnelles</h3>
+
+                <div class="icon-action">
+                    <a href="{{ path('user_update_user', {id: user.id}) }}"> <i class="fa-solid fa-gear"></i> </a>
+
+                    {# Supprimer l'utilisateur (+popup pour valider choix) #}
+                    <div class="popup-confirmation-delete" data-popup-target-id="{{ user.id }}">
+                        <p>Voulez vous vraiment supprimer votre compte ?</p>
+
+                        <a href="{{ path('user_delete_user', {id: user.id}) }}" class="a-style-popup"> Supprimer </a>
+                        <button class="js-close-popup"> Annuler </button>
+                    </div>
+
+                    <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
+
+                </div>
 
                 <div class="tableau">
                     <table>
@@ -58,13 +73,13 @@
 
                     </table>
 
-                    <div class="icon-action">
-                        <a href="{{ path('user_update_user', {id: user.id}) }}"> <i class="fa-solid fa-gear"></i> </a>
-                        <a href="{{ path('user_delete_user', {id: user.id}) }}"> <i class="fa-regular fa-trash-can"></i> </a>
-                    </div>
                 </div>
             </div>
 
     </section>
 
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ asset('asset/js/main.js') }}"></script>
 {% endblock %}

@@ -12,6 +12,13 @@
 
     <h1> Éditer le profil </h1>
 
-    {{ form(userUpdateForm) }}
+    {{ form_start(userUpdateForm) }}
+        {{ form_row(userUpdateForm.password) }}
+        {{ form_row(userUpdateForm.firstName) }}
+        {{ form_row(userUpdateForm.phone) }}
+        {{ form_row(userUpdateForm.presentation) }}
+        {{ form_row(userUpdateForm.profilePicture) }}
+        {{ form_row(userUpdateForm.enregistrer) }}
+    {{ form_row(userUpdateForm) }}
 
 {% endblock %}

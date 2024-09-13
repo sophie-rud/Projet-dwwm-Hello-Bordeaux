@@ -12,20 +12,24 @@
 
   .view-activity {
     position: relative;
+    width: 100%;
+    height: 33vh;
 
     .photo-activity {
       position: relative;
-      width: 200px;
-      height: 250px;
+      //width: 200px;
+      //height: 250px;
+      width: inherit;
+      height: inherit;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        overflow: hidden;
       }
     }
 

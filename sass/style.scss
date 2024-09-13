@@ -8,6 +8,10 @@
 
 //components
 @import "components/carousel";
+@import "components/messages-flash";
+@import "components/popup";
+@import "components/table";
+@import "components/buttons";
 
 // layout
 @import "layout/header";
@@ -20,6 +24,21 @@
 @import "pages/login";
 @import "pages/inscription";
 @import "pages/profile";
+@import "pages/photo-gallery";
 
 
+// responsive
+  //base
+@import "base/responsive/general-responsive";
 
+  //layout
+@import "layout/responsive/header-responsive";
+@import "layout/responsive/footer-responsive";
+
+  //pages
+@import "pages/responsive/home-responsive";
+@import "pages/responsive/login-responsive";
+@import "pages/responsive/activities-responsive";
+@import "pages/responsive/photo-gallery-responsive";
+@import "pages/responsive/show-activity-responsive";
+@import "pages/responsive/profile-responsive";

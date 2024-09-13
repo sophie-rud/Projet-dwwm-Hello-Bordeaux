@@ -5,49 +5,75 @@
 
 {% block main %}
 
-<section>
+<section id="table-activities" class="admin-table">
 
-    <table>
-            <tr>
-                <td>Id</td>
-                <td>Titre</td>
-                <td>Catégorie</td>
-                <td>Lieu</td>
-                <td>Date</td>
-                <td>Photo</td>
-                <td>Description</td>
-                <td>Nombre de participants max</td>
-                <td>Publié ?</td>
-                <td>Créé le :</td>
-                <td>Mis à jour le :</td>
-                <td>Voir</td>
-                <td>Supprimer</td>
-                <td>Modifier</td>
+    <a class="add-btn-style" href="{{ path('admin_insert_activity') }}"> Publier une activité </a>
 
-            </tr>
+    <table id="myTable">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Titre</td>
+                    <td>Catégorie</td>
+                    <td>Lieu</td>
+                    <td>Date</td>
+                    <td>Photo</td>
+                    <td>Description</td>
+                    <td>Nombre de participants max</td>
+                    <td>Publié ?</td>
+                    <td>Créé le :</td>
+                    <td>Mis à jour le :</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
 
-        {% for activity in activities %}
-            <tr>
-                <td>{{ activity.id }}</td>
-                <td>{{ activity.title }}</td>
-                <td>{{ activity.category.nameCategory }}</td>
-                <td>{{ activity.place }}</td>
-                <td>{{ activity.date | date('d.m.Y') }}</td>
-                <td> <div class="photoAdminActivity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div> </td>
-                <td>{{ activity.description }}</td>
-                <td>{{ activity.nbParticipantsMax }}</td>
-                <td>{{ activity.isPublished }}</td>
-                <td>{{ activity.createdAt | date('d.m.Y') }}</td>
-                <td>{{ activity.updatedAt | date('d.m.Y') }}</td>
-                <td> <a href="{{ path('admin_show_activity', {id: activity.id}) }}"> Voir l'activité </a> </td>
-                <td> <a href="{{ path('admin_delete_activity', {id: activity.id}) }}"> Supprimer l'activité </a> </td>
-                <td> <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Modifier </a> </td>
-            </tr>
 
-        {% endfor %}
+            <tbody>
+            {% for activity in activities %}
+                <tr>
+                    <td>{{ activity.id }}</td>
+                    <td>{{ activity.title }}</td>
+                    <td>{{ activity.category.nameCategory }}</td>
+                    <td>{{ activity.place }}</td>
+                    <td>{{ activity.date | date('d.m.Y') }}</td>
+                    <td> <div class="photoAdminActivity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div> </td>
+                    <td>{{ activity.description }}</td>
+                    <td>{{ activity.nbParticipantsMax }}</td>
+                    <td> {% if activity.isPublished %}
+                            <i class="fa-solid fa-check"></i>
+                        {% else %}
+                            <i class="fa-solid fa-xmark"></i>
+                        {% endif %}
+                    </td>
+                    <td>{{ activity.createdAt | date('d.m.Y') }}</td>
+                    <td>{{ activity.updatedAt | date('d.m.Y') }}</td>
+                    <td>
+                        <a href="{{ path('admin_show_activity', {id: activity.id}) }}"> <i class="fa-regular fa-eye"></i> </a>
 
+                        <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
+
+                        {# Supprimer l'activité (+popup pour valider choix) #}
+                        <div class="popup-confirmation-delete" data-popup-target-id="{{ activity.id }}">
+                            <p>Voulez vous vraiment supprimer l'activité ?</p>
+
+                            <a href="{{ path('admin_delete_activity', {id: activity.id}) }}" class="a-style-popup"> Supprimer </a>
+                            <button class="js-close-popup"> Annuler </button>
+                        </div>
+
+                        <p data-trigger-id="{{ activity.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
     </table>
 
 </section>
 
+{% endblock %}
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script src="{{ asset('asset/js/datatable.js') }}"></script>
 {% endblock %}

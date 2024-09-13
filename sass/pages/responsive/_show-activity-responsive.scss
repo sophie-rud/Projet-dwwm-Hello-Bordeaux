@@ -1,0 +1,104 @@
+// RESPONSIVE
+
+/* RESPONSIVE TABLETTE */
+@media screen and (min-width: 481px) and (max-width: 1024px){
+
+  #section-show-activity {
+    width: 90%;
+    margin: auto;
+
+    .show-activity {
+      margin: 2% auto;
+      padding: 15px 20px;
+      @include flex($justify: space-between);
+      flex-wrap: wrap;
+
+
+      // Image de l'activité
+      .img-activity {
+        width: 40%;
+        min-width: 40%;
+      }
+
+      .infos-activity {
+        width: 50%;
+        min-width: 50%;
+        margin: 0 10px;
+
+
+        .group-title {
+          .pictogram {
+            width: 15%;
+          }
+
+          h2 {
+            font-size: 20px;
+          }
+        }
+
+        p{
+          font-size: 15px;
+        }
+      }
+
+      .text-activity {
+        padding: 10px 15px;
+        margin-top: 20px;
+      }
+    }
+
+    .btn-style {
+      width: 80%;
+      padding: 9px 0;
+      margin-bottom: 15%;
+    }
+  }
+
+  #section-participants {
+    width: 90%;
+  }
+
+}
+
+/* RESPONSIVE MOBILE */
+@media screen and (max-width: 480px){
+
+  #section-show-activity {
+    .show-activity {
+      @include flex($flex-dir: column, $justify: space-around, $gap: 20px);
+
+      .img-activity {
+        width: 100%;
+        min-width: 90%;
+      }
+
+      .infos-activity {
+        width: 100%;
+        min-width: 90%;
+
+        .group-title {
+          padding-bottom: 20px;
+          @include flex($justify: flex-start);
+
+          .pictogram {
+            width: 15%;
+          }
+        }
+      }
+    }
+
+    .btn-style {
+      width: 100%;
+      padding: 12px 0;
+      margin-bottom: 15%;
+    }
+  }
+
+  // Section participants
+  #section-participants {
+    .all-participants {
+      @include flex($justify: flex-start);
+    }
+  }
+
+}

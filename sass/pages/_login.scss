@@ -2,11 +2,12 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  margin-bottom: 2%;
-}
 
 main {
+
+  h1 {
+    margin-top: 0;
+  }
 
   .main-login {
     background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
@@ -23,8 +24,8 @@ main {
     background-color: rgba(115, 21, 52, 0.3);
     border-radius: 25px;
     padding: 30px;
-    margin: auto;
-
+    margin: 0 auto 30px auto;
+    //margin-bottom: 30px;
 
     .inputWrapper {
       position: relative;
@@ -67,7 +68,9 @@ main {
     border-radius: 50px;
     border: solid 1px $claretRed;
     color: $limestone;
-    width: 100%;
+    display: block;
+    width: 60%;
+    margin: auto;
     padding: 6px 0;
   }
 
@@ -82,7 +85,7 @@ main {
     background-color: rgba(115, 21, 52, 0.7);
     border-radius: 50px;
     border: transparent;
-    width: 45%;
+    width: 27%;
     margin: 30px auto;
     text-align: center;
     font-size: 15px;

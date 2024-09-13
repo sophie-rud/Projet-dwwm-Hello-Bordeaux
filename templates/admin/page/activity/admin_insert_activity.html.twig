@@ -18,6 +18,7 @@
     {{ form_start(activityForm) }}
 
         {{ form_row(activityForm.title) }}
+        <p>Vous apparaîtrez comme organisateur de l'activité. </p>
         {{ form_row(activityForm.place) }}
         {{ form_row(activityForm.date) }}
         {{ form_row(activityForm.time) }}
@@ -37,8 +38,8 @@
             <li>{{ form_row(gallery.filePath) }}</li>
         {% endfor %}
 
-        <button type="button" class="add_item_link" data-collection-holder-class="galleries">Ajouter une photo</button> #}
-    </ul>
+        <button type="button" class="add_item_link" data-collection-holder-class="galleries">Ajouter une photo</button>
+    </ul> #}
 
         {{ form_row(activityForm.valider) }}
 

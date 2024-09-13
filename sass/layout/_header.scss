@@ -9,9 +9,10 @@
     max-width: 400px;
 
 
-    form {
+    form.search-bar {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 0;
     }
 
     input[type="text"] {
@@ -45,10 +46,13 @@
   .rightPart {
     @include flex($flex-dir: row, $justify: space-between);
 
+    .loginBlock {
+      @include flex();
+      margin-right: 50px;
+
       a {
         color: $claretRed;
-        margin-right: 100px;
-
+        font-size: 16px;
 
         .fa-circle-user {
           color: $claretRed;
@@ -56,14 +60,29 @@
           margin-right: 5px;
         }
       }
+      a.btn-inscrire {
+        background-color: rgba( 115, 21, 52, 0.6);
+        margin-left: 15px;
+      }
+
+      a.deconnection {
+        margin-left: 15px;
+
+        .fa-right-to-bracket {
+          font-size: 18px;
+          margin-right: 5px;
+        }
+      }
+    }
 
       #iconLanguage {
         width: 45px;
       }
+
   }
 }
 
-
+// ---------- Header barre rouge (basse)
 #headerMainBar {
   background-color: $claretRed;
 
@@ -71,17 +90,40 @@
     padding: 25px 0;
     @include flex($justify: flex-start);
 
+    ul.menu-burger {
+      display: none;
+      width: 10%;
+      padding: 2%;
+      position: relative;
+      z-index: 3000;
+      background-color: $limestone;
+      border-radius: 10px;
+    }
+
+    ul.menu-burger li{
+      margin: 5px 0;
+      width: 100%;
+      height: 3px;
+      padding: 0;
+      background-color: $claretRed;
+      border-radius: 2px;
+    }
+
     .logo {
       margin-left: 7%;
       margin-right: 12%;
-      color: white;
+      width: 4%;
     }
 
-    ul {
+    ul.nav {
       @include flex($flex-dir: row);
 
       li {
         padding: 0 2rem;
+        text-transform: uppercase;
+        font-size: 14px;
+        text-align: start;
+        color: $limestone;
 
         a {
           text-transform: uppercase;
@@ -91,6 +133,52 @@
           color: $limestone;
         }
 
+      }
+    }
+  }
+}
+
+
+
+// ---------- Header public | Sous-menu des activités
+
+#activites-nav {
+  .sous-menu-activites {
+    display: none!important;
+  }
+}
+
+#activites-nav:hover {
+  position: relative;
+
+  .sous-menu-activites {
+    display: block!important;
+    text-align: start;
+    position: absolute;
+    background-color: rgba( 115, 21, 52, 0.75);
+    width: 350px;
+    top: 0;
+    left: 0;
+    padding-top: 45px;
+    padding-bottom: 10px;
+
+    li {
+      text-align: start;
+      padding: 5px 0;
+
+      a, i {
+        color: rgba( 254, 239, 221, 0.7);
+        padding-left: 30px;
+        transition: transform 330ms ease-in-out;
+
+      }
+    }
+    li:hover {
+      i {
+        transform: translateX(15px);
+      }
+      a {
+        color: $limestone;
       }
     }
   }

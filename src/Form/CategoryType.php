@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,10 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('nameCategory')
-            ->add('pictogram')
+            ->add('pictogram', FileType::class, [
+                'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
+                'required' => false,
+            ])
             ->add('Enregistrer', SubmitType::class)
         ;
     }

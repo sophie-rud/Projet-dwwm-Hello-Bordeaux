@@ -10,10 +10,14 @@ use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('admin/categories')]
 class AdminCategoryController extends AbstractController {
@@ -30,7 +34,7 @@ class AdminCategoryController extends AbstractController {
 
 
     #[Route('/insert', name: 'admin_insert_category')]
-    public function insertCategory(Request $request, EntityManagerInterface $entityManager): Response {
+    public function insertCategory(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ParameterBagInterface $params): Response {
 
         $category = new Category();
 
@@ -39,6 +43,37 @@ class AdminCategoryController extends AbstractController {
         $categoryCreateForm->handleRequest($request);
 
         if ($categoryCreateForm->isSubmitted() && $categoryCreateForm->isValid()) {
+
+
+            // On récupère le fichier depuis le formulaire
+            $pictoFile = $categoryCreateForm->get('pictogram')->getData();
+
+            // Si un fichier photo est bien soumis
+            if ($pictoFile) {
+                // On récupère le nom du fichier
+                $originalFilename = pathinfo($pictoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // On "nettoie" le nom du fichier avec $slugger->slug() (retire les caractères spéciaux...)
+                $safeFilename = $slugger->slug($originalFilename);
+                // On ajoute un identifiant unique au nom
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictoFile->guessExtension();
+
+
+                try {
+                    // On récupère le chemin de la racine du projet
+                    $rootPath = $params->get('kernel.project_dir');
+                    // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
+                    $pictoFile->move($rootPath . '/public/uploads', $newFilename);
+                } catch (FileException $e) {
+                    dd($e->getMessage());
+                }
+
+                // On stocke le nom du fichier dans la propriété image de l'entité activity
+                $category->setPictogram($newFilename);
+            }
+
+
+
+
             $entityManager->persist($category);
             $entityManager->flush();
 
@@ -82,15 +117,57 @@ class AdminCategoryController extends AbstractController {
 
 
     #[Route('/update/{id}', name: 'admin_update_category')]
-    public function updateCategory(int $id, Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): Response {
+    public function updateCategory(int $id, Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, SluggerInterface $slugger, ParameterBagInterface $params, LoggerInterface $logger): Response {
 
         $category = $categoryRepository->find($id);
+        // On récupère le picto actuel avant de traiter le formulaire
+        $currentPicto = $category->getPictogram();
 
         $categoryUpdateForm = $this->createForm(CategoryType::class, $category);
 
         $categoryUpdateForm->handleRequest($request);
 
         if ($categoryUpdateForm->isSubmitted() && $categoryUpdateForm->isValid()) {
+
+
+            // On récupère le fichier depuis le formulaire
+            $pictoFile = $categoryUpdateForm->get('pictogram')->getData();
+
+            // Si un fichier photo est bien soumis
+            if ($pictoFile) {
+                // On récupère le nom du fichier
+                $originalFilename = pathinfo($pictoFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // On "nettoie" le nom du fichier avec $slugger->slug() (retire les caractères spéciaux...)
+                $safeFilename = $slugger->slug($originalFilename);
+                // On ajoute un identifiant unique au nom
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictoFile->guessExtension();
+
+                // bloc try/catch -> permet de gérer les erreurs lors de l'exécution du code, avec un code alternatif pour traiter les exceptions
+                try {
+                    // On récupère le chemin de la racine du projet
+                    $rootPath = $params->get('kernel.project_dir');
+                    // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
+                    $pictoFile->move($rootPath . '/public/uploads', $newFilename);
+                } catch (FileException $e) {
+                    // Enregistrer l'erreur dans les logs (garde une trace des évènements, permettent de régler les erreurs)
+                    $logger->error('File upload failed: ' . $e->getMessage());
+                    // On affiche un message flash d'erreur
+                    $this->addFlash('error', 'Une erreur est survenue lors du téléchargement du fichier.');
+                    // On fait un rechargement de la page d'édition de l'activité
+                    return $this->redirectToRoute('admin_update_category');
+
+                }
+
+
+                // On stocke le nom du fichier dans la propriété image de l'entité activity
+                $category->setPictogram($newFilename);
+
+                // Si aucun fichier n'est uploadé, conserver l'image existante
+                //$category->setPictogram($currentPicto);
+            }
+
+
+
             $entityManager->persist($category);
             $entityManager->flush();
 

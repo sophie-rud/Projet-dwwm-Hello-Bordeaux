@@ -1,0 +1,11 @@
+// Responsive pour les écrans jusqu'à 780px de large (tablette format vertical)
+
+@media screen and (max-width: 780px) {
+  #section-picture-gallery {
+    width: 90%;
+  }
+
+  .one-picture-in-gallery {
+    width: 45%;
+  }
+}

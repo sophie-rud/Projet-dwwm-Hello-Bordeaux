@@ -5,45 +5,83 @@
 
 {% block main %}
 
-    <section>
+    <section id="table-users" class="admin-table">
 
-        <table>
-            <tr>
-                <td>Id</td>
-                <td>Email</td>
-                <td>Pseudo</td>
+        <a class="add-btn-style" href="{{ path('admin_insert_user') }}"> Ajouter un utilisateur </a>
 
-                <td>Créé le :</td>
-                <td>Voir</td>
-                <td>Supprimer</td>
-                <td>Bloquer</td>
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <td>Email</td>
+                    <td>Pseudo</td>
+                    <td>Rôle</td>
+                    <td>Inscrit·e le :</td>
+                    <td>Bloqué·e</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
 
-            </tr>
-
-
+            <tbody>
             {% for user in users %}
 
-            {# {% if user.roles == 'ROLE_ADMIN' %} #}
 
                 <tr>
-                    <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.username }}</td>
+                    <td> <p><strong>{{ user.username }}</strong></p></td>
+                    <td>
+                        {% if 'ROLE_SUPER_ADMIN' in user.roles %}
+                            <p>Super-admin</p>
+                            {% elseif 'ROLE_ADMIN' in user.roles %}
+                                <p>Admin</p>
+                            {% elseif 'ROLE_USER' in user.roles %}
+                                <p>User</p>
+                        {% endif %}
+                    </td>
+                    <td>{{ user.registeredAt | date('d.m.Y') }}</td>
+                    <td> {% if not user.isActive %}
+                            <a href="{{ path('admin_unblock_user', {id: user.id}) }}"><i class="fa-solid fa-user-slash"></i></a>
+                        {% endif %}
+                    </td>
 
-                    {# <td>{{ user.registeredAt | date('d.m.Y') }}</td>
+                    <td class="td-flex">
+                        {# Bloquer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-confirmation-block" data-popup-block-target-id="{{ user.id }}">
+                            <p>Voulez vous bloquer {{ user.username }} ?</p>
 
-                    <td> <a href="{{ path('admin_show_activity', {id: activity.id}) }}"> Voir l'activité </a> </td>
-                    <td> <a href="{{ path('admin_delete_activity', {id: activity.id}) }}"> Supprimer l'activité </a> </td>
-                    <td> <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Modifier </a> </td> #}
+                            <a href="{{ path('admin_block_user', {id: user.id}) }}" class="a-style-popup"> Bloquer </a>
+                            <button class="js-close-popup"> Annuler </button>
+                        </div>
+
+                        <i data-block-trigger-id="{{ user.id }}" class="js-popup-confirmation-block fa-solid fa-ban"></i>
+
+
+                        {# Supprimer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-confirmation-delete" data-popup-target-id="{{ user.id }}">
+                            <p>Voulez vous vraiment supprimer cet utilisateur : {{ user.username }} ?</p>
+
+                            <a href="{{ path('admin_delete_user', {id: user.id}) }}" class="a-style-popup"> Supprimer </a>
+                            <button class="js-close-popup"> Annuler </button>
+                        </div>
+
+                        <p> <i data-trigger-id="{{ user.id }}"  class="js-popup-confirmation-delete fa-regular fa-trash-can"></i> </p>
+                    </td>
 
                 </tr>
 
                 {# {% endif %} #}
 
             {% endfor %}
+            </tbody>
 
         </table>
 
     </section>
 
+{% endblock %}
+
+
+{% block javascript %}
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script src="{{ asset('asset/js/datatable.js') }}"></script>
 {% endblock %}

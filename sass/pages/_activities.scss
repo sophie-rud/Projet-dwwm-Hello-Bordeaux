@@ -21,60 +21,76 @@
     }
   }
 
+
+  .icon-category {
+    width: 45px;
+    padding-right: 15px;
+  }
+
   // activités d'une catégorie (sans le bloc titre catégorie)
   .activities {
     //width: 80%;
     //margin: auto;
-    @include flex($justify: flex-start);
+    @include flex($justify: flex-start, $gap: 15px);
+    flex-wrap: wrap;
     background-color: rgba(255,191,85,0.1);
-
+    padding: 0 2%;
   }
 }
 
 // Affichage d'une activité
 .container-activity {
-
   width: 21%;
-  height: 300px;
+  //height: 300px;
   color: $limestone;
   overflow: hidden;
   border-radius: 10px;
-  margin: 0 3%;
 
 
   .info-activity {
     position: relative;
+    @include flex($flex-dir: column, $justify: space-between);
+    height: 250px;
   }
 
-  .img-activity img {
+  .img-activity {
     width: 100%;
-    height: 250px;
-    object-fit: cover;
+    height: inherit;
     overflow: hidden;
-    opacity: 0.8;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+    }
   }
 
   .top-activity {
     position: absolute;
     top: 0;
-    @include flex($flex-dir: row, $justify: space-around);
+    @include flex($justify: space-between);
     width: 100%;
     padding: 2px 0;
     background-color: rgba(115, 21, 52, 0.5);
 
     p {
       color: $limestone;
+      margin-right: 10px;
     }
 
     .pictogram {
-      width: 16px;
+      width: 30px;
+      padding: 1% 2%;
+      background-color: rgba(254, 239, 221, 0.5);
+      border-radius: 10px;
     }
   }
 
   .appointment-activity {
     position: absolute;
     bottom: 0;
-    @include flex($flex-dir: row, $justify: space-around);
+    @include flex($flex-dir: row, $justify: space-between);
     width: 100%;
     padding: 0 20px;
     //font-size: 14px;
@@ -118,7 +134,7 @@
   background-color : rgba(255,191,85,0.5);
   width  : 150px;
   height : 15px;
-  left: 80px;
-  bottom: 0;
+  left: 50px;
+  bottom: 10px;
   z-index: 1;
 }

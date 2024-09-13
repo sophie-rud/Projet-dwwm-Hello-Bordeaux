@@ -50,6 +50,7 @@ class ActivityType extends AbstractType
                 'choice_label' => 'pictureName',
                 'multiple' => true,
                 'expanded' => true,
+                'required' => false,
                 // 'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
             ])
             /* ->add('galleries', CollectionType::class, [

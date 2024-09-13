@@ -1,0 +1,61 @@
+/* ---------- RESPONSIVE TABLETTE ---------- */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  // Titles
+  h1 {
+    font-size: 35px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 19px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+
+  // Texte
+  p {
+    font-size: 16px;
+  }
+}
+
+/* ---------- RESPONSIVE TABLETTE ---------- */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  // Titles
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 27px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+
+  // Texte
+  p {
+    font-size: 15px;
+  }
+}
+
+/* ---------- RESPONSIVE SMARTPHONE ---------- */
+@media screen and (max-width: 480px) {
+
+// Titles
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 21px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+}

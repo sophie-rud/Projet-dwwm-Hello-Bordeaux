@@ -7,11 +7,10 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Activity;
-use App\Entity\PictureGallery;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -189,7 +188,7 @@ class AdminActivityController extends AbstractController {
 
 
     #[Route('/update/{id}', name: 'admin_update_activity')]
-    public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response {
+    public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params, LoggerInterface $logger): Response {
 
         // Dans $activity, on stocke le résultat du select par id dans l'entité Activity
         $activity = $activityRepository->find($id);
@@ -218,15 +217,22 @@ class AdminActivityController extends AbstractController {
                 // On ajoute un identifiant unique au nom
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $photoFile->guessExtension();
 
-
+                // bloc try/catch -> permet de gérer les erreurs lors de l'exécution du code, avec un code alternatif pour traiter les exceptions
                 try {
                     // On récupère le chemin de la racine du projet
                     $rootPath = $params->get('kernel.project_dir');
                     // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
                     $photoFile->move($rootPath . '/public/uploads', $newFilename);
                 } catch (FileException $e) {
-                    dd($e->getMessage());
+                    // Enregistrer l'erreur dans les logs (garde une trace des évènements, permettent de régler les erreurs)
+                    $logger->error('File upload failed: ' . $e->getMessage());
+                    // On affiche un message flash d'erreur
+                    $this->addFlash('error', 'Une erreur est survenue lors du téléchargement du fichier.');
+                    // On fait un rechargement de la page d'édition de l'activité
+                    return $this->redirectToRoute('admin_update_activity');
+
                 }
+
 
                 // On stocke le nom du fichier dans la propriété image de l'entité activity
                 $activity->setPhoto($newFilename);
@@ -256,6 +262,4 @@ class AdminActivityController extends AbstractController {
 
         ]);
     }
-
-
 }
