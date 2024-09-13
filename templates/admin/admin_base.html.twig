@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>{% block metatitle %}Welcome admin!{% endblock %}</title>
+    <meta charset="UTF-8"><meta name="description" content="Activités encadrées pour les nouveaux arrivants à Bordeaux">
+    <meta name="keywords" content="Bordeaux, activités, rencontrer de nouvelles personnes">
+    <meta name="author" content="Sophie Rudio">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block metatitle %}Hello Bordeaux!{% endblock %}</title>
     {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> #}
     <link rel="icon" href="{{ asset('asset/images/favicon-32x32.png') }}" type="image/png">
 
@@ -22,13 +26,15 @@
 
         <div id="headerTopBar">
             <div class="search-container">
-                <form action="/search" method="GET">
+                <form class="search-bar" action="/search" method="GET">
                     <input type="text" placeholder="Rechercher..." name="search">
                     <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
                 </form>
             </div>
 
             <div class="rightPart">
+
+                <div class="loginBlock">
                 <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i>
                     {% block username %}
                         {% if app.user %}
@@ -37,11 +43,14 @@
                             Espace utilisateur
                         {% endif %}
                     {% endblock %} </a>
+
                 {% block deconnection %}
                     {% if app.user %}
-                        <a href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                        <a class="deconnection" href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
                     {% endif %}
                 {% endblock %}
+                </div>
+
                 <div id="iconLanguage"> <img src="{{ asset('asset/images/icons/french_flag.jpg') }}" alt="Icon french flag"> </div>
             </div>
         </div>
@@ -50,7 +59,14 @@
         <div id="headerMainBar">
             <nav class="header-nav">
                 <a class="logo" href="{{ path('home') }}"> <img src="{{ asset('asset/images/logo-HB-clair.png') }}" alt="logo Hello Bordeaux"> </a>
-                <ul>
+
+                <ul class="menu-burger">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+                <ul class="nav">
                     <li> <a href="{{ path('admin_list_users') }}"> Gérer les utilisateurs </a> </li>
                     <li> <a href="{{ path('admin_list_categories') }}"> Gérer les catégories </a> </li>
                     <li> <a href="{{ path('admin_list_activities') }}"> Gérer les activités </a> </li>
@@ -101,14 +117,23 @@
                 <li> <a href=""> Applications </a> </li>
             </ul>
 
-            <a href="#top"> <i class="fa-solid fa-circle-chevron-up iconFooter"></i></a>
+            <a class="toTheTop" href="#top"> <i class="fa-solid fa-circle-chevron-up iconFooter"></i></a>
         </nav>
     </footer>
 
 
+    <script>
+        let burger = document.querySelector('.menu-burger');
+        let menu = document.querySelector('.nav');
+
+        burger.addEventListener('click', () => {
+                menu.classList.toggle('active');
+            }
+        )
+    </script>
+
     {% block javascript %}{% endblock %}
     <script src="{{ asset('asset/js/main.js') }}"></script>
-    <script src="{{ asset('asset/js/datatable.js') }}"></script>
 </body>
 
 </html>

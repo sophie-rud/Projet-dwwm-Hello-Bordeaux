@@ -12,11 +12,17 @@ img {
   color: #731534;
 }
 
+form {
+  margin-bottom: 30px;
+}
+
 h1 {
   font-size: 35px;
   font-weight: normal;
   text-align: center;
   padding-top: 30px;
+  margin-top: 50px;
+  margin-bottom: 2%;
 }
 
 h2 {
@@ -44,6 +50,7 @@ p {
   position: relative;
   text-align: center;
   padding: 10px 0 10px 0;
+  margin-top: 50px;
 }
 
 .styleTitle::before,
@@ -82,10 +89,6 @@ p {
   object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
 }
 
-form {
-  margin-bottom: 30px !important;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -110,20 +113,22 @@ a {
 }
 .owl-carousel .view-activity {
   position: relative;
+  width: 100%;
+  height: 33vh;
 }
 .owl-carousel .view-activity .photo-activity {
   position: relative;
-  width: 200px;
-  height: 250px;
+  width: inherit;
+  height: inherit;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 .owl-carousel .view-activity .photo-activity img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  overflow: hidden;
 }
 .owl-carousel .view-activity h3 {
   color: #FEEFDD;
@@ -320,9 +325,10 @@ tr:nth-of-type(even) {
   width: 100%;
   max-width: 400px;
 }
-#headerTopBar .search-container form {
+#headerTopBar .search-container form.search-bar {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0;
 }
 #headerTopBar .search-container input[type=text] {
   width: 100%;
@@ -373,6 +379,9 @@ tr:nth-of-type(even) {
 }
 #headerTopBar .rightPart .loginBlock a.btn-inscrire {
   background-color: rgba(115, 21, 52, 0.6);
+  margin-left: 15px;
+}
+#headerTopBar .rightPart .loginBlock a.deconnection {
   margin-left: 15px;
 }
 #headerTopBar .rightPart #iconLanguage {
@@ -489,7 +498,7 @@ footer .footer-nav ul:first-of-type li {
   padding: 0 10px;
 }
 footer .footer-nav ul:last-of-type li {
-  padding: 0 4rem;
+  padding: 0 3rem;
 }
 footer .footer-nav ul:last-of-type li a {
   font-size: 15px;
@@ -543,10 +552,7 @@ article .iconeInfosPratiques img {
   gap: 0;
 }
 #menuDecouvrirBordeaux article {
-  width: 30%;
-}
-#menuDecouvrirBordeaux article h3 {
-  font-weight: bold;
+  width: 32%;
 }
 #menuDecouvrirBordeaux article h3:hover {
   opacity: 65%;
@@ -568,9 +574,18 @@ article .iconeInfosPratiques img {
 }
 #sortiesSemaine .imageArticle {
   width: 50%;
+  height: inherit;
+  overflow: hidden;
+}
+#sortiesSemaine .imageArticle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 #sortiesSemaine .textArticle {
-  padding: 0 7%;
+  padding-right: 2%;
+  width: 40%;
 }
 #sortiesSemaine .textArticle h4 {
   position: relative;
@@ -847,10 +862,9 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  margin-bottom: 2%;
+main h1 {
+  margin-top: 0;
 }
-
 main .main-login {
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
   background-size: cover;
@@ -864,7 +878,7 @@ main form {
   background-color: rgba(115, 21, 52, 0.3);
   border-radius: 25px;
   padding: 30px;
-  margin: auto;
+  margin: 0 auto 30px auto;
 }
 main form .inputWrapper {
   position: relative;
@@ -1028,33 +1042,57 @@ main .btn-inscription {
   padding: 3px 0;
 }
 
+/* ---------- RESPONSIVE TABLETTE ---------- */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  h1 {
+    font-size: 35px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 19px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 16px;
+  }
+}
+/* ---------- RESPONSIVE TABLETTE ---------- */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  h1 {
+    font-size: 30px;
+  }
+  h2 {
+    font-size: 27px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  p {
+    font-size: 15px;
+  }
+}
 /* ---------- RESPONSIVE SMARTPHONE ---------- */
 @media screen and (max-width: 480px) {
   h1 {
-    font-size: 25px;
+    font-size: 24px;
   }
   h2 {
-    font-size: 23px;
+    font-size: 21px;
   }
   h3 {
-    font-size: 13px;
+    font-size: 18px;
   }
   h4 {
     font-size: 18px;
   }
 }
-/* ---------- RESPONSIVE TABLETTE ---------- */
-/* @media screen and (min-width: 769px) and (max-width: 1024px) {
-
-  #headerTopBar {
-    padding: 10px 20px;
-
-    .search-container {
-      width: 100%;
-      max-width: 250px;
-    }
-  }
-} */
 @media screen and (max-width: 1024px) {
   #headerTopBar {
     background-color: #731534;
@@ -1076,7 +1114,6 @@ main .btn-inscription {
   }
   #headerTopBar .rightPart .loginBlock a {
     font-size: 16px;
-    margin-right: 0;
   }
   #headerTopBar .rightPart .loginBlock a .fa-circle-user {
     margin-right: 2px;
@@ -1221,13 +1258,21 @@ main .btn-inscription {
     order: -1;
   }
 }
-/* ---------- RESPONSIVE SMARTPHONE ---------- */
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  #banner {
+    display: none;
+  }
+  #menuDecouvrirBordeaux {
+    width: 90%;
+  }
+}
+/* ---------- RESPONSIVE SMARTPHONE et petite TABLETTE ---------- */
+@media screen and (max-width: 768px) {
   #banner {
     display: none;
   }
   #menuInfosPratiques {
-    width: 85%;
+    width: 90%;
   }
   #menuInfosPratiques article {
     display: flex;
@@ -1238,18 +1283,17 @@ main .btn-inscription {
     width: 18%;
   }
   #menuInfosPratiques article h3 {
-    font-size: 9px;
+    font-size: 14px;
     padding-top: 8%;
   }
   #menuDecouvrirBordeaux {
-    width: 85%;
+    width: 90%;
   }
   #menuDecouvrirBordeaux article {
-    width: 30%;
+    width: 32%;
   }
   #menuDecouvrirBordeaux article h3 {
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 14px;
   }
   #menuDecouvrirBordeaux article h3:hover {
     display: none;
@@ -1282,15 +1326,48 @@ main .btn-inscription {
     display: none;
   }
 }
-@media screen and (max-width: 480px) {
-  form {
-    width: 80% !important;
+@media screen and (max-width: 768px) and (max-width: 480px) {
+  #menuInfosPratiques article h3 {
+    font-size: 9px;
   }
-  .btn {
-    width: 100% !important;
+  #menuDecouvrirBordeaux {
+    width: 95%;
   }
-  .btn-inscription {
-    width: 90% !important;
+  #menuDecouvrirBordeaux article h3 {
+    font-size: 11px;
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  main form {
+    width: 70%;
+  }
+  main .btn {
+    width: 100%;
+  }
+  main .btn-inscription {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 768px) {
+  main form {
+    width: 80%;
+  }
+  main .btn {
+    width: 100%;
+  }
+  main .btn-inscription {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 768px) and (max-width: 480px) {
+  main form {
+    width: 90%;
+  }
+  main .btn {
+    width: 100%;
+  }
+  main .btn-inscription {
+    width: 90%;
   }
 }
 @media screen and (max-width: 1024px) {

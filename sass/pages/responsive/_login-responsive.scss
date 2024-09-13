@@ -1,14 +1,50 @@
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  main {
+    form {
+      width: 70%;
+    }
 
-  form {
-    width: 80%!important;
+    .btn {
+      width: 100%;
+    }
+
+    .btn-inscription {
+      width: 70%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  main {
+    form {
+      width: 80%;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .btn-inscription {
+      width: 80%;
+    }
   }
 
-  .btn {
-    width: 100%!important;
+  @media screen and (max-width: 480px) {
+
+    main {
+      form {
+        width: 90%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .btn-inscription {
+        width: 90%;
+      }
+    }
   }
 
-  .btn-inscription {
-    width: 90%!important;
-  }
 }

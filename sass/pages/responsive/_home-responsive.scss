@@ -1,22 +1,33 @@
-/* ---------- RESPONSIVE SMARTPHONE ---------- */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  #banner {
+    display: none;
+  }
 
-@media screen and (max-width: 480px) {
+
+  #menuDecouvrirBordeaux {
+    width: 90%;
+  }
+}
+
+/* ---------- RESPONSIVE SMARTPHONE et petite TABLETTE ---------- */
+
+@media screen and (max-width: 768px) {
 
   #banner {
     display: none;
   }
 
-  // ---------- SECTION 1 : Informations pratiques ----------
+  // SECTION 1 : Informations pratiques ----------
 
   #menuInfosPratiques {
-    width: 85%;
+    width: 90%;
 
     article {
       @include flex($flex-dir: column, $justify: center);
       width: 18%;
 
       h3 {
-        font-size: 9px;
+        font-size: 14px;
         padding-top: 8%;
       }
     }
@@ -25,14 +36,14 @@
   // ---------- SECTION 2 : Découvrir Bordeaux ----------
 
   #menuDecouvrirBordeaux {
-    width: 85%;
+    width: 90%;
 
     article {
-      width: 30%;
+      width: 32%;
 
       h3 {
-        font-size: 11px;
-        font-weight: bold;
+        font-size: 14px;
+        //font-weight: bold;
       }
 
       h3:hover {
@@ -80,6 +91,26 @@
         display: none
       }
     }
-
   }
+
+  @media screen and (max-width: 480px) {
+    #menuInfosPratiques {
+      article {
+        h3 {
+          font-size: 9px;
+        }
+      }
+    }
+
+    #menuDecouvrirBordeaux {
+      width: 95%;
+      article {
+
+        h3 {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
 }

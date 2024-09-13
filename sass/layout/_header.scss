@@ -9,9 +9,10 @@
     max-width: 400px;
 
 
-    form {
+    form.search-bar {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 0;
     }
 
     input[type="text"] {
@@ -62,6 +63,15 @@
       a.btn-inscrire {
         background-color: rgba( 115, 21, 52, 0.6);
         margin-left: 15px;
+      }
+
+      a.deconnection {
+        margin-left: 15px;
+
+        .fa-right-to-bracket {
+          font-size: 18px;
+          margin-right: 5px;
+        }
       }
     }
 
