@@ -35,7 +35,7 @@
                     <td> <h2>{{ picture.pictureName }}</h2> </td>
                     <td> {#  <p> {{ picture.postedBy }} </p> #} </td>
                     <td> {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p> #} </td>
-                    <td>
+                    <td class="td-flex">
                         <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
                         {# Supprimer l'image (+popup pour valider choix) #}
@@ -64,5 +64,6 @@
 {% block javascript %}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.4/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('asset/js/datatable.js') }}"></script>
 {% endblock %}

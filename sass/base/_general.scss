@@ -13,6 +13,18 @@ img {
 }
 
 
+// ---------- Flex sur body pour placement du footer ----------
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+  }
+}
+
 // ---------- FORM ----------
 form {
   margin-bottom: 30px;

@@ -48,7 +48,7 @@
 
     .loginBlock {
       @include flex();
-      margin-right: 50px;
+      margin-right: 3%;
 
       a {
         color: $claretRed;
@@ -170,7 +170,6 @@
         color: rgba( 254, 239, 221, 0.7);
         padding-left: 30px;
         transition: transform 330ms ease-in-out;
-
       }
     }
     li:hover {

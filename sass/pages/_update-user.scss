@@ -1,0 +1,23 @@
+#section-update-user {
+
+  #form-update-profile {
+
+    .formUpdate-identity1,
+    .formUpdate-identity2 {
+      //background-color: rgba( 254, 239, 221, 0.9);
+      background-color: rgba(115, 21, 52, 0.35);
+      margin-bottom: 20px;
+      padding: 4%;
+      border-radius: 20px;
+    }
+
+    .formUpdate-identity2 {
+      background-color: rgba(115, 21, 52, 0.2);
+    }
+
+    input[readonly] {
+      background-color: rgba(115, 21, 52, 0.15);
+
+    }
+  }
+}

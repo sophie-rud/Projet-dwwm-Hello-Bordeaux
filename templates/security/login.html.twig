@@ -8,7 +8,7 @@
 <div class="main-login">
     <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 
-    <form method="post">
+    <form class="form-bgRed" id="login-form" method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}

@@ -1,0 +1,43 @@
+form {
+  width: 60%;
+  display: block;
+  //padding: 30px;
+  margin: 0 auto 30px auto;
+}
+
+
+//Formulaire arr-plan rouge
+.form-bgRed {
+  width: 45%;
+  display: block;
+  background-color: rgba(115, 21, 52, 0.3);
+  border-radius: 25px;
+  padding: 30px;
+  margin: 0 auto 30px auto;
+}
+
+
+// Formulaires user (inscription & update)
+.custom-input, input[readonly] {
+  display: block;
+  padding: 10px;
+  //background-color: rgba( 254, 239, 221, 0.8);
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid $limestone;
+  border-radius: 5px;
+  font-size: 1em;
+  color: $claretRed;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.custom-label {
+  display: block;
+  color: $claretRed;
+  font-weight: bold;
+  background-color: rgba(115, 21, 52, 0.2);
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 0 5px 5px;
+  margin: 3px 0;
+}

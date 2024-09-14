@@ -1,18 +1,24 @@
 .admin-table {
   width: 95%;
   margin: auto;
+
+  #myTable {
+
+    thead {
+        font-weight: bold;
+        background-color: rgba(115, 21, 52, 0.3);
+        height: 25px;
+    }
+
+    tbody {
+      tr:nth-of-type(odd){
+        background-color: rgba(115, 21, 52, 0.15);
+      }
+    }
+  }
+
 }
 
-thead {
-  font-weight: bold;
-  background-color: rgba(115, 21, 52, 0.3);
-  height: 25px;
-}
-
-
-tr:nth-of-type(even){
-  background-color: rgba(115, 21, 52, 0.15);
-}
 
 
 // Tableau des catégories
@@ -47,6 +53,7 @@ tr:nth-of-type(even){
   }
 }
 
+
 // Tableau de la galerie photo
 .pictureInGallery {
   width: 200px;
@@ -55,12 +62,13 @@ tr:nth-of-type(even){
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    overflow: hidden;
   }
 }
 

@@ -32,3 +32,22 @@
   border: solid 1px $limestone;
   color: $claretRed;
 }
+
+// Boutons submit formulaires
+.submit-btn {
+  padding: 15px 30px;
+  background-color: rgba(115, 21, 52, 0.6);
+  color: $limestone;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.submit-btn:hover {
+  background-color: $claretRed;
+  color: $limestone;
+}
