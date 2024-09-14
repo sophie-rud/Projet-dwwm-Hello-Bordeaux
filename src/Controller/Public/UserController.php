@@ -113,9 +113,12 @@ class UserController extends AbstractController {
             return new Response($html404, 404);
         }
 
+        $myActivities = $user->getActivitiesParticipate();
+
         // On retourne une réponse http en html
         return $this->render('public/page/user/user_show_profile.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'myActivities' => $myActivities
         ]);
     }
 

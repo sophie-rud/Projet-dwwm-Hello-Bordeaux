@@ -7,6 +7,13 @@
   text-align: center;
   width: 200px;
   margin: 12px auto;
+  transition: all 0.5s ease-out;
+}
+
+.add-btn-style:hover {
+  background-color: $claretRed;
+  color: $limestone;
+  transform: scale(1.05);
 }
 
 .btn-inscrire {
@@ -25,13 +32,16 @@
   width: 60%;
   margin: auto;
   padding: 6px 0;
+  transition: all 0.5s ease-out;
 }
 
 .btn:hover {
   background-color: $limestone;
   border: solid 1px $limestone;
   color: $claretRed;
+  transform: scale(1.05);
 }
+
 
 // Boutons submit formulaires
 .submit-btn {
@@ -45,9 +55,11 @@
   display: block;
   margin: 20px auto;
   text-align: center;
+  transition: all 0.5s ease-out;
 }
 
 .submit-btn:hover {
   background-color: $claretRed;
   color: $limestone;
+  transform: scale(1.05);
 }
