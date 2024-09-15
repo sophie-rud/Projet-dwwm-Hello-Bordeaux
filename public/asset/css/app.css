@@ -364,17 +364,15 @@ a {
 }
 
 form {
-  width: 60%;
-  display: block;
+  width: 70%;
   margin: 0 auto 30px auto;
 }
 
 .form-bgRed {
-  width: 45%;
-  display: block;
+  width: 75%;
   background-color: rgba(115, 21, 52, 0.3);
   border-radius: 25px;
-  padding: 30px;
+  padding: 5% 0;
   margin: 0 auto 30px auto;
 }
 
@@ -414,6 +412,7 @@ form {
 #headerTopBar .search-container {
   width: 100%;
   max-width: 500px;
+  margin-right: 10%;
 }
 #headerTopBar .search-container form.search-bar {
   display: flex;
@@ -607,11 +606,29 @@ footer .footer-nav .iconFooter {
   margin: 0 5px;
 }
 
-.banner {
+#banner {
+  background-image: url(../images/home/panorama_bordeaux.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 70vh;
+}
+#banner h1 {
+  margin-top: 0;
+  font-size: 45px;
+  font-weight: bold;
+  position: relative;
+  z-index: 100;
+}
+#banner::before {
+  content: "";
+  position: absolute;
+  width: 67%;
+  height: 50px;
+  background-color: rgba(254, 239, 221, 0.5);
+  left: 0;
+  top: 31%;
+  z-index: -1;
 }
 
 #menuInfosPratiques {
@@ -920,6 +937,37 @@ article .iconeInfosPratiques img {
   color: #FEEFDD;
 }
 
+#section-photos-gallery, #section-admin-photos-gallery {
+  width: 80%;
+  margin: 5% auto;
+  background-color: #FEEFDD;
+  border-radius: 25px;
+  padding: 20px 0;
+}
+#section-photos-gallery h2, #section-admin-photos-gallery h2 {
+  margin-bottom: 10px;
+}
+#section-photos-gallery .photos-from-gallery, #section-admin-photos-gallery .photos-from-gallery {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+#section-photos-gallery .photos-from-gallery .photo, #section-admin-photos-gallery .photos-from-gallery .photo {
+  width: 23%;
+  height: 25vh;
+  overflow: hidden;
+}
+#section-photos-gallery .photos-from-gallery .photo img, #section-admin-photos-gallery .photos-from-gallery .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 #section-participants, #section-participants-for-admin {
   width: 80%;
   margin: 5% auto;
@@ -942,6 +990,9 @@ article .iconeInfosPratiques img {
   gap: 0;
   padding: 15px 25px;
 }
+#section-participants .all-participants .one-participant, #section-participants-for-admin .all-participants .one-participant {
+  position: relative;
+}
 #section-participants .all-participants .one-participant .display-username, #section-participants-for-admin .all-participants .one-participant .display-username {
   display: none;
 }
@@ -949,7 +1000,6 @@ article .iconeInfosPratiques img {
   width: 70px;
   height: 70px;
   margin: 0 7px;
-  position: relative;
   transition: transform 0.3s ease;
 }
 #section-participants .all-participants .one-participant .profilePicture:hover, #section-participants-for-admin .all-participants .one-participant .profilePicture:hover {
@@ -957,10 +1007,12 @@ article .iconeInfosPratiques img {
 }
 #section-participants .all-participants .one-participant .profilePicture:hover + .display-username, #section-participants-for-admin .all-participants .one-participant .profilePicture:hover + .display-username {
   display: block;
-  position: absolute;
   font-size: 13px;
-  margin: 5px 0 0 12px;
   color: #731534;
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #main-login {
@@ -1255,72 +1307,76 @@ article .iconeInfosPratiques img {
   background-color: rgba(115, 21, 52, 0.15);
 }
 
-#mainPage404 {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: relative;
-}
-#mainPage404::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+#mainPage404, #mainAdminPage404 {
   background-image: url(../images/photo-page-404.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.65;
+  position: relative;
   z-index: 1;
 }
-#mainPage404 #section-page404 {
-  position: relative;
-  z-index: 10;
-}
-#mainPage404 #section-page404 h1 {
-  color: #731534;
-  z-index: 100;
-}
-#mainPage404 #section-page404 .btn {
-  text-align: center;
-  width: 50%;
-  z-index: 100;
-}
-
-#mainPage403 {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: relative;
-}
-#mainPage403::before {
+#mainPage404::before, #mainAdminPage404::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(../images/photo-page-403.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center bottom -230px;
-  opacity: 0.65;
-  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.65);
+  z-index: 2;
+  pointer-events: none;
 }
-#mainPage403 #section-page403 {
+
+.section-page404 {
   position: relative;
   z-index: 10;
 }
-#mainPage403 #section-page403 h1 {
+.section-page404 h1 {
   color: #731534;
   z-index: 100;
+  position: relative;
 }
-#mainPage403 #section-page403 .btn {
+.section-page404 .btn {
   text-align: center;
   width: 50%;
   z-index: 100;
+  position: relative;
+}
+
+#mainPage403, #mainAdminPage403 {
+  background-image: url(../images/photo-page-403.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom -280px;
+  position: relative;
+  z-index: 1;
+}
+#mainPage403::before, #mainAdminPage403::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.65);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.section-page403 {
+  position: relative;
+  z-index: 10;
+}
+.section-page403 h1 {
+  color: #731534;
+  z-index: 100;
+  position: relative;
+}
+.section-page403 .btn {
+  text-align: center;
+  width: 50%;
+  z-index: 100;
+  position: relative;
 }
 
 /* ---------- RESPONSIVE TABLETTE ---------- */
@@ -1382,6 +1438,16 @@ article .iconeInfosPratiques img {
   #headerTopBar .search-container {
     display: none;
   }
+  #headerTopBar .search-container.active {
+    display: block !important;
+    position: absolute;
+    top: 50px;
+    width: 50%;
+    left: 30px;
+    z-index: 3000;
+    border-radius: 20px;
+    background-color: #FEEFDD;
+  }
   #headerTopBar .rightPart {
     display: flex;
     flex-direction: row;
@@ -1392,6 +1458,9 @@ article .iconeInfosPratiques img {
   }
   #headerTopBar .rightPart a, #headerTopBar .rightPart i {
     color: #FEEFDD !important;
+  }
+  #headerTopBar .rightPart .loginBlock {
+    margin-right: 5%;
   }
   #headerTopBar .rightPart .loginBlock a {
     font-size: 16px;

@@ -1,9 +1,12 @@
-#mainPage403 {
+#mainPage403, #mainAdminPage403 {
+  background-image: url(../images/photo-page-403.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center bottom -280px;
   position: relative;
+  z-index: 1;
 
+  // Superposition avec opacité
   &::before {
     content: "";
     position: absolute;
@@ -11,27 +14,27 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(../images/photo-page-403.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center bottom -230px;
-    opacity: 0.65;
-    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.65);
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+
+// Conteneur pour le contenu (titre, bouton, etc.)
+.section-page403 {
+  position: relative;
+  z-index: 10;
+
+  h1 {
+    color: $claretRed;
+    z-index: 100;
+    position: relative;
   }
 
-  #section-page403 {
+  .btn {
+    text-align: center;
+    width: 50%;
+    z-index: 100;
     position: relative;
-    z-index: 10;
-
-    h1 {
-      color: $claretRed;
-      z-index: 100;
-    }
-
-    .btn {
-      text-align: center;
-      width: 50%;
-      z-index: 100;
-    }
   }
 }

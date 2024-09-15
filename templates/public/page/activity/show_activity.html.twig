@@ -57,6 +57,24 @@
     </section>
 
 
+    <section id="section-photos-gallery">
+
+        <h2>Galerie photo</h2>
+
+        <div class="photos-from-gallery">
+
+            {% for gallery in galleries %}
+                <div class="photo">
+                    <img src="{{ asset('uploads/'~gallery.filePath ) }}" alt="Photo : {{ gallery.pictureName }}">
+                </div>
+            {% else %}
+                <p>Aucune activité trouvée</p>
+            {% endfor %}
+
+        </div>
+    </section>
+
+
     <section id="section-participants">
         <h3>Participants</h3>
 

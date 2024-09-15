@@ -82,25 +82,6 @@ class AdminActivityController extends AbstractController {
         // Si le formulaire est soumis (posté) et complété avec des données valides (qui respectent les contraintes de champs)
         if ($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
 
-
-           /* foreach ($activity->getGalleries() as $gallery) {
-                // $originalGalleries->add($gallery);
-                $entityManager->persist($gallery);
-            }
-
-            // remove the relationship between the gallery and the Activity
-            foreach ($originalGalleries as $gallery) {
-                if (false === $activity->getGalleries()->contains($gallery)) {
-                    // remove the Activity from the Gallery
-                    $gallery->getActivities()->removeElement($activity);
-
-                    $entityManager->persist($gallery);
-
-                }
-            } */
-
-
-
             // On récupère le fichier depuis le formulaire
             $photoFile = $activityCreateForm->get('photo')->getData();
 
@@ -120,7 +101,7 @@ class AdminActivityController extends AbstractController {
                     // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
                     $photoFile->move($rootPath . '/public/uploads', $newFilename);
                 } catch (FileException $e) {
-                    dd($e->getMessage());
+                    $this->addFlash('error', $e->getMessage());
                 }
 
                 // On stocke le nom du fichier dans la propriété image de l'entité activity
@@ -179,9 +160,7 @@ class AdminActivityController extends AbstractController {
 
         // Si l'exécution du try a échoué, catch est exécuté et on renvoie une réponse http avec un message d'erreur
         } catch (\Exception $exception) {
-            return $this->renderView('admin/page/error.html.twig', [
-                'errorMessage' => $exception->getMessage()
-                ]);
+            $this->addFlash('error', $exception->getMessage());
         }
 
 
@@ -255,6 +234,9 @@ class AdminActivityController extends AbstractController {
 
             // Et on affiche un message flash pour informer l'utilisateur de la bonne exécution de sa requête
             $this->addFlash('success', 'Activité enregistrée !');
+
+            //On fait une redirection vers la liste des activités
+            return $this->redirectToRoute('admin_list_activities');
         }
 
         // Avec la méthode createView(), on génère une instance de 'vue' du formulaire, pour le render

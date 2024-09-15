@@ -106,9 +106,7 @@ class AdminCategoryController extends AbstractController {
         $this->addFlash('success', 'La catégorie a été supprimée');
 
         } catch(\Exception $exception){
-        return $this->renderView('admin/page/error.html.twig', [
-            'errorMessage' => $exception->getMessage()
-        ]);
+            $this->addFlash('error', $exception->getMessage());
     }
 
         return $this->redirectToRoute('admin_list_categories');
@@ -167,12 +165,12 @@ class AdminCategoryController extends AbstractController {
             }
 
 
-
             $entityManager->persist($category);
             $entityManager->flush();
 
             $this->addFlash('success', 'La catégorie a été modifiée');
 
+            return $this->redirectToRoute('admin_list_categories');
         }
 
         $categoryUpdateFormView = $categoryUpdateForm->createView();

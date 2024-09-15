@@ -13,38 +13,36 @@
 
     <h1> Ajouter une activité </h1>
 
-    {# {{ form(activityForm) }} #}
+    <div class="form-bgRed">
+        {{ form_start(activityForm) }}
 
-    {{ form_start(activityForm) }}
+            <p> Vous apparaîtrez comme organisateur de l'activité. </p>
+            {{ form_row(activityForm.title) }}
+            {{ form_row(activityForm.place) }}
+            {{ form_row(activityForm.date) }}
+            {{ form_row(activityForm.time) }}
+            {{ form_row(activityForm.description) }}
+            {{ form_row(activityForm.nbParticipantsMax) }}
+            {{ form_row(activityForm.photo) }}
+            {{ form_row(activityForm.isPublished) }}
+            {{ form_row(activityForm.category) }}
 
-        {{ form_row(activityForm.title) }}
-        <p>Vous apparaîtrez comme organisateur de l'activité. </p>
-        {{ form_row(activityForm.place) }}
-        {{ form_row(activityForm.date) }}
-        {{ form_row(activityForm.time) }}
-        {{ form_row(activityForm.description) }}
-        {{ form_row(activityForm.nbParticipantsMax) }}
-        {{ form_row(activityForm.photo) }}
-        {{ form_row(activityForm.isPublished) }}
-        {{ form_row(activityForm.category) }}
+            {{ form_row(activityForm.galleries) }}
+            {# <ul class="gallery"
+            data-index="{{ activityForm.galleries|length > 0 ? activityForm.galleries|last.vars.name + 1 : 0 }}"
+            data-prototype="{{ form_widget(activityForm.galleries.vars.prototype)|e('html_attr') }}"
+        >
+            {# {% for gallery in activityForm.galleries %}
+                <li>{{ form_row(gallery.filePath) }}</li>
+            {% endfor %}
 
-        <h3>Images de la galerie</h3>
-        {{ form_row(activityForm.galleries) }}
-        {# <ul class="gallery"
-        data-index="{{ activityForm.galleries|length > 0 ? activityForm.galleries|last.vars.name + 1 : 0 }}"
-        data-prototype="{{ form_widget(activityForm.galleries.vars.prototype)|e('html_attr') }}"
-    >
-        {# {% for gallery in activityForm.galleries %}
-            <li>{{ form_row(gallery.filePath) }}</li>
-        {% endfor %}
+            <button type="button" class="add_item_link" data-collection-holder-class="galleries">Ajouter une photo</button>
+        </ul> #}
 
-        <button type="button" class="add_item_link" data-collection-holder-class="galleries">Ajouter une photo</button>
-    </ul> #}
+            {{ form_row(activityForm.valider) }}
 
-        {{ form_row(activityForm.valider) }}
-
-    {{ form_end(activityForm) }}
-
+        {{ form_end(activityForm) }}
+    </div>
 
 {% endblock %}
 

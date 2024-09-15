@@ -14,10 +14,13 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nameCategory')
+            ->add('nameCategory', null, [
+                'label' => 'Nom de la catégorie*'
+            ])
             ->add('pictogram', FileType::class, [
                 'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
                 'required' => false,
+                'label' => 'Pictogramme*'
             ])
             ->add('Enregistrer', SubmitType::class)
         ;

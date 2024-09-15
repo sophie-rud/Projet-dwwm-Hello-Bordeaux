@@ -28,7 +28,7 @@
     <header>
 
         <div id="headerTopBar">
-            <div class="search-container">
+            <div class="search-container display-search">
                 <form class="search-bar" action="/search" method="GET">
                     <input type="text" placeholder="Rechercher..." name="search">
                     <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
@@ -80,7 +80,7 @@
 
         <div id="headerMainBar">
             <nav class="header-nav">
-                <a class="logo" href="{{ path('home') }}"> <img src="{{ asset('asset/images/logo-HB-clair.png') }}" alt="logo Hello Bordeaux"> </a>
+                <a class="logo" href="{{ path('home') }}"> <img src="{{ asset('asset/images/logo-HB-clair-font.png') }}" alt="logo Hello Bordeaux"> </a>
 
                 <ul class="menu-burger">
                     <li></li>
@@ -147,9 +147,11 @@
     <script>
         let burger = document.querySelector('.menu-burger');
         let menu = document.querySelector('.nav');
+        let search = document.querySelector('.search-container');
 
         burger.addEventListener('click', () => {
                 menu.classList.toggle('active');
+                search.classList.toggle('active');
             }
         )
     </script>
