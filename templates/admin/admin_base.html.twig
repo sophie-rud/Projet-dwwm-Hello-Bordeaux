@@ -38,7 +38,22 @@
             <div class="rightPart">
 
                 <div class="loginBlock">
-                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i>
+                    {% block username %}
+                        {% if app.user %}
+                        <a href="{{ path('admin_show_profile', { 'id': app.user.id }) }}">
+                            <i class="fa-solid fa-circle-user"></i>
+                            {{ app.user.username }}
+                        </a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}">
+                                <i class="fa-solid fa-circle-user"></i>
+                                Se connecter
+                            </a>
+                            {# <a class="btn-inscrire" href="{{ path('inscription_user') }}"> S'inscrire </a> #}
+                        {% endif %}
+                    {% endblock %}
+
+                {# <a href="{{ path('app_admin_login') }}"> <i class="fa-solid fa-circle-user"></i>
                     {% block username %}
                         {% if app.user %}
                             {{ app.user.username }}
@@ -46,10 +61,14 @@
                             Espace utilisateur
                         {% endif %}
                     {% endblock %} </a>
+                #}
 
                 {% block deconnection %}
                     {% if app.user %}
-                        <a class="deconnection" href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                        <a class="deconnection" href="{{ path('app_logout') }}">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Se déconnecter
+                        </a>
                     {% endif %}
                 {% endblock %}
                 </div>

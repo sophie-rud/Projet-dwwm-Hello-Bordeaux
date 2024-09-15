@@ -3,7 +3,7 @@
 /* RESPONSIVE TABLETTE */
 @media screen and (min-width: 481px) and (max-width: 1024px){
 
-  #section-show-activity {
+  #section-show-activity, #section-admin-show-activity {
     width: 90%;
     margin: auto;
 
@@ -28,7 +28,7 @@
 
         .group-title {
           .pictogram {
-            width: 15%;
+            width: 8%;
           }
 
           h2 {
@@ -42,8 +42,16 @@
       }
 
       .text-activity {
-        padding: 10px 15px;
         margin-top: 20px;
+
+        p:first-of-type {
+          padding: 10px 0;
+        }
+        .organizer {
+          font-size: 13px;
+          padding: 10px 0;
+          margin-top: 15px;
+        }
       }
     }
 
@@ -63,7 +71,7 @@
 /* RESPONSIVE MOBILE */
 @media screen and (max-width: 480px){
 
-  #section-show-activity {
+  #section-show-activity, #section-admin-show-activity {
     .show-activity {
       @include flex($flex-dir: column, $justify: space-around, $gap: 20px);
 
@@ -81,8 +89,21 @@
           @include flex($justify: flex-start);
 
           .pictogram {
-            width: 15%;
+            width: 10%;
           }
+        }
+      }
+
+      .text-activity {
+        margin-top: 5px;
+
+        p:first-of-type {
+          padding: 10px 0;
+        }
+        .organizer {
+          font-size: 13px;
+          padding: 10px 0;
+          margin-top: 15px;
         }
       }
     }

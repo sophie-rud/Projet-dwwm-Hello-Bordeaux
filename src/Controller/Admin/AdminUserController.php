@@ -36,6 +36,25 @@ class AdminUserController extends AbstractController {
         ]);
     }
 
+    #[Route('/profile/{id}', name: 'admin_show_profile')]
+    public function showAdminProfile(int $id, UserRepository $userRepository): Response {
+
+        // Dans $user, on stocke le résultat de notre recherche par id dans les données de la table User
+        $user = $userRepository->find($id);
+
+
+        // Si aucun user n'est trouvé avec l'id recherché, on retourne une page et code d'erreur 404
+        if (!$user) {
+            $html404 = $this->renderView('public/page/page404.html.twig');
+            return new Response($html404, 404);
+        }
+
+        // On retourne une réponse http en html
+        return $this->render('admin/page/user/admin_show_profile.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
     #[Route('/insert', name: 'admin_insert_user')]
     #[IsGranted('ROLE_ADMIN')]
     public function insertAdmin(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params): Response

@@ -51,9 +51,12 @@ class AdminActivityController extends AbstractController {
             return new Response($html404, 404);
         }
 
+        $participants = $activity->getUserParticipant();
+
         // On retourne une réponse http en html
         return $this->render('admin/page/activity/admin_show_activity.html.twig', [
-            'activity' => $activity
+            'activity' => $activity,
+            'participants' => $participants
         ]);
     }
 

@@ -1,0 +1,70 @@
+{% extends 'admin/admin_base.html.twig' %}
+
+{% block metatitle %} Mon profil
+{% endblock %}
+
+
+{% block main %}
+
+<h1> Profil </h1>
+
+<section id="section-admin-profile">
+
+    <div class="profile">
+
+        <div class="userId">
+            <div class="username">
+                <div class="profilePicture"> <img src="{{ asset('uploads/' ~user.profilePicture) }}" alt="photo de profil de : {{ user.username }}"> </div>
+                <h2>{{ user.username }}</h2>
+            </div>
+            <p>{{ user.firstName }} </p>
+        </div>
+
+        <div class="presentation">
+            <h3>Présentation</h3>
+            <p> {{ user.presentation }} </p>
+        </div>
+
+        <a href="{{ path('user_update_user', {id: user.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
+
+    </div>
+
+    <div class="infos-personnelles">
+        <h2>Informations personnelles</h2>
+
+        <div class="icon-action">
+            <a href="{{ path('user_update_user', {id: user.id}) }}"> <i class="fa-solid fa-gear"></i> </a>
+        </div>
+
+        <div class="tableau">
+            <table>
+
+                <tr>
+                    <td> Email </td>
+                    <td> <p> {{ user.email }} </p> </td>
+                </tr>
+
+                <tr>
+                    <td> Numéro de téléphone </td>
+                    <td> <p> {{ user.phone }} </p> </td>
+                </tr>
+
+                <tr>
+                    <td> Date de naissance </td>
+                    <td> {{ user.birthDate | date('d.m.Y') }} </td>
+                </tr>
+
+
+                <tr>
+                    <td> Inscrit·e le : </td>
+                    <td> {{ user.registeredAt | date('d/m/Y')}} </td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

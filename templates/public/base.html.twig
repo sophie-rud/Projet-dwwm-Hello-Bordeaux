@@ -86,7 +86,7 @@
         </div>
     </header>
 
-    <main>
+    <main {% block classMain %}{% endblock %}>
         {# vérifie si des messages flashes ont été enregistrés par un controleur. Si oui, on les affiche #}
         {% for message in app.flashes('success') %}
             <div class="success-message">

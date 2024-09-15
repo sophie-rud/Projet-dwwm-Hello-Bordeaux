@@ -41,10 +41,12 @@ class ActivityController extends AbstractController {
         }
 
         $participants = $activity->getUserParticipant();
+        $organizer = $activity->getUserAdminOrganizer();
 
         return $this->render('public/page/activity/show_activity.html.twig', [
             'activity' => $activity,
             'participants' => $participants,
+            'organizer' => $organizer,
         ]);
     }
 

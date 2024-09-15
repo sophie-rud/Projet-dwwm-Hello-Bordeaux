@@ -1,19 +1,18 @@
-main {
+#main-login {
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  //height: 67vh;
 
   h1 {
     margin-top: 0;
   }
+}
 
-  .main-login {
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 67vh;
-  }
+#section-login, #section-admin-login {
 
-
-  #login-form {
+  #login-form, #admin-login-form {
     width: 45%;
     display: block;
     background-color: rgba(115, 21, 52, 0.3);

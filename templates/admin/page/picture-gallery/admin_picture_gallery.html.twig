@@ -39,6 +39,7 @@
                         <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
                         {# Supprimer l'image (+popup pour valider choix) #}
+                        <div class="popup-overlay"></div>
                         <div class="popup-confirmation-delete" data-popup-target-id="{{ picture.id }}">
                             <p>Voulez vous vraiment supprimer l'image ?</p>
 

@@ -1,18 +1,20 @@
 
 #headerTopBar {
   background-color: $limestone;
-  padding: 10px 50px;
+  padding: 10px 50px 10px 25px;
   @include flex($flex-dir:row, $justify:space-between);
+  margin-right: auto;
 
   .search-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
 
 
     form.search-bar {
       display: flex;
       justify-content: space-between;
       margin-bottom: 0;
+      width: 100%;
     }
 
     input[type="text"] {
@@ -47,8 +49,8 @@
     @include flex($flex-dir: row, $justify: space-between);
 
     .loginBlock {
-      @include flex();
-      margin-right: 3%;
+      @include flex($justify: space-around);
+      margin-right: auto;
 
       a {
         color: $claretRed;
@@ -76,7 +78,8 @@
     }
 
       #iconLanguage {
-        width: 45px;
+        //width: 45px;
+        width: 10%;
       }
 
   }

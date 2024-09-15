@@ -45,6 +45,7 @@
 
                     <td class="td-flex">
                         {# Bloquer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-overlay"></div>
                         <div class="popup-confirmation-block" data-popup-block-target-id="{{ user.id }}">
                             <p>Voulez vous bloquer {{ user.username }} ?</p>
 
@@ -56,6 +57,7 @@
 
 
                         {# Supprimer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-overlay"></div>
                         <div class="popup-confirmation-delete" data-popup-target-id="{{ user.id }}">
                             <p>Voulez vous vraiment supprimer cet utilisateur : {{ user.username }} ?</p>
 
