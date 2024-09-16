@@ -17,19 +17,25 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 // la route donnée avant la classe vient en préfixe de toutes les routes des méthodes appelées dans la classe
 #[Route('admin/activities')]
+#[IsGranted('ROLE_ADMIN')]
 class AdminActivityController extends AbstractController {
 
     // Annotation qui permet de créer une route dès que la fonction adminListActivities est appelée
     #[Route('/', name: 'admin_list_activities')]
-    public function adminListActivities(ActivityRepository $activityRepository): Response {
+    public function adminListActivities(ActivityRepository $activityRepository, UserInterface $user): Response {
+
+        // Récupére l'utilisateur connecté
+        $userAdmin = $user;
 
         // On stocke le résultat de notre select, findAll(), sur la table Activity
-        $activities = $activityRepository->findAll();
+        $activities = $activityRepository->findUpcomingActivitiesByAdmin($userAdmin);
 
         // On retourne une réponse http en html
         return $this->render('admin/page/activity/admin_list_activities.html.twig', [
@@ -170,6 +176,7 @@ class AdminActivityController extends AbstractController {
 
 
     #[Route('/update/{id}', name: 'admin_update_activity')]
+    #[IsGranted('ROLE_ADMIN')]
     public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params, LoggerInterface $logger): Response {
 
         // Dans $activity, on stocke le résultat du select par id dans l'entité Activity
@@ -215,14 +222,12 @@ class AdminActivityController extends AbstractController {
 
                 }
 
-
                 // On stocke le nom du fichier dans la propriété image de l'entité activity
                 $activity->setPhoto($newFilename);
 
                 // Si aucun fichier n'est uploadé, conserver l'image existante
                 $activity->setPhoto($currentPhoto);
             }
-
 
 
             // On actualise la date de mise à jour de l'activité

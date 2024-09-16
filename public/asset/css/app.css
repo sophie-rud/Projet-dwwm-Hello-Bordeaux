@@ -612,6 +612,7 @@ footer .footer-nav .iconFooter {
   background-repeat: no-repeat;
   background-position: center;
   height: 70vh;
+  z-index: 1;
 }
 #banner h1 {
   margin-top: 0;
@@ -628,7 +629,7 @@ footer .footer-nav .iconFooter {
   background-color: rgba(254, 239, 221, 0.5);
   left: 0;
   top: 31%;
-  z-index: -1;
+  z-index: 10;
 }
 
 #menuInfosPratiques {

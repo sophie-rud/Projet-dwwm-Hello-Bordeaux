@@ -20,7 +20,7 @@ class ActivityController extends AbstractController {
     #[Route('/activities', name: 'list_activities')]
     public function listActivities(ActivityRepository $activityRepository, CategoryRepository $categoryRepository): Response {
 
-        $activities = $activityRepository->findAll();
+        $activities = $activityRepository->findUpcomingActivities();
         $categories = $categoryRepository->findAll();
 
         return $this->render('public/page/activity/list_activities.html.twig', [
