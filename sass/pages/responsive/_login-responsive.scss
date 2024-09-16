@@ -1,40 +1,10 @@
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   main {
-    #login-form {
-      width: 70%;
-    }
 
-    .btn {
-      width: 100%;
-    }
+    #section-login, #section-admin-login {
 
-    .btn-inscription {
-      width: 70%;
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-
-  main {
-    #login-form {
-      width: 80%;
-    }
-
-    .btn {
-      width: 100%;
-    }
-
-    .btn-inscription {
-      width: 80%;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-
-    main {
-      #login-form {
-        width: 90%;
+      #login-form, #admin-login-form {
+        width: 70%;
       }
 
       .btn {
@@ -42,8 +12,47 @@
       }
 
       .btn-inscription {
-        width: 90%;
+        width: 70%;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  main {
+    #section-login, #section-admin-login {
+      #login-form, #admin-login-form {
+        width: 80%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .btn-inscription {
+        width: 80%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+
+    main {
+      #section-login, #section-admin-login {
+        #login-form, #admin-login-form {
+          width: 90%;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .btn-inscription {
+          width: 90%;
+        }
+      }
+
     }
   }
 

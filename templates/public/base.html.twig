@@ -28,7 +28,7 @@
 
     <header>
         <div id="headerTopBar">
-            <div class="search-container nav">
+            <div class="search-container">
                 <form class="search-bar" action="/search" method="GET">
                     <input type="text" placeholder="Rechercher..." name="search">
                     <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
@@ -143,12 +143,12 @@
         let menu = document.querySelector('.nav');
         let search = document.querySelector('.search-container');
 
-
         burger.addEventListener('click', () => {
                 menu.classList.toggle('active');
                 search.classList.toggle('active');
             }
-        )
+        );
+
     </script>
 
 {% block javascript %} {% endblock %}

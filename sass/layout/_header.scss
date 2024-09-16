@@ -136,21 +136,29 @@
           text-align: center;
           color: $limestone;
         }
-
       }
+
+      // --Sous-menu des activités
+      #activites-nav {
+        .sous-menu-activites {
+          display: none;
+        }
+
+        &.active {
+          display: flex;
+          flex-direction: column;
+
+          .sous-menu-activites {
+            display: block;
+          }
+        }
+      }
+
     }
   }
 }
 
 
-
-// ---------- Header public | Sous-menu des activités
-
-#activites-nav {
-  .sous-menu-activites {
-    display: none!important;
-  }
-}
 
 #activites-nav:hover {
   position: relative;
@@ -176,7 +184,7 @@
         transition: transform 330ms ease-in-out;
       }
     }
-    li:hover {
+     li:hover {
       i {
         transform: translateX(15px);
       }
@@ -186,3 +194,4 @@
     }
   }
 }
+

@@ -30,6 +30,7 @@ confirmationBlockButtons.forEach((confirmationBlockButton) => {
         const elementId = confirmationBlockButton.dataset.blockTriggerId;
         const popup = document.querySelector(`[data-popup-block-target-id="${elementId}"]`);
         popup.style.display = "block";
+        document.querySelector('.popup-overlay').style.display = 'block';
     });
 })
 

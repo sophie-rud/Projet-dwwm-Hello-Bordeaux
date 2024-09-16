@@ -44,7 +44,7 @@
                         <button class="js-close-popup"> Annuler </button>
                     </div>
 
-                    <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
+                    <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can cursor-pointer"></i> </p>
 
                 </div>
 
@@ -95,8 +95,9 @@
                 <p>Aucune activité trouvée</p>
             {% endfor %}
 
-            <a class="add-btn-style" href="{{ path('list_activities') }}"> Voir les activités </a>
         </div>
+
+        <a class="add-btn-style" href="{{ path('list_activities') }}"> Voir les activités </a>
 
     </section>
 

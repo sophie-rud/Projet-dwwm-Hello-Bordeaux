@@ -39,7 +39,7 @@
                     </td>
                     <td>{{ user.registeredAt | date('d.m.Y') }}</td>
                     <td> {% if not user.isActive %}
-                            <a href="{{ path('admin_unblock_user', {id: user.id}) }}"><i class="fa-solid fa-user-slash"></i></a>
+                            <a href="{{ path('admin_unblock_user', {id: user.id}) }}"><i class="fa-solid fa-user-slash cursor-pointer"></i></a>
                         {% endif %}
                     </td>
 
@@ -53,7 +53,7 @@
                             <button class="js-close-popup"> Annuler </button>
                         </div>
 
-                        <i data-block-trigger-id="{{ user.id }}" class="js-popup-confirmation-block fa-solid fa-ban"></i>
+                        <i data-block-trigger-id="{{ user.id }}" class="js-popup-confirmation-block fa-solid fa-ban cursor-pointer"></i>
 
 
                         {# Supprimer l'utilisateur (+popup pour valider choix) #}
@@ -65,7 +65,7 @@
                             <button class="js-close-popup"> Annuler </button>
                         </div>
 
-                        <p> <i data-trigger-id="{{ user.id }}"  class="js-popup-confirmation-delete fa-regular fa-trash-can"></i> </p>
+                        <p> <i data-trigger-id="{{ user.id }}"  class="js-popup-confirmation-delete fa-regular fa-trash-can cursor-pointer"></i> </p>
                     </td>
 
                 </tr>

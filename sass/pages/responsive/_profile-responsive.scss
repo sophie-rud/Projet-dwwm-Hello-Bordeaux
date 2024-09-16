@@ -29,19 +29,35 @@
       padding: 20px 10px;
     }
   }
-}
+
+  #section-myActivities {
+    width: 90%;
+
+    .my-activities {
+
+      .my-activity {
+        position: relative;
+        width: 20%;
+        height: 25vh;
+      }
+    }
+  }
+
 
 
 /* RESPONSIVE TABLETTE */
-@media screen and (min-width: 481px) and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
 
-  #section-profile {
+    #section-myActivities {
 
-    .profile {
+      .my-activities {
 
-      .infos-personnelles {
-        width: 100%;
-        padding: 20px 10px;
+        .my-activity {
+          position: relative;
+          width: 30%;
+          height: 25vh;
+          margin-bottom: 15px;
+        }
       }
     }
   }

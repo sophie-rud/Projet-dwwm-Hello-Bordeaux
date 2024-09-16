@@ -113,3 +113,19 @@ p {
     object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
   }
 }
+
+
+// ---------- Cursor pointor et hover sur icones ----------
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.fa-solid, .fa-regular {
+  transition: all 0.5s ease-out;
+
+  &:hover {
+    transform: scale(1.3);
+    color: black;
+  }
+}
