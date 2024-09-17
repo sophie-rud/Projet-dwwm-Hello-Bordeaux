@@ -160,12 +160,7 @@ class AdminUserController extends AbstractController {
             $html404 = $this->renderView('admin/page/page404.html.twig');
             return new Response($html404, 404);
         }
-
-        if ($currentUser->getId() !== $id) {
-            $html403 = $this->renderView('admin/page/page403.html.twig');
-            return new Response($html403, 403);
-        }
-
+        
         // On récupère le rôle de l'utilisateur de l'id recherché
         $roles = $user->getRoles();
 

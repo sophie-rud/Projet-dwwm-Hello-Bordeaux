@@ -55,8 +55,8 @@
     }
 
   }
-/*
-  .btn {
+
+  /*.btn {
     background-color: $claretRed;
     border-radius: 50px;
     border: solid 1px $claretRed;
@@ -65,13 +65,18 @@
     width: 60%;
     margin: auto;
     padding: 6px 0;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
   }
 
   .btn:hover {
     background-color: $limestone;
     border: solid 1px $limestone;
     color: $claretRed;
-  } */
+    transform: scale(1.05);
+  }*/
+
+
 
   .btn-inscription {
     display: block;
@@ -84,6 +89,12 @@
     font-size: 15px;
     color: $limestone;
     padding: 6px 0;
+  }
+
+  .btn-inscription:hover {
+    background-color: $limestone;
+    border: solid 1px $limestone;
+    color: $claretRed;
   }
 }
 

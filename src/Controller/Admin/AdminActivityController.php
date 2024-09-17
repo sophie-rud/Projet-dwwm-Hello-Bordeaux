@@ -58,11 +58,13 @@ class AdminActivityController extends AbstractController {
         }
 
         $participants = $activity->getUserParticipant();
+        $galleries = $activity->getGalleries();
 
         // On retourne une réponse http en html
         return $this->render('admin/page/activity/admin_show_activity.html.twig', [
             'activity' => $activity,
-            'participants' => $participants
+            'participants' => $participants,
+            'galleries' => $galleries,
         ]);
     }
 
@@ -149,7 +151,7 @@ class AdminActivityController extends AbstractController {
         $activity = $activityRepository->find($id);
 
         // Si aucune activité n'est trouvée avec l'id recherché, on retourne une page et code d'erreur 404
-        if (!$activity || !$activity->getisPublished()) {
+        if (!$activity) {
             $html404 = $this->renderView('admin/page/page404.html.twig');
             return new Response($html404, 404);
         }

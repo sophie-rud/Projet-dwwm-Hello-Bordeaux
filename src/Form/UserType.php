@@ -97,7 +97,7 @@ class UserType extends AbstractType
                 'widget' => 'single_text', //input de type "date"
                 'attr' => [
                     'class' => 'custom-input',
-                    'min' => '1920-01-01', // définit une date maximum
+                    //'min' => '1920-01-01', // définit une date maximum
                     'max' => (new \DateTime())->format('Y-m-d'), // définit une date minimum (jour actuel)
                 ],
                 'label_attr' => ['class' => 'custom-label'],
@@ -106,13 +106,13 @@ class UserType extends AbstractType
                     new Assert\NotBlank([
                         'message' => 'La date de naissance ne peut pas être vide.',
                     ]),
-                    new Assert\Date([
+                    /*new Assert\Date([
                         'message' => 'Veuillez entrer une date valide.',
                     ]),
                     new Assert\LessThan([
                         'value' => (new \DateTime())->format('Y-m-d'),
                         'message' => 'La date de naissance doit être dans le passé.',
-                    ]),
+                    ]),*/
                 ],
             ])
             ->add('phone', null, [

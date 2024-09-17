@@ -33,7 +33,6 @@ class UserController extends AbstractController {
 
         if ($userCreateForm->isSubmitted() && $userCreateForm->isValid()) {
 
-
             // On récupère le fichier depuis le formulaire
             $pictureFile = $userCreateForm->get('profilePicture')->getData();
 
@@ -61,8 +60,6 @@ class UserController extends AbstractController {
             }
 
 
-
-
             // On récupère la valeur entrée par l'utilisateur dans le champ password
             $password = $userCreateForm->get('password')->getData();
 
@@ -83,6 +80,8 @@ class UserController extends AbstractController {
 
                 $this->addFlash('success', 'Votre profil a été créé !');
 
+                return $this->redirectToRoute('home');
+
             } catch(\Exception $exception) {
 
                 $this->addFlash('error', $exception->getMessage());
@@ -95,7 +94,6 @@ class UserController extends AbstractController {
         return $this->render('public/page/user/inscription_user.html.twig', [
             'userForm' => $userCreateFormView
         ]);
-
     }
 
 

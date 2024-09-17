@@ -1,3 +1,12 @@
+#carousel-activities {
+  #carousel {
+    background-color: rgba( 87, 199, 223, 0.2);
+    padding: 40px 0;
+    margin-top: 2%;
+  }
+}
+
+
 
 // Section avec toutes les activités de toutes les catégories
 #section-activities-by-category {
@@ -117,6 +126,13 @@
     font-size: 16px;
     padding: 10px 0;
     border-radius: 0 0 10px 10px;
+    transition: all 0.5s ease-out;
+  }
+
+  .title-activity h3:hover {
+    color: $orange;
+    //color: rgba(250, 191, 95, 0.8);
+    transform: scale(1.02);
   }
 
 }

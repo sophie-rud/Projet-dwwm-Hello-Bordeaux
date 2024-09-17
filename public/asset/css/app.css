@@ -353,6 +353,7 @@ a {
   margin: auto;
   padding: 6px 0;
   transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -743,6 +744,12 @@ article .iconeInfosPratiques img {
   margin: 9% 0;
 }
 
+#carousel-activities #carousel {
+  background-color: rgba(87, 199, 223, 0.2);
+  padding: 40px 0;
+  margin-top: 2%;
+}
+
 #section-activities-by-category {
   display: flex;
   flex-direction: column;
@@ -863,6 +870,11 @@ article .iconeInfosPratiques img {
   font-size: 16px;
   padding: 10px 0;
   border-radius: 0 0 10px 10px;
+  transition: all 0.5s ease-out;
+}
+.container-activity .title-activity h3:hover {
+  color: #FFBF5F;
+  transform: scale(1.02);
 }
 
 .title-bg-style {
@@ -1055,23 +1067,25 @@ article .iconeInfosPratiques img {
 }
 
 #section-login, #section-admin-login {
-  /*
-    .btn {
-      background-color: $claretRed;
-      border-radius: 50px;
-      border: solid 1px $claretRed;
-      color: $limestone;
-      display: block;
-      width: 60%;
-      margin: auto;
-      padding: 6px 0;
-    }
+  /*.btn {
+    background-color: $claretRed;
+    border-radius: 50px;
+    border: solid 1px $claretRed;
+    color: $limestone;
+    display: block;
+    width: 60%;
+    margin: auto;
+    padding: 6px 0;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+  }
 
-    .btn:hover {
-      background-color: $limestone;
-      border: solid 1px $limestone;
-      color: $claretRed;
-    } */
+  .btn:hover {
+    background-color: $limestone;
+    border: solid 1px $limestone;
+    color: $claretRed;
+    transform: scale(1.05);
+  }*/
 }
 #section-login #login-form, #section-login #admin-login-form, #section-admin-login #login-form, #section-admin-login #admin-login-form {
   width: 45%;
@@ -1119,6 +1133,11 @@ article .iconeInfosPratiques img {
   font-size: 15px;
   color: #FEEFDD;
   padding: 6px 0;
+}
+#section-login .btn-inscription:hover, #section-admin-login .btn-inscription:hover {
+  background-color: #FEEFDD;
+  border: solid 1px #FEEFDD;
+  color: #731534;
 }
 
 #section-inscription p {
