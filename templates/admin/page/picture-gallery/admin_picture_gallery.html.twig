@@ -19,8 +19,8 @@
                 <tr>
                     <td>Photo</td>
                     <td>Nom</td>
-                    <td>Postée par : </td>
-                    <td>Postée le : </td>
+                    {# <td>Postée par : </td> #}
+                    {# <td>Postée le : </td> #}
                     <td>Actions</td>
                 </tr>
             </thead>
@@ -32,9 +32,9 @@
                     <td>
                         <div class="pictureInGallery"> <img src="{{ asset('uploads/'~picture.filePath ) }}" alt="Photo : {{ picture.pictureName }}"> </div>
                     </td>
-                    <td> <h2>{{ picture.pictureName }}</h2> </td>
-                    <td> {#  <p> {{ picture.postedBy }} </p> #} </td>
-                    <td> {#  <p> {{ picture.postedAt | date('d/m/Y') }} </p> #} </td>
+                    <td> <h2 class="title-h2-picture-gallery">{{ picture.pictureName }}</h2> </td>
+                    {# <td> <p> {{ picture.postedBy }} </p> </td> #}
+                    {# <td> <p> {{ picture.postedAt | date('d/m/Y') }} </p> </td> #}
                     <td class="td-flex">
                         <a href="{{ path('admin_update_picture_in_gallery', {id: picture.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
