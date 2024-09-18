@@ -17,19 +17,25 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 // la route donnée avant la classe vient en préfixe de toutes les routes des méthodes appelées dans la classe
 #[Route('admin/activities')]
+#[IsGranted('ROLE_ADMIN')]
 class AdminActivityController extends AbstractController {
 
     // Annotation qui permet de créer une route dès que la fonction adminListActivities est appelée
     #[Route('/', name: 'admin_list_activities')]
-    public function adminListActivities(ActivityRepository $activityRepository): Response {
+    public function adminListActivities(ActivityRepository $activityRepository, UserInterface $user): Response {
+
+        // Récupére l'utilisateur connecté
+        $userAdmin = $user;
 
         // On stocke le résultat de notre select, findAll(), sur la table Activity
-        $activities = $activityRepository->findAll();
+        $activities = $activityRepository->findUpcomingActivitiesByAdmin($userAdmin);
 
         // On retourne une réponse http en html
         return $this->render('admin/page/activity/admin_list_activities.html.twig', [
@@ -51,9 +57,14 @@ class AdminActivityController extends AbstractController {
             return new Response($html404, 404);
         }
 
+        $participants = $activity->getUserParticipant();
+        $galleries = $activity->getGalleries();
+
         // On retourne une réponse http en html
         return $this->render('admin/page/activity/admin_show_activity.html.twig', [
-            'activity' => $activity
+            'activity' => $activity,
+            'participants' => $participants,
+            'galleries' => $galleries,
         ]);
     }
 
@@ -79,25 +90,6 @@ class AdminActivityController extends AbstractController {
         // Si le formulaire est soumis (posté) et complété avec des données valides (qui respectent les contraintes de champs)
         if ($activityCreateForm->isSubmitted() && $activityCreateForm->isValid()) {
 
-
-           /* foreach ($activity->getGalleries() as $gallery) {
-                // $originalGalleries->add($gallery);
-                $entityManager->persist($gallery);
-            }
-
-            // remove the relationship between the gallery and the Activity
-            foreach ($originalGalleries as $gallery) {
-                if (false === $activity->getGalleries()->contains($gallery)) {
-                    // remove the Activity from the Gallery
-                    $gallery->getActivities()->removeElement($activity);
-
-                    $entityManager->persist($gallery);
-
-                }
-            } */
-
-
-
             // On récupère le fichier depuis le formulaire
             $photoFile = $activityCreateForm->get('photo')->getData();
 
@@ -117,7 +109,7 @@ class AdminActivityController extends AbstractController {
                     // On déplace le fichier dans le dossier indiqué dans le chemin d'accès. On renomme
                     $photoFile->move($rootPath . '/public/uploads', $newFilename);
                 } catch (FileException $e) {
-                    dd($e->getMessage());
+                    $this->addFlash('error', $e->getMessage());
                 }
 
                 // On stocke le nom du fichier dans la propriété image de l'entité activity
@@ -159,7 +151,7 @@ class AdminActivityController extends AbstractController {
         $activity = $activityRepository->find($id);
 
         // Si aucune activité n'est trouvée avec l'id recherché, on retourne une page et code d'erreur 404
-        if (!$activity || !$activity->getisPublished()) {
+        if (!$activity) {
             $html404 = $this->renderView('admin/page/page404.html.twig');
             return new Response($html404, 404);
         }
@@ -176,9 +168,7 @@ class AdminActivityController extends AbstractController {
 
         // Si l'exécution du try a échoué, catch est exécuté et on renvoie une réponse http avec un message d'erreur
         } catch (\Exception $exception) {
-            return $this->renderView('admin/page/error.html.twig', [
-                'errorMessage' => $exception->getMessage()
-                ]);
+            $this->addFlash('error', $exception->getMessage());
         }
 
 
@@ -188,6 +178,7 @@ class AdminActivityController extends AbstractController {
 
 
     #[Route('/update/{id}', name: 'admin_update_activity')]
+    #[IsGranted('ROLE_ADMIN')]
     public function updateActivity(int $id, ActivityRepository $activityRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger, ParameterBagInterface $params, LoggerInterface $logger): Response {
 
         // Dans $activity, on stocke le résultat du select par id dans l'entité Activity
@@ -233,14 +224,12 @@ class AdminActivityController extends AbstractController {
 
                 }
 
-
                 // On stocke le nom du fichier dans la propriété image de l'entité activity
                 $activity->setPhoto($newFilename);
 
                 // Si aucun fichier n'est uploadé, conserver l'image existante
                 $activity->setPhoto($currentPhoto);
             }
-
 
 
             // On actualise la date de mise à jour de l'activité
@@ -252,6 +241,9 @@ class AdminActivityController extends AbstractController {
 
             // Et on affiche un message flash pour informer l'utilisateur de la bonne exécution de sa requête
             $this->addFlash('success', 'Activité enregistrée !');
+
+            //On fait une redirection vers la liste des activités
+            return $this->redirectToRoute('admin_list_activities');
         }
 
         // Avec la méthode createView(), on génère une instance de 'vue' du formulaire, pour le render

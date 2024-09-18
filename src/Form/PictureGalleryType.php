@@ -16,9 +16,12 @@ class PictureGalleryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pictureName')
+            ->add('pictureName', null, [
+                'label' => 'Nom de la photo*'
+            ])
             ->add('filePath', FileType::class, [
                 'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
+                'label' => 'Sélectionner une photo*'
             ])
             /* ->add('activities', EntityType::class, [
                 'class' => Activity::class,

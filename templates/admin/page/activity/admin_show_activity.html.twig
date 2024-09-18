@@ -1,27 +1,74 @@
 {% extends 'admin/admin_base.html.twig' %}
 
-{% block metatitle %}
+{% block metatitle %} {{ activity.title }}
 {% endblock %}
 
 
 {% block main %}
 
-    <h1> Activité </h1>
+    <h1> {{ activity.title }} </h1>
 
-    <section>
+    <section id="section-admin-show-activity">
 
-            <article>
+        <div class="show-activity">
 
-                <h2>{{ activity.title }}</h2>
+            <div class="img-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div>
+
+            <div class="infos-activity">
+                <div class="group-title">
+                    <div class="pictogram"> <img src="{{ asset('uploads/'~activity.category.pictogram) }}" alt="icône {{ activity.category.nameCategory }}"> </div>
+                    <h2>{{ activity.title }}</h2>
+                </div>
+                <p> <i class="fa-regular fa-calendar-check"></i> {{ activity.date | date('d/m/Y')}} </p>
+                <p> <i class="fa-solid fa-location-dot"></i> {{ activity.place }} </p>
+                <p> <i class="fa-regular fa-clock"></i> {{ activity.time | date('H:i') }} </p>
+            </div>
+
+            <div class="text-activity">
                 <p> {{ activity.description }} </p>
-                <div class="imgActivity"> <img src="{{ activity.photo }}" alt="illustration de : {{ activity.title }}"> </div>
-                <p> {{ activity.date | date('d/m/Y') }} </p>
+            </div>
 
-            </article>
+        </div>
 
-            <a href="{{ path('admin_delete_activity', {id: activity.id}) }}"> Supprimer l'activité </a>
-            <a href="{{ path('admin_update_activity', {id: activity.id}) }}"> Mettre à jour </a>
+        <a class="add-btn-style" href="{{ path('admin_update_activity', {id: activity.id}) }}"> Mettre à jour </a>
 
+        <div class="popup-overlay"></div>
+        <div class="popup-confirmation-delete" data-popup-target-id="{{ activity.id }}">
+            <p>Voulez vous vraiment supprimer l'activité ?</p>
+
+            <a href="{{ path('admin_delete_activity', {id: activity.id}) }}" class="a-style-popup"> Supprimer </a>
+            <button class="js-close-popup"> Annuler </button>
+        </div>
+
+        <p data-trigger-id="{{ activity.id }}" class="add-btn-style js-popup-confirmation-delete"> Supprimer l'activité </p>
+
+    </section>
+
+    <section id="section-participants-for-admin">
+        <h3>Participants</h3>
+        <ul>
+            {% for participant in participants %}
+                <li>{{ participant.username }}, prénom : {{ participant.firstName }}</li>
+            {% else %}
+                <li>Aucun participant inscrit pour cette activité.</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="section-admin-photos-gallery">
+        <h2>Galerie photo</h2>
+
+        <div class="photos-from-gallery">
+
+            {% for gallery in galleries %}
+                <div class="photo">
+                    <img src="{{ asset('uploads/'~gallery.filePath ) }}" alt="Photo : {{ gallery.pictureName }}">
+                </div>
+            {% else %}
+                <p>Aucune galerie photo</p>
+            {% endfor %}
+
+        </div>
     </section>
 
 {% endblock %}

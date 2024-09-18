@@ -1,5 +1,18 @@
 {% extends 'public/base.html.twig' %}
 
+
+{% block metatitle %} Page 404
+{% endblock %}
+
+
+{% block classMain %} id="mainPage404" {% endblock %}
+
 {% block main %}
-    <p> Page 404 </p>
+
+    <section class="section-page404">
+        <h1> La page que vous cherchez n'a pas été trouvée... </h1>
+
+        <a class="btn" href="{{ path('home') }}"> Retour à l'accueil </a>
+    </section>
+
 {% endblock %}

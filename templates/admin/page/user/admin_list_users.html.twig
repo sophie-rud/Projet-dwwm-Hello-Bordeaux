@@ -39,12 +39,13 @@
                     </td>
                     <td>{{ user.registeredAt | date('d.m.Y') }}</td>
                     <td> {% if not user.isActive %}
-                            <a href="{{ path('admin_unblock_user', {id: user.id}) }}"><i class="fa-solid fa-user-slash"></i></a>
+                            <a href="{{ path('admin_unblock_user', {id: user.id}) }}"><i class="fa-solid fa-user-slash cursor-pointer"></i></a>
                         {% endif %}
                     </td>
 
                     <td class="td-flex">
                         {# Bloquer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-overlay"></div>
                         <div class="popup-confirmation-block" data-popup-block-target-id="{{ user.id }}">
                             <p>Voulez vous bloquer {{ user.username }} ?</p>
 
@@ -52,10 +53,11 @@
                             <button class="js-close-popup"> Annuler </button>
                         </div>
 
-                        <i data-block-trigger-id="{{ user.id }}" class="js-popup-confirmation-block fa-solid fa-ban"></i>
+                        <i data-block-trigger-id="{{ user.id }}" class="js-popup-confirmation-block fa-solid fa-ban cursor-pointer"></i>
 
 
                         {# Supprimer l'utilisateur (+popup pour valider choix) #}
+                        <div class="popup-overlay"></div>
                         <div class="popup-confirmation-delete" data-popup-target-id="{{ user.id }}">
                             <p>Voulez vous vraiment supprimer cet utilisateur : {{ user.username }} ?</p>
 
@@ -63,7 +65,7 @@
                             <button class="js-close-popup"> Annuler </button>
                         </div>
 
-                        <p> <i data-trigger-id="{{ user.id }}"  class="js-popup-confirmation-delete fa-regular fa-trash-can"></i> </p>
+                        <p> <i data-trigger-id="{{ user.id }}"  class="js-popup-confirmation-delete fa-regular fa-trash-can cursor-pointer"></i> </p>
                     </td>
 
                 </tr>
@@ -83,5 +85,6 @@
 {% block javascript %}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.4/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('asset/js/datatable.js') }}"></script>
 {% endblock %}

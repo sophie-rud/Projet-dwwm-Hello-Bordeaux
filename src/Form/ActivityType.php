@@ -20,19 +20,30 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('place')
+            ->add('title', null, [
+                'label' => 'Titre de l\'activité*'
+            ])
+            ->add('place', null, [
+                'label' => 'Lieu de rendez-vous*'
+            ])
             ->add('date', null, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'label' => 'Date*'
             ])
             ->add('time', null, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
+                'label' => 'Heure de rendez-vous*'
             ])
-            ->add('description')
-            ->add('nbParticipantsMax')
+            ->add('description', null, [
+                'label' => 'Présentation de l\'activité*'
+            ])
+            ->add('nbParticipantsMax', null, [
+                'label' => 'Un nombre de participants maximum ?'
+            ])
             ->add('photo', FileType::class, [
                 'mapped' => false, // demande à Symfony de ne pas gérer automatiquement les photos
                 'required' => false,
+                'label' => 'Photographie*'
             ])
             /* ->add('createdAt', null, [
                 'widget' => 'single_text'
@@ -40,14 +51,18 @@ class ActivityType extends AbstractType
             ->add('updatedAt', null, [
                 'widget' => 'single_text'
             ]) */
-            ->add('isPublished')
+            ->add('isPublished', null, [
+                'label' => 'Publié ?*'
+            ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'nameCategory',
+                'label' => 'Catégorie*'
             ])
             ->add('galleries', EntityType::class, [
                 'class' => PictureGallery::class,
                 'choice_label' => 'pictureName',
+                'label' => 'Galerie photo',
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false,

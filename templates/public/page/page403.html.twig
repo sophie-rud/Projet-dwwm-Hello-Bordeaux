@@ -1,8 +1,17 @@
 {% extends 'public/base.html.twig' %}
 
-{% block metatitle %} page 403
+{% block metatitle %} Page 403
 {% endblock %}
 
+
+{% block classMain %} id="mainPage403" {% endblock %}
+
 {% block main %}
-    <p> Vous n'êtes pas autorisé à accéder à cette page. </p>
+
+    <section class="section-page403">
+        <h1> Vous n'êtes pas autorisé à accéder à cette page. </h1>
+
+        <a class="btn" href="{{ path('home') }}"> Retour à l'accueil </a>
+    </section>
+
 {% endblock %}

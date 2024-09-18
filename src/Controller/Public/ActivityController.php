@@ -20,7 +20,7 @@ class ActivityController extends AbstractController {
     #[Route('/activities', name: 'list_activities')]
     public function listActivities(ActivityRepository $activityRepository, CategoryRepository $categoryRepository): Response {
 
-        $activities = $activityRepository->findAll();
+        $activities = $activityRepository->findUpcomingActivities();
         $categories = $categoryRepository->findAll();
 
         return $this->render('public/page/activity/list_activities.html.twig', [
@@ -41,10 +41,14 @@ class ActivityController extends AbstractController {
         }
 
         $participants = $activity->getUserParticipant();
+        $organizer = $activity->getUserAdminOrganizer();
+        $galleries = $activity->getGalleries();
 
         return $this->render('public/page/activity/show_activity.html.twig', [
             'activity' => $activity,
             'participants' => $participants,
+            'organizer' => $organizer,
+            'galleries' => $galleries,
         ]);
     }
 

@@ -29,6 +29,9 @@ security:
                 # where to redirect after logout
                 target: home
 
+            # Redirection pour les accès refusés
+            access_denied_url: /403
+
         main:
             lazy: true
             provider: app_user_provider

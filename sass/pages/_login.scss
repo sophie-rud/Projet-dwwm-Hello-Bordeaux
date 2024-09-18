@@ -1,31 +1,24 @@
-body {
-  min-height: 100vh;
-}
-
-
-main {
+#main-login {
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  //height: 67vh;
 
   h1 {
     margin-top: 0;
   }
+}
 
-  .main-login {
-    background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 67vh;
-  }
+#section-login, #section-admin-login {
 
-
-  form {
+  #login-form, #admin-login-form {
     width: 45%;
     display: block;
     background-color: rgba(115, 21, 52, 0.3);
     border-radius: 25px;
     padding: 30px;
     margin: 0 auto 30px auto;
-    //margin-bottom: 30px;
 
     .inputWrapper {
       position: relative;
@@ -63,7 +56,7 @@ main {
 
   }
 
-  .btn {
+  /*.btn {
     background-color: $claretRed;
     border-radius: 50px;
     border: solid 1px $claretRed;
@@ -72,13 +65,18 @@ main {
     width: 60%;
     margin: auto;
     padding: 6px 0;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
   }
 
   .btn:hover {
     background-color: $limestone;
     border: solid 1px $limestone;
     color: $claretRed;
-  }
+    transform: scale(1.05);
+  }*/
+
+
 
   .btn-inscription {
     display: block;
@@ -91,6 +89,12 @@ main {
     font-size: 15px;
     color: $limestone;
     padding: 6px 0;
+  }
+
+  .btn-inscription:hover {
+    background-color: $limestone;
+    border: solid 1px $limestone;
+    color: $claretRed;
   }
 }
 

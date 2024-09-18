@@ -1,1 +1,4 @@
-let dataTable = new DataTable('#myTable');
+let dataTable = new DataTable('#myTable', {
+    responsive: true,
+    scrollX: true,
+});

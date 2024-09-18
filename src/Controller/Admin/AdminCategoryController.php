@@ -17,9 +17,11 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('admin/categories')]
+#[IsGranted('ROLE_ADMIN')]
 class AdminCategoryController extends AbstractController {
 
     #[Route('/', name: 'admin_list_categories')]
@@ -106,9 +108,7 @@ class AdminCategoryController extends AbstractController {
         $this->addFlash('success', 'La catégorie a été supprimée');
 
         } catch(\Exception $exception){
-        return $this->renderView('admin/page/error.html.twig', [
-            'errorMessage' => $exception->getMessage()
-        ]);
+            $this->addFlash('error', $exception->getMessage());
     }
 
         return $this->redirectToRoute('admin_list_categories');
@@ -167,12 +167,12 @@ class AdminCategoryController extends AbstractController {
             }
 
 
-
             $entityManager->persist($category);
             $entityManager->flush();
 
             $this->addFlash('success', 'La catégorie a été modifiée');
 
+            return $this->redirectToRoute('admin_list_categories');
         }
 
         $categoryUpdateFormView = $categoryUpdateForm->createView();

@@ -3,22 +3,44 @@
 {% block metatitle %} Éditer le profil
 {% endblock %}
 
-{% block bootstrap %}
+{# {% block bootstrap %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-{% endblock %}
+{% endblock %} #}
 
 
 {% block main %}
 
     <h1> Éditer le profil </h1>
 
-    {{ form_start(userUpdateForm) }}
-        {{ form_row(userUpdateForm.password) }}
-        {{ form_row(userUpdateForm.firstName) }}
-        {{ form_row(userUpdateForm.phone) }}
-        {{ form_row(userUpdateForm.presentation) }}
-        {{ form_row(userUpdateForm.profilePicture) }}
-        {{ form_row(userUpdateForm.enregistrer) }}
-    {{ form_row(userUpdateForm) }}
+<section id="section-update-user">
+
+    <div id="form-update-profile">
+
+        {{ form_start(userUpdateForm) }}
+
+        <div class="formUpdate-identity1">
+            {{ form_row(userUpdateForm.username) }}
+            {{ form_row(userUpdateForm.firstName) }}
+            {{ form_row(userUpdateForm.profilePicture) }}
+            {{ form_row(userUpdateForm.presentation) }}
+        </div>
+
+        <div class="formUpdate-identity2">
+                {{ form_label(userUpdateForm.email) }}
+                {{ form_widget(userUpdateForm.email, {'attr': {'class': 'task_field', 'readonly': true}}) }}
+
+            {{ form_row(userUpdateForm.password) }}
+            {{ form_row(userUpdateForm.phone) }}
+
+                {{ form_label(userUpdateForm.birthDate) }}
+                {{ form_widget(userUpdateForm.birthDate, {'attr': {'class': 'task_field', 'readonly': true}}) }}
+
+        </div>
+
+            {{ form_row(userUpdateForm.enregistrer) }}
+
+        {{ form_end(userUpdateForm) }}
+    </div>
+</section>
 
 {% endblock %}

@@ -22,6 +22,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 #[Route('/admin/user')]
+#[IsGranted('ROLE_ADMIN')]
 class AdminUserController extends AbstractController {
 
 
@@ -33,6 +34,30 @@ class AdminUserController extends AbstractController {
         // On retourne une réponse http en html
         return $this->render('admin/page/user/admin_list_users.html.twig', [
             'users' => $users
+        ]);
+    }
+
+    #[Route('/profile/{id}', name: 'admin_show_profile')]
+    public function showAdminProfile(int $id, UserRepository $userRepository): Response {
+
+        // Dans $user, on stocke le résultat de notre recherche par id dans les données de la table User
+        $user = $userRepository->find($id);
+        $currentUser = $this->getUser();
+
+        // Si aucun user n'est trouvé avec l'id recherché, on retourne une page et code d'erreur 404
+        if (!$user) {
+            $html404 = $this->renderView('admin/page/page404.html.twig');
+            return new Response($html404, 404);
+        }
+
+        if ($currentUser->getId() !== $id) {
+            $html403 = $this->renderView('admin/page/page403.html.twig');
+            return new Response($html403, 403);
+        }
+
+        // On retourne une réponse http en html
+        return $this->render('admin/page/user/admin_show_profile.html.twig', [
+            'user' => $user,
         ]);
     }
 
@@ -105,6 +130,8 @@ class AdminUserController extends AbstractController {
 
                 $this->addFlash('success', 'Nouvel administrateur ajouté');
 
+                return $this->redirectToRoute('admin_list_users');
+
             } catch(\Exception $exception) {
                 //
                 $this->addFlash('error', $exception->getMessage());
@@ -127,12 +154,13 @@ class AdminUserController extends AbstractController {
     public function deleteUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager): Response {
 
         $user = $userRepository->find($id);
+        $currentUser = $this->getUser();
 
         if (!$user) {
             $html404 = $this->renderView('admin/page/page404.html.twig');
             return new Response($html404, 404);
         }
-
+        
         // On récupère le rôle de l'utilisateur de l'id recherché
         $roles = $user->getRoles();
 
@@ -323,6 +351,8 @@ class AdminUserController extends AbstractController {
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Votre profil a été mis à jour');
+
+                return $this->redirectToRoute('admin_list_users');
 
             } catch(\Exception $exception) {
 

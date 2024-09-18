@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Activity;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -15,6 +16,45 @@ class ActivityRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Activity::class);
     }
+
+    public function findUpcomingActivities(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.date >= :today')
+            ->setParameter('today', new \DateTime())
+            ->orderBy('a.date', 'ASC') // Optionnel : pour trier par date ascendante
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    /**
+     * @param User $userAdmin
+     * @return Activity[]
+     */
+    public function findActivitiesByAdmin(User $userAdmin)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.userAdminOrganizer = :userAdmin')
+            ->setParameter('userAdmin', $userAdmin)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param User $userAdmin
+     * @return Activity[]
+     */
+    public function findUpcomingActivitiesByAdmin(User $userAdmin)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.userAdminOrganizer = :userAdmin')
+            ->andWhere('a.date > CURRENT_DATE()')
+            ->setParameter('userAdmin', $userAdmin)
+            ->getQuery()
+            ->getResult();
+    }
+
 
 //    /**
 //     * @return Activity[] Returns an array of Activity objects

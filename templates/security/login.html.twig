@@ -2,15 +2,16 @@
 
 {% block metatitle %}Log in!{% endblock %}
 
-{# {% block classMain %}class="main-login"{% endblock classMain %} #}
+{% block classMain %}id="main-login"{% endblock classMain %}
 
 {% block main %}
-<div class="main-login">
+<section id="section-login">
     <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
 
-    <form method="post">
+    <form class="form-bgRed" id="login-form" method="post">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <p>L'email ou le mot de passe semble incorrect.</p>
+            {# <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
         {% endif %}
 
         {#
@@ -29,7 +30,7 @@
 
         <div class="inputWrapper">
             <input type="password" placeholder=" " name="_password" id="password" class="form-control" autocomplete="current-password" required>
-            <label for="password">Password</label>
+            <label for="password">Mot de passe</label>
         </div>
 
         <input type="hidden" name="_csrf_token"
@@ -55,5 +56,5 @@
     <a class="btn-inscription" href="{{ path('inscription_user') }}"> Pas encore inscrit ? Créez un compte ! </a>
 
 
-</div>
+</section>
 {% endblock %}

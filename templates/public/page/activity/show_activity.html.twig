@@ -27,12 +27,17 @@
 
                 </div>
 
-                <p class="text-activity"> {{ activity.description }} </p>
+                <div class="text-activity">
+                    <p> {{ activity.description }} </p>
+                    <p class="organizer"> Activité organisée par : {{ organizer.username }}</p>
+                </div>
+
             </div>
 
             {# Vérifie si l'utilisateur est connecté #}
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {# Participer à l'activité (+ popup pour valider choix) #}
+                <div class="popup-overlay"></div>
                 <div class="popup-confirmation-block" data-popup-block-target-id="{{ activity.id }}">
                     <h2>{{ activity.title }} le {{ activity.date | date('d/m/Y')}}</h2>
                     <p>Validez-vous votre participation à cette activité ?</p>
@@ -49,6 +54,24 @@
                 </p>
             {% endif %}
 
+    </section>
+
+
+    <section id="section-photos-gallery">
+
+        <h2>Galerie photo</h2>
+
+        <div class="photos-from-gallery">
+
+            {% for gallery in galleries %}
+                <div class="photo">
+                    <img src="{{ asset('uploads/'~gallery.filePath ) }}" alt="Photo : {{ gallery.pictureName }}">
+                </div>
+            {% else %}
+                <p>Pas de galerie photo</p>
+            {% endfor %}
+
+        </div>
     </section>
 
 

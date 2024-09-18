@@ -17,9 +17,11 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/picture-gallery')]
+#[IsGranted('ROLE_ADMIN')]
 class AdminPictureGalleryController extends AbstractController {
 
     #[Route('/', name: 'admin_picture_gallery')]
@@ -81,7 +83,7 @@ class AdminPictureGalleryController extends AbstractController {
             // On affiche un message pour informer l'admin du succès de la requête
             $this->addFlash('success', 'Photo enregistrée dans la gallerie !');
 
-            // On fait une redirection sur la liste des activités
+            // On fait une redirection sur la galerie
             return $this->redirectToRoute('admin_picture_gallery');
         }
 
@@ -118,9 +120,7 @@ class AdminPictureGalleryController extends AbstractController {
 
             // Si l'exécution du try a échoué, catch est exécuté et on renvoie une réponse http avec un message d'erreur
         } catch (\Exception $exception) {
-            return $this->renderView('admin/page/error.html.twig', [
-                'errorMessage' => $exception->getMessage()
-            ]);
+            $this->addFlash('error', $exception->getMessage());
         }
 
 
@@ -145,6 +145,8 @@ class AdminPictureGalleryController extends AbstractController {
             $entityManager->flush();
 
             $this->addFlash('success', 'Image mise à jour !');
+
+            return $this->redirectToRoute('admin_picture_gallery');
         }
 
         $pictureUpdateFormView = $pictureUpdateForm->createView();

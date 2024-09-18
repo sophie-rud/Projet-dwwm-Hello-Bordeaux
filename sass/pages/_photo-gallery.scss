@@ -17,6 +17,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease;
+
 
     img {
       width: 100%;
@@ -24,6 +26,10 @@
       object-fit: cover;
       overflow: hidden;
     }
+
+    /* &:hover {
+      transform: scale(1.15);
+    } */
   }
 
   h2 {

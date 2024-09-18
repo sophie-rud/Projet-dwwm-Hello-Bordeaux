@@ -30,12 +30,13 @@
             </div>
 
             <div class="infos-personnelles">
-                <h3>Informations personnelles</h3>
+                <h2>Informations personnelles</h2>
 
                 <div class="icon-action">
                     <a href="{{ path('user_update_user', {id: user.id}) }}"> <i class="fa-solid fa-gear"></i> </a>
 
                     {# Supprimer l'utilisateur (+popup pour valider choix) #}
+                    <div class="popup-overlay"></div>
                     <div class="popup-confirmation-delete" data-popup-target-id="{{ user.id }}">
                         <p>Voulez vous vraiment supprimer votre compte ?</p>
 
@@ -43,7 +44,7 @@
                         <button class="js-close-popup"> Annuler </button>
                     </div>
 
-                    <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
+                    <p data-trigger-id="{{ user.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can cursor-pointer"></i> </p>
 
                 </div>
 
@@ -75,6 +76,28 @@
 
                 </div>
             </div>
+
+    </section>
+
+    <section id="section-myActivities">
+
+        <h2>Mes activités</h2>
+
+        <div class="my-activities">
+
+            {% for activity in myActivities %}
+            <div class="my-activity">
+                <h3>{{ activity.title }}</h3>
+                <a href="{{ path('show_activity', {id: activity.id}) }}"><div class="img-my-activity"> <img src="{{ asset('uploads/'~activity.photo) }}" alt="illustration de : {{ activity.title }}"> </div> </a>
+
+            </div>
+            {% else %}
+                <p>Aucune activité trouvée</p>
+            {% endfor %}
+
+        </div>
+
+        <a class="add-btn-style" href="{{ path('list_activities') }}"> Voir les activités </a>
 
     </section>
 

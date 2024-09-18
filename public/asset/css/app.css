@@ -12,6 +12,16 @@ img {
   color: #731534;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+body main {
+  flex: 1;
+}
+
 form {
   margin-bottom: 30px;
 }
@@ -26,7 +36,7 @@ h1 {
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: normal;
   text-align: center;
 }
@@ -87,6 +97,18 @@ p {
   width: 100%;
   height: 100%; /* L'image occupe toute la hauteur du conteneur */
   object-fit: cover; /* Pour que l'image couvre tout le conteneur sans se déformer */
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.fa-solid, .fa-regular {
+  transition: all 0.5s ease-out;
+}
+.fa-solid:hover, .fa-regular:hover {
+  transform: scale(1.3);
+  color: black;
 }
 
 * {
@@ -189,6 +211,17 @@ a {
   text-align: center;
 }
 
+.popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 400;
+}
+
 .popup-confirmation-delete, .popup-confirmation-block {
   display: none;
   position: fixed;
@@ -198,6 +231,7 @@ a {
   transform: translateX(-50%);
   padding: 100px;
   text-align: center;
+  z-index: 500;
 }
 .popup-confirmation-delete p, .popup-confirmation-block p {
   margin-bottom: 25px;
@@ -221,14 +255,14 @@ a {
   width: 95%;
   margin: auto;
 }
-
-thead {
-  font-weight: bold;
-  background-color: rgba(115, 21, 52, 0.3);
-  height: 25px;
+.admin-table #myTable {
+  /* thead {
+      font-weight: bold;
+      background-color: rgba(115, 21, 52, 0.3);
+      height: 25px;
+  } */
 }
-
-tr:nth-of-type(even) {
+.admin-table #myTable tbody tr:nth-of-type(odd) {
   background-color: rgba(115, 21, 52, 0.15);
 }
 
@@ -264,20 +298,24 @@ tr:nth-of-type(even) {
 
 .pictureInGallery {
   width: 200px;
-  height: 200px;
+  height: 150px;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 .pictureInGallery img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  overflow: hidden;
 }
 
-.add-btn-style {
+.title-h2-picture-gallery {
+  font-size: 20px;
+}
+
+.add-btn-style, .btn-style {
   background-color: rgba(115, 21, 52, 0.7);
   color: #FEEFDD;
   border-radius: 8px;
@@ -286,6 +324,14 @@ tr:nth-of-type(even) {
   text-align: center;
   width: 200px;
   margin: 12px auto;
+  transition: all 0.5s ease-out;
+  cursor: pointer;
+}
+
+.add-btn-style:hover, .btn-style:hover {
+  background-color: #731534;
+  color: #FEEFDD;
+  transform: scale(1.05);
 }
 
 .btn-inscrire {
@@ -293,6 +339,12 @@ tr:nth-of-type(even) {
   color: #FEEFDD !important;
   border-radius: 20px;
   padding: 8px 12px;
+  cursor: pointer;
+}
+
+.btn-inscrire:hover {
+  background-color: #731534;
+  color: #FEEFDD !important;
 }
 
 .btn {
@@ -304,31 +356,93 @@ tr:nth-of-type(even) {
   width: 60%;
   margin: auto;
   padding: 6px 0;
+  transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 
 .btn:hover {
   background-color: #FEEFDD;
   border: solid 1px #FEEFDD;
   color: #731534;
+  transform: scale(1.05);
+}
+
+.submit-btn {
+  padding: 15px 30px;
+  background-color: rgba(115, 21, 52, 0.6);
+  color: #FEEFDD;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  transition: all 0.5s ease-out;
+}
+
+.submit-btn:hover {
+  background-color: #731534;
+  color: #FEEFDD;
+  transform: scale(1.05);
+}
+
+form {
+  width: 70%;
+  margin: 0 auto 30px auto;
+}
+
+.form-bgRed {
+  width: 75%;
+  background-color: rgba(115, 21, 52, 0.3);
+  border-radius: 25px;
+  padding: 5% 0;
+  margin: 0 auto 30px auto;
+}
+
+.custom-input, input[readonly] {
+  display: block;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #FEEFDD;
+  border-radius: 5px;
+  font-size: 1em;
+  color: #731534;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.custom-label {
+  display: block;
+  color: #731534;
+  font-weight: bold;
+  background-color: rgba(115, 21, 52, 0.2);
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px 0 5px 5px;
+  margin: 3px 0;
 }
 
 #headerTopBar {
   background-color: #FEEFDD;
-  padding: 10px 50px;
+  padding: 10px 50px 10px 25px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 0;
+  margin-right: auto;
 }
 #headerTopBar .search-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
+  margin-right: 10%;
 }
 #headerTopBar .search-container form.search-bar {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0;
+  width: 100%;
 }
 #headerTopBar .search-container input[type=text] {
   width: 100%;
@@ -363,10 +477,10 @@ tr:nth-of-type(even) {
 #headerTopBar .rightPart .loginBlock {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   gap: 0;
-  margin-right: 50px;
+  margin-right: auto;
 }
 #headerTopBar .rightPart .loginBlock a {
   color: #731534;
@@ -384,8 +498,12 @@ tr:nth-of-type(even) {
 #headerTopBar .rightPart .loginBlock a.deconnection {
   margin-left: 15px;
 }
+#headerTopBar .rightPart .loginBlock a.deconnection .fa-right-to-bracket {
+  font-size: 18px;
+  margin-right: 5px;
+}
 #headerTopBar .rightPart #iconLanguage {
-  width: 45px;
+  width: 10%;
 }
 
 #headerMainBar {
@@ -441,9 +559,15 @@ tr:nth-of-type(even) {
   text-align: center;
   color: #FEEFDD;
 }
-
-#activites-nav .sous-menu-activites {
-  display: none !important;
+#headerMainBar .header-nav ul.nav #activites-nav .sous-menu-activites {
+  display: none;
+}
+#headerMainBar .header-nav ul.nav #activites-nav.active {
+  display: flex;
+  flex-direction: column;
+}
+#headerMainBar .header-nav ul.nav #activites-nav.active .sous-menu-activites {
+  display: block;
 }
 
 #activites-nav:hover {
@@ -479,6 +603,7 @@ tr:nth-of-type(even) {
 footer {
   background-color: #731534;
   padding: 15px 50px;
+  margin: 0;
 }
 footer .footer-nav {
   display: flex;
@@ -511,11 +636,30 @@ footer .footer-nav .iconFooter {
   margin: 0 5px;
 }
 
-.banner {
+#banner {
+  background-image: url(../images/home/panorama_bordeaux.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 70vh;
+  z-index: 1;
+}
+#banner h1 {
+  margin-top: 0;
+  font-size: 45px;
+  font-weight: bold;
+  position: relative;
+  z-index: 100;
+}
+#banner::before {
+  content: "";
+  position: absolute;
+  width: 67%;
+  height: 50px;
+  background-color: rgba(254, 239, 221, 0.5);
+  left: 0;
+  top: 31%;
+  z-index: 10;
 }
 
 #menuInfosPratiques {
@@ -602,6 +746,12 @@ article .iconeInfosPratiques img {
 }
 #sortiesSemaine .textArticle p {
   margin: 9% 0;
+}
+
+#carousel-activities #carousel {
+  background-color: rgba(87, 199, 223, 0.2);
+  padding: 40px 0;
+  margin-top: 2%;
 }
 
 #section-activities-by-category {
@@ -724,6 +874,11 @@ article .iconeInfosPratiques img {
   font-size: 16px;
   padding: 10px 0;
   border-radius: 0 0 10px 10px;
+  transition: all 0.5s ease-out;
+}
+.container-activity .title-activity h3:hover {
+  color: #FFBF5F;
+  transform: scale(1.02);
 }
 
 .title-bg-style {
@@ -741,11 +896,11 @@ article .iconeInfosPratiques img {
   z-index: 1;
 }
 
-#section-show-activity {
+#section-show-activity, #section-admin-show-activity {
   width: 80%;
   margin: auto;
 }
-#section-show-activity .show-activity {
+#section-show-activity .show-activity, #section-admin-show-activity .show-activity {
   background-color: #FEEFDD;
   border-radius: 25px;
   margin: 2% auto;
@@ -756,19 +911,19 @@ article .iconeInfosPratiques img {
   align-items: center;
   gap: 0;
 }
-#section-show-activity .show-activity .img-activity {
+#section-show-activity .show-activity .img-activity, #section-admin-show-activity .show-activity .img-activity {
   width: 100%;
   min-width: 200px;
   height: 218px;
   border-radius: 25px;
   overflow: hidden;
 }
-#section-show-activity .show-activity .img-activity img {
+#section-show-activity .show-activity .img-activity img, #section-admin-show-activity .show-activity .img-activity img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-#section-show-activity .show-activity .infos-activity {
+#section-show-activity .show-activity .infos-activity, #section-admin-show-activity .show-activity .infos-activity {
   background-color: rgba(115, 21, 52, 0.3);
   border-radius: 20px;
   padding: 20px 10px;
@@ -777,10 +932,10 @@ article .iconeInfosPratiques img {
   height: 218px;
   min-width: 200px;
 }
-#section-show-activity .show-activity .infos-activity p {
+#section-show-activity .show-activity .infos-activity p, #section-admin-show-activity .show-activity .infos-activity p {
   padding: 8px 0;
 }
-#section-show-activity .show-activity .infos-activity .group-title {
+#section-show-activity .show-activity .infos-activity .group-title, #section-admin-show-activity .show-activity .infos-activity .group-title {
   padding-bottom: 20px;
   display: flex;
   flex-direction: row;
@@ -788,15 +943,20 @@ article .iconeInfosPratiques img {
   align-items: center;
   gap: 0;
 }
-#section-show-activity .show-activity .infos-activity .group-title .pictogram {
-  width: 5%;
+#section-show-activity .show-activity .infos-activity .group-title .pictogram, #section-admin-show-activity .show-activity .infos-activity .group-title .pictogram {
+  width: 15%;
   padding-right: 10px;
 }
-#section-show-activity .show-activity .text-activity {
+#section-show-activity .show-activity .text-activity p:first-of-type, #section-admin-show-activity .show-activity .text-activity p:first-of-type {
   padding: 10px 30px;
   text-align: justify;
 }
-#section-show-activity .btn-style {
+#section-show-activity .show-activity .text-activity .organizer, #section-admin-show-activity .show-activity .text-activity .organizer {
+  font-size: 13px;
+  padding: 10px 30px;
+  margin-top: 30px;
+}
+#section-show-activity .btn-style, #section-admin-show-activity .btn-style {
   display: block;
   background-color: rgba(115, 21, 52, 0.7);
   border-radius: 50px;
@@ -807,29 +967,67 @@ article .iconeInfosPratiques img {
   padding: 6px 0;
   transition: transform 0.3s ease;
 }
-#section-show-activity .btn-style a {
+#section-show-activity .btn-style a, #section-admin-show-activity .btn-style a {
   font-size: 15px;
   color: #FEEFDD;
 }
-#section-show-activity .btn-style:hover {
+#section-show-activity .btn-style:hover, #section-admin-show-activity .btn-style:hover {
   background-color: #731534;
   transform: scale(1.05);
 }
-#section-show-activity .btn-style:hover a {
+#section-show-activity .btn-style:hover a, #section-admin-show-activity .btn-style:hover a {
   color: #FEEFDD;
 }
 
-#section-participants {
+#section-photos-gallery, #section-admin-photos-gallery {
   width: 80%;
   margin: 5% auto;
   background-color: #FEEFDD;
   border-radius: 25px;
+  padding: 20px 0;
 }
-#section-participants h3 {
+#section-photos-gallery h2, #section-admin-photos-gallery h2 {
+  margin-bottom: 10px;
+}
+#section-photos-gallery .photos-from-gallery, #section-admin-photos-gallery .photos-from-gallery {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+#section-photos-gallery .photos-from-gallery .photo, #section-admin-photos-gallery .photos-from-gallery .photo {
+  width: 23%;
+  height: 25vh;
+  overflow: hidden;
+}
+#section-photos-gallery .photos-from-gallery .photo img, #section-admin-photos-gallery .photos-from-gallery .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#section-participants, #section-participants-for-admin {
+  width: 80%;
+  margin: 5% auto;
+  background-color: #FEEFDD;
+  border-radius: 25px;
+  padding-bottom: 20px;
+}
+#section-participants h3, #section-participants-for-admin h3 {
   margin-bottom: 10px;
   padding: 15px 25px;
 }
-#section-participants .all-participants {
+#section-participants p, #section-participants-for-admin p {
+  padding: 0 15px;
+}
+#section-participants ul li, #section-participants-for-admin ul li {
+  padding: 0 25px;
+}
+#section-participants .all-participants, #section-participants-for-admin .all-participants {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -837,42 +1035,63 @@ article .iconeInfosPratiques img {
   gap: 0;
   padding: 15px 25px;
 }
-#section-participants .all-participants .one-participant .display-username {
+#section-participants .all-participants .one-participant, #section-participants-for-admin .all-participants .one-participant {
+  position: relative;
+}
+#section-participants .all-participants .one-participant .display-username, #section-participants-for-admin .all-participants .one-participant .display-username {
   display: none;
 }
-#section-participants .all-participants .one-participant .profilePicture {
+#section-participants .all-participants .one-participant .profilePicture, #section-participants-for-admin .all-participants .one-participant .profilePicture {
   width: 70px;
   height: 70px;
   margin: 0 7px;
-  position: relative;
   transition: transform 0.3s ease;
 }
-#section-participants .all-participants .one-participant .profilePicture:hover {
+#section-participants .all-participants .one-participant .profilePicture:hover, #section-participants-for-admin .all-participants .one-participant .profilePicture:hover {
   transform: scale(1.02);
 }
-#section-participants .all-participants .one-participant .profilePicture:hover + .display-username {
+#section-participants .all-participants .one-participant .profilePicture:hover + .display-username, #section-participants-for-admin .all-participants .one-participant .profilePicture:hover + .display-username {
   display: block;
-  position: absolute;
   font-size: 13px;
-  margin: 5px 0 0 12px;
   color: #731534;
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-body {
-  min-height: 100vh;
-}
-
-main h1 {
-  margin-top: 0;
-}
-main .main-login {
+#main-login {
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.8)), url(../images/home/panorama_bordeaux.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 67vh;
 }
-main form {
+#main-login h1 {
+  margin-top: 0;
+}
+
+#section-login, #section-admin-login {
+  /*.btn {
+    background-color: $claretRed;
+    border-radius: 50px;
+    border: solid 1px $claretRed;
+    color: $limestone;
+    display: block;
+    width: 60%;
+    margin: auto;
+    padding: 6px 0;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: $limestone;
+    border: solid 1px $limestone;
+    color: $claretRed;
+    transform: scale(1.05);
+  }*/
+}
+#section-login #login-form, #section-login #admin-login-form, #section-admin-login #login-form, #section-admin-login #admin-login-form {
   width: 45%;
   display: block;
   background-color: rgba(115, 21, 52, 0.3);
@@ -880,16 +1099,16 @@ main form {
   padding: 30px;
   margin: 0 auto 30px auto;
 }
-main form .inputWrapper {
+#section-login #login-form .inputWrapper, #section-login #admin-login-form .inputWrapper, #section-admin-login #login-form .inputWrapper, #section-admin-login #admin-login-form .inputWrapper {
   position: relative;
   margin: 50px 0;
   background-color: #FEEFDD;
 }
-main form .inputWrapper input, main form .inputWrapper label {
+#section-login #login-form .inputWrapper input, #section-login #login-form .inputWrapper label, #section-login #admin-login-form .inputWrapper input, #section-login #admin-login-form .inputWrapper label, #section-admin-login #login-form .inputWrapper input, #section-admin-login #login-form .inputWrapper label, #section-admin-login #admin-login-form .inputWrapper input, #section-admin-login #admin-login-form .inputWrapper label {
   display: block;
   width: 100%;
 }
-main form .inputWrapper label {
+#section-login #login-form .inputWrapper label, #section-login #admin-login-form .inputWrapper label, #section-admin-login #login-form .inputWrapper label, #section-admin-login #admin-login-form .inputWrapper label {
   position: absolute;
   top: 0;
   left: 0;
@@ -897,32 +1116,17 @@ main form .inputWrapper label {
   font-family: Josefin Sans, sans-serif;
   transition: 0.5s;
 }
-main form .inputWrapper input {
+#section-login #login-form .inputWrapper input, #section-login #admin-login-form .inputWrapper input, #section-admin-login #login-form .inputWrapper input, #section-admin-login #admin-login-form .inputWrapper input {
   border: none;
   border-bottom: solid 1px #FEEFDD;
   background-color: transparent;
   padding: 3px 0;
   font-size: 16px;
 }
-main form .inputWrapper input:not(:placeholder-shown) + label, main form .inputWrapper input:focus + label {
+#section-login #login-form .inputWrapper input:not(:placeholder-shown) + label, #section-login #login-form .inputWrapper input:focus + label, #section-login #admin-login-form .inputWrapper input:not(:placeholder-shown) + label, #section-login #admin-login-form .inputWrapper input:focus + label, #section-admin-login #login-form .inputWrapper input:not(:placeholder-shown) + label, #section-admin-login #login-form .inputWrapper input:focus + label, #section-admin-login #admin-login-form .inputWrapper input:not(:placeholder-shown) + label, #section-admin-login #admin-login-form .inputWrapper input:focus + label {
   transform: translateY(-30px);
 }
-main .btn {
-  background-color: #731534;
-  border-radius: 50px;
-  border: solid 1px #731534;
-  color: #FEEFDD;
-  display: block;
-  width: 60%;
-  margin: auto;
-  padding: 6px 0;
-}
-main .btn:hover {
-  background-color: #FEEFDD;
-  border: solid 1px #FEEFDD;
-  color: #731534;
-}
-main .btn-inscription {
+#section-login .btn-inscription, #section-admin-login .btn-inscription {
   display: block;
   background-color: rgba(115, 21, 52, 0.7);
   border-radius: 50px;
@@ -934,12 +1138,34 @@ main .btn-inscription {
   color: #FEEFDD;
   padding: 6px 0;
 }
+#section-login .btn-inscription:hover, #section-admin-login .btn-inscription:hover {
+  background-color: #FEEFDD;
+  border: solid 1px #FEEFDD;
+  color: #731534;
+}
 
-#section-profile {
+#section-inscription p {
+  text-align: center;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+#section-inscription #form-inscription .formInscription-identity1,
+#section-inscription #form-inscription .formInscription-identity2,
+#section-inscription #form-inscription .formInscription-presentation {
+  background-color: rgba(254, 239, 221, 0.9);
+  margin-bottom: 20px;
+  padding: 4%;
+  border-radius: 20px;
+}
+#section-inscription #form-inscription .formInscription-identity1 {
+  background-color: rgba(115, 21, 52, 0.2);
+}
+
+#section-profile, #section-admin-profile {
   width: 75%;
   margin: auto;
 }
-#section-profile .profile {
+#section-profile .profile, #section-admin-profile .profile {
   background-color: rgba(115, 21, 52, 0.5);
   border-radius: 20px;
   padding: 40px 30px;
@@ -949,15 +1175,15 @@ main .btn-inscription {
   align-items: center;
   gap: 5%;
 }
-#section-profile .profile .profilePicture {
+#section-profile .profile .profilePicture, #section-admin-profile .profile .profilePicture {
   width: 110px;
   height: 100px;
 }
-#section-profile .profile a {
+#section-profile .profile a, #section-admin-profile .profile a {
   align-self: flex-start;
   font-size: 20px;
 }
-#section-profile .profile .username {
+#section-profile .profile .username, #section-admin-profile .profile .username {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -965,49 +1191,122 @@ main .btn-inscription {
   gap: 5%;
   padding-bottom: 5%;
 }
-#section-profile .profile .presentation {
+#section-profile .profile .presentation, #section-admin-profile .profile .presentation {
   width: 70%;
   padding: 0 30px;
 }
-#section-profile .profile .presentation p {
+#section-profile .profile .presentation p, #section-admin-profile .profile .presentation p {
   color: #FEEFDD;
   text-align: justify;
 }
-#section-profile .infos-personnelles {
+#section-profile .infos-personnelles, #section-admin-profile .infos-personnelles {
   background-color: rgba(115, 21, 52, 0.3);
   border-radius: 20px;
   margin: 15px 0;
   padding: 20px 50px;
 }
-#section-profile .infos-personnelles h3 {
+#section-profile .infos-personnelles h2, #section-admin-profile .infos-personnelles h2 {
+  font-size: 20px;
   margin-bottom: 12px;
   text-align: center;
 }
-#section-profile .infos-personnelles .icon-action {
+#section-profile .infos-personnelles .icon-action, #section-admin-profile .infos-personnelles .icon-action {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   gap: 0;
 }
-#section-profile .infos-personnelles .icon-action a {
+#section-profile .infos-personnelles .icon-action a, #section-admin-profile .infos-personnelles .icon-action a {
   font-size: 20px;
   margin: 0 20px;
 }
-#section-profile .infos-personnelles .tableau {
+#section-profile .infos-personnelles .tableau, #section-admin-profile .infos-personnelles .tableau {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 0;
 }
-#section-profile .infos-personnelles .tableau tr td:first-of-type {
+#section-profile .infos-personnelles .tableau tr td:first-of-type, #section-admin-profile .infos-personnelles .tableau tr td:first-of-type {
   width: 200px;
   height: 20px;
 }
 
 .small-font {
   font-size: 11px;
+}
+
+#section-myActivities {
+  width: 75%;
+  margin: 5% auto;
+  background-color: rgba(254, 239, 221, 0.7);
+  border-radius: 20px;
+  padding: 20px 0;
+}
+#section-myActivities h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+#section-myActivities .my-activities {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+#section-myActivities .my-activities .my-activity {
+  position: relative;
+  width: 20%;
+  height: 25vh;
+}
+#section-myActivities .my-activities .my-activity h3 {
+  color: #FEEFDD;
+  background-color: rgba(115, 21, 52, 0.4);
+  padding: 4px;
+  width: 90%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50%;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 100;
+}
+#section-myActivities .my-activities .my-activity .img-my-activity {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+#section-myActivities .my-activities .my-activity .img-my-activity img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+#section-myActivities .my-activities .my-activity:hover h3 {
+  color: #731534;
+  background-color: transparent;
+  font-weight: bold;
+  transform: scale(1.05);
+}
+#section-myActivities .my-activities .my-activity:hover .img-my-activity::after {
+  content: "";
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#section-myActivities .my-activities .my-activity:hover .img-my-activity img {
+  filter: brightness(150%);
 }
 
 #section-picture-gallery {
@@ -1030,6 +1329,10 @@ main .btn-inscription {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease;
+  /* &:hover {
+    transform: scale(1.15);
+  } */
 }
 .one-picture-in-gallery .pictureInGallery img {
   width: 100%;
@@ -1040,6 +1343,92 @@ main .btn-inscription {
 .one-picture-in-gallery h2 {
   font-size: 16px;
   padding: 3px 0;
+}
+
+#section-update-user #form-update-profile .formUpdate-identity1,
+#section-update-user #form-update-profile .formUpdate-identity2 {
+  background-color: rgba(115, 21, 52, 0.35);
+  margin-bottom: 20px;
+  padding: 4%;
+  border-radius: 20px;
+}
+#section-update-user #form-update-profile .formUpdate-identity2 {
+  background-color: rgba(115, 21, 52, 0.2);
+}
+#section-update-user #form-update-profile input[readonly] {
+  background-color: rgba(115, 21, 52, 0.15);
+}
+
+#mainPage404, #mainAdminPage404 {
+  background-image: url(../images/photo-page-404.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+#mainPage404::before, #mainAdminPage404::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.65);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.section-page404 {
+  position: relative;
+  z-index: 10;
+}
+.section-page404 h1 {
+  color: #731534;
+  z-index: 100;
+  position: relative;
+}
+.section-page404 .btn {
+  text-align: center;
+  width: 50%;
+  z-index: 100;
+  position: relative;
+}
+
+#mainPage403, #mainAdminPage403 {
+  background-image: url(../images/photo-page-403.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom -280px;
+  position: relative;
+  z-index: 1;
+}
+#mainPage403::before, #mainAdminPage403::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.65);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.section-page403 {
+  position: relative;
+  z-index: 10;
+}
+.section-page403 h1 {
+  color: #731534;
+  z-index: 100;
+  position: relative;
+}
+.section-page403 .btn {
+  text-align: center;
+  width: 50%;
+  z-index: 100;
+  position: relative;
 }
 
 /* ---------- RESPONSIVE TABLETTE ---------- */
@@ -1101,6 +1490,19 @@ main .btn-inscription {
   #headerTopBar .search-container {
     display: none;
   }
+  #headerTopBar .search-container.active {
+    display: block !important;
+    position: absolute;
+    top: 50px;
+    width: 60%;
+    left: 30px;
+    z-index: 3000;
+    border-radius: 20px;
+    background-color: #FEEFDD;
+  }
+  #headerTopBar .search-container.active .search-bar {
+    width: 100%;
+  }
   #headerTopBar .rightPart {
     display: flex;
     flex-direction: row;
@@ -1111,6 +1513,9 @@ main .btn-inscription {
   }
   #headerTopBar .rightPart a, #headerTopBar .rightPart i {
     color: #FEEFDD !important;
+  }
+  #headerTopBar .rightPart .loginBlock {
+    margin-right: 5%;
   }
   #headerTopBar .rightPart .loginBlock a {
     font-size: 16px;
@@ -1150,6 +1555,7 @@ main .btn-inscription {
     margin-left: auto;
     margin-right: 8%;
     order: 2;
+    cursor: pointer;
   }
   #headerMainBar .header-nav ul.nav {
     display: none !important;
@@ -1178,7 +1584,10 @@ main .btn-inscription {
     width: 80%;
   }
   #headerMainBar .header-nav ul.nav.active #activites-nav .sous-menu-activites {
-    display: block !important;
+    display: block;
+    /*&:hover {
+      display: block!important;
+    }*/
   }
   #headerMainBar .header-nav ul.nav.active #activites-nav .sous-menu-activites li {
     margin: 3%;
@@ -1187,10 +1596,7 @@ main .btn-inscription {
     font-size: 12px;
     color: rgba(254, 239, 221, 0.7);
   }
-  #headerMainBar .header-nav ul.nav.active #activites-nav:hover {
-    display: none;
-  }
-  #activites-nav:hover {
+  #headerMainBar .header-nav ul.nav.active #activites-nav .sous-menu-activites li i {
     display: none;
   }
 }
@@ -1338,35 +1744,35 @@ main .btn-inscription {
   }
 }
 @media screen and (min-width: 769px) and (max-width: 1024px) {
-  main form {
+  main #section-login #login-form, main #section-login #admin-login-form, main #section-admin-login #login-form, main #section-admin-login #admin-login-form {
     width: 70%;
   }
-  main .btn {
+  main #section-login .btn, main #section-admin-login .btn {
     width: 100%;
   }
-  main .btn-inscription {
+  main #section-login .btn-inscription, main #section-admin-login .btn-inscription {
     width: 70%;
   }
 }
 @media screen and (max-width: 768px) {
-  main form {
+  main #section-login #login-form, main #section-login #admin-login-form, main #section-admin-login #login-form, main #section-admin-login #admin-login-form {
     width: 80%;
   }
-  main .btn {
+  main #section-login .btn, main #section-admin-login .btn {
     width: 100%;
   }
-  main .btn-inscription {
+  main #section-login .btn-inscription, main #section-admin-login .btn-inscription {
     width: 80%;
   }
 }
 @media screen and (max-width: 768px) and (max-width: 480px) {
-  main form {
+  main #section-login #login-form, main #section-login #admin-login-form, main #section-admin-login #login-form, main #section-admin-login #admin-login-form {
     width: 90%;
   }
-  main .btn {
+  main #section-login .btn, main #section-admin-login .btn {
     width: 100%;
   }
-  main .btn-inscription {
+  main #section-login .btn-inscription, main #section-admin-login .btn-inscription {
     width: 90%;
   }
 }
@@ -1433,11 +1839,11 @@ main .btn-inscription {
 }
 /* RESPONSIVE TABLETTE */
 @media screen and (min-width: 481px) and (max-width: 1024px) {
-  #section-show-activity {
+  #section-show-activity, #section-admin-show-activity {
     width: 90%;
     margin: auto;
   }
-  #section-show-activity .show-activity {
+  #section-show-activity .show-activity, #section-admin-show-activity .show-activity {
     margin: 2% auto;
     padding: 15px 20px;
     display: flex;
@@ -1447,29 +1853,36 @@ main .btn-inscription {
     gap: 0;
     flex-wrap: wrap;
   }
-  #section-show-activity .show-activity .img-activity {
+  #section-show-activity .show-activity .img-activity, #section-admin-show-activity .show-activity .img-activity {
     width: 40%;
     min-width: 40%;
   }
-  #section-show-activity .show-activity .infos-activity {
+  #section-show-activity .show-activity .infos-activity, #section-admin-show-activity .show-activity .infos-activity {
     width: 50%;
     min-width: 50%;
     margin: 0 10px;
   }
-  #section-show-activity .show-activity .infos-activity .group-title .pictogram {
-    width: 15%;
+  #section-show-activity .show-activity .infos-activity .group-title .pictogram, #section-admin-show-activity .show-activity .infos-activity .group-title .pictogram {
+    width: 8%;
   }
-  #section-show-activity .show-activity .infos-activity .group-title h2 {
+  #section-show-activity .show-activity .infos-activity .group-title h2, #section-admin-show-activity .show-activity .infos-activity .group-title h2 {
     font-size: 20px;
   }
-  #section-show-activity .show-activity .infos-activity p {
+  #section-show-activity .show-activity .infos-activity p, #section-admin-show-activity .show-activity .infos-activity p {
     font-size: 15px;
   }
-  #section-show-activity .show-activity .text-activity {
-    padding: 10px 15px;
+  #section-show-activity .show-activity .text-activity, #section-admin-show-activity .show-activity .text-activity {
     margin-top: 20px;
   }
-  #section-show-activity .btn-style {
+  #section-show-activity .show-activity .text-activity p:first-of-type, #section-admin-show-activity .show-activity .text-activity p:first-of-type {
+    padding: 10px 0;
+  }
+  #section-show-activity .show-activity .text-activity .organizer, #section-admin-show-activity .show-activity .text-activity .organizer {
+    font-size: 13px;
+    padding: 10px 0;
+    margin-top: 15px;
+  }
+  #section-show-activity .btn-style, #section-admin-show-activity .btn-style {
     width: 80%;
     padding: 9px 0;
     margin-bottom: 15%;
@@ -1480,22 +1893,22 @@ main .btn-inscription {
 }
 /* RESPONSIVE MOBILE */
 @media screen and (max-width: 480px) {
-  #section-show-activity .show-activity {
+  #section-show-activity .show-activity, #section-admin-show-activity .show-activity {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     gap: 20px;
   }
-  #section-show-activity .show-activity .img-activity {
+  #section-show-activity .show-activity .img-activity, #section-admin-show-activity .show-activity .img-activity {
     width: 100%;
     min-width: 90%;
   }
-  #section-show-activity .show-activity .infos-activity {
+  #section-show-activity .show-activity .infos-activity, #section-admin-show-activity .show-activity .infos-activity {
     width: 100%;
     min-width: 90%;
   }
-  #section-show-activity .show-activity .infos-activity .group-title {
+  #section-show-activity .show-activity .infos-activity .group-title, #section-admin-show-activity .show-activity .infos-activity .group-title {
     padding-bottom: 20px;
     display: flex;
     flex-direction: row;
@@ -1503,10 +1916,21 @@ main .btn-inscription {
     align-items: center;
     gap: 0;
   }
-  #section-show-activity .show-activity .infos-activity .group-title .pictogram {
-    width: 15%;
+  #section-show-activity .show-activity .infos-activity .group-title .pictogram, #section-admin-show-activity .show-activity .infos-activity .group-title .pictogram {
+    width: 10%;
   }
-  #section-show-activity .btn-style {
+  #section-show-activity .show-activity .text-activity, #section-admin-show-activity .show-activity .text-activity {
+    margin-top: 5px;
+  }
+  #section-show-activity .show-activity .text-activity p:first-of-type, #section-admin-show-activity .show-activity .text-activity p:first-of-type {
+    padding: 10px 0;
+  }
+  #section-show-activity .show-activity .text-activity .organizer, #section-admin-show-activity .show-activity .text-activity .organizer {
+    font-size: 13px;
+    padding: 10px 0;
+    margin-top: 15px;
+  }
+  #section-show-activity .btn-style, #section-admin-show-activity .btn-style {
     width: 100%;
     padding: 12px 0;
     margin-bottom: 15%;
@@ -1546,16 +1970,26 @@ main .btn-inscription {
     width: 100%;
     padding: 20px 10px;
   }
-}
-/* RESPONSIVE TABLETTE */
-@media screen and (min-width: 481px) and (max-width: 1024px) {
-  #section-profile .profile .infos-personnelles {
-    width: 100%;
-    padding: 20px 10px;
+  #section-myActivities {
+    width: 90%;
   }
+  #section-myActivities .my-activities .my-activity {
+    position: relative;
+    width: 20%;
+    height: 25vh;
+  }
+  /* RESPONSIVE TABLETTE */
   /* RESPONSIVE MOBILE */
 }
-@media screen and (min-width: 481px) and (max-width: 1024px) and (max-width: 480px) {
+@media screen and (max-width: 1024px) and (max-width: 768px) {
+  #section-myActivities .my-activities .my-activity {
+    position: relative;
+    width: 30%;
+    height: 25vh;
+    margin-bottom: 15px;
+  }
+}
+@media screen and (max-width: 1024px) and (max-width: 480px) {
   #section-profile .profile div.presentation p {
     font-size: 14px;
   }

@@ -1,6 +1,7 @@
 footer {
   background-color: $claretRed;
   padding: 15px 50px;
+  margin: 0;
 
   .footer-nav {
     @include flex($flex-dir: row, $justify: space-between);

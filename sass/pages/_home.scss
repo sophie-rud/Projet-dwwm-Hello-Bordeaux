@@ -1,10 +1,31 @@
 // Bannière panorama accueil
-.banner {
-  //background-image: url(../images/panorama_bordeaux.png);
+#banner {
+  background-image: url(../images/home/panorama_bordeaux.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   height: 70vh;
+  z-index: 1;
+
+  h1 {
+    margin-top: 0;
+    font-size: 45px;
+    font-weight: bold;
+    position: relative;
+    z-index: 100;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 67%;
+    height: 50px;
+    background-color: rgba( 254, 239, 221, 0.5);
+    left: 0;
+    top: 31%;
+    z-index: 10;
+  }
+
 }
 
 

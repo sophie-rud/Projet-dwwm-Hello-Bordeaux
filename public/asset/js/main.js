@@ -16,6 +16,7 @@ confirmationButtons.forEach((confirmationButton) => {
 
         // on passe la popup trouvée en display block pour l'afficher
         popup.style.display = "block";
+        document.querySelector('.popup-overlay').style.display = 'block';
     });
 })
 
@@ -29,6 +30,7 @@ confirmationBlockButtons.forEach((confirmationBlockButton) => {
         const elementId = confirmationBlockButton.dataset.blockTriggerId;
         const popup = document.querySelector(`[data-popup-block-target-id="${elementId}"]`);
         popup.style.display = "block";
+        document.querySelector('.popup-overlay').style.display = 'block';
     });
 })
 
@@ -47,5 +49,6 @@ closePopupButtons.forEach((closePopupButton) => {
         // On remonte jusqu'à la popup parente et on la masque
         const popup = closePopupButton.closest('.popup-confirmation-delete, .popup-confirmation-block');
         popup.style.display = "none";
+        document.querySelector('.popup-overlay').style.display = 'none';
     });
 });

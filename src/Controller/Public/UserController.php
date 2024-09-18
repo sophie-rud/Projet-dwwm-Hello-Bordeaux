@@ -10,6 +10,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +32,6 @@ class UserController extends AbstractController {
 
 
         if ($userCreateForm->isSubmitted() && $userCreateForm->isValid()) {
-
 
             // On récupère le fichier depuis le formulaire
             $pictureFile = $userCreateForm->get('profilePicture')->getData();
@@ -60,8 +60,6 @@ class UserController extends AbstractController {
             }
 
 
-
-
             // On récupère la valeur entrée par l'utilisateur dans le champ password
             $password = $userCreateForm->get('password')->getData();
 
@@ -82,6 +80,8 @@ class UserController extends AbstractController {
 
                 $this->addFlash('success', 'Votre profil a été créé !');
 
+                return $this->redirectToRoute('home');
+
             } catch(\Exception $exception) {
 
                 $this->addFlash('error', $exception->getMessage());
@@ -94,28 +94,38 @@ class UserController extends AbstractController {
         return $this->render('public/page/user/inscription_user.html.twig', [
             'userForm' => $userCreateFormView
         ]);
-
     }
 
 
 
     // Annotation qui permet de créer une route dès que la fonction est appelée
     #[Route('/user/profile/{id}', name: 'user_show_profile')]
-    public function showProfile(int $id, UserRepository $userRepository): Response {
+    public function showProfile(int $id, UserRepository $userRepository, Security $security): Response {
 
+        // Récupérer l'utilisateur actuellement connecté
+        $currentUser = $security->getUser();
         // Dans $user, on stocke le résultat de notre recherche par id dans les données de la table User
         $user = $userRepository->find($id);
 
-
-        // Si aucun user n'est trouvé avec l'id recherché, on retourne une page et code d'erreur 404
-        if (!$user) {
+        // Si aucun utilisateur n'est connecté ou aucun user n'est trouvé avec l'id recherché, on retourne une page et code d'erreur 404
+        if (!$user || !$currentUser) {
             $html404 = $this->renderView('public/page/page404.html.twig');
             return new Response($html404, 404);
         }
 
+        // Si l'utilisateur connecté n'a pas le bon id, on retourne la page 403
+        if ($currentUser->getId() !== $id) {
+            $html403 = $this->renderView('public/page/page403.html.twig');
+            return new Response($html403, 403);
+        }
+
+
+        $myActivities = $user->getActivitiesParticipate();
+
         // On retourne une réponse http en html
         return $this->render('public/page/user/user_show_profile.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'myActivities' => $myActivities
         ]);
     }
 
@@ -126,9 +136,14 @@ class UserController extends AbstractController {
         $user = $userRepository->find($id);
         $currentUser = $this->getUser();
 
-        if (!$user || $currentUser->getId() !== $user->getId()) {
+        if (!$user || !$currentUser) {
             $html404 = $this->renderView('public/page/page404.html.twig');
             return new Response($html404, 404);
+        }
+
+        if ($currentUser->getId() !== $id) {
+            $html403 = $this->renderView('public/page/page403.html.twig');
+            return new Response($html403, 403);
         }
 
 
@@ -154,9 +169,9 @@ class UserController extends AbstractController {
         $user = $userRepository->find($id);
         $currentUser = $this->getUser();
 
-        if ($currentUser->getId() !== $user->getId()) {
+        if ($currentUser->getId() !== $id) {
             /*throw $this->createAccessDeniedException('Vous ne pouvez pas modifier le profil d\'un autre utilisateur.');*/
-            $html403 = $this->renderView('admin/page/page403.html.twig');
+            $html403 = $this->renderView('public/page/page403.html.twig');
             return new Response($html403, 403);
         }
 

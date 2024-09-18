@@ -1,0 +1,40 @@
+#mainPage404, #mainAdminPage404 {
+  background-image: url(../images/photo-page-404.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+
+  // Superposition avec opacité
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.65);
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+
+// Conteneur pour le contenu (titre, bouton, etc.)
+.section-page404 {
+  position: relative;
+  z-index: 10;
+
+  h1 {
+    color: $claretRed;
+    z-index: 100;
+    position: relative;
+  }
+
+  .btn {
+    text-align: center;
+    width: 50%;
+    z-index: 100;
+    position: relative;
+  }
+}

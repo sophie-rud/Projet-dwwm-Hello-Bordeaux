@@ -12,7 +12,6 @@
         <table id="myTable">
             <thead>
                 <tr>
-                    <td>Id</td>
                     <td>Nom</td>
                     <td>Pictogramme</td>
                     <td>Actions</td>
@@ -22,13 +21,13 @@
             <tbody>
             {% for category in categories %}
                 <tr>
-                    <td>{{ category.id }}</td>
                     <td>{{ category.nameCategory }}</td>
                     <td> <div class="pictoCategory"> <img src="{{ asset('uploads/'~category.pictogram) }}" alt="illustration de : {{ category.nameCategory }}"> </div> </td>
-                    <td>
+                    <td class="td-flex">
                         <a href="{{ path('admin_update_category', {id: category.id}) }}"> <i class="fa-solid fa-pencil"></i> </a>
 
                         {# Supprimer la catégorie (+popup pour valider choix) #}
+                        <div class="popup-overlay"></div>
                         <div class="popup-confirmation-delete" data-popup-target-id="{{ category.id }}">
                             <p>Voulez vous vraiment supprimer la catégorie ?</p>
 
@@ -36,7 +35,7 @@
                             <button class="js-close-popup"> Annuler </button>
                         </div>
 
-                        <p data-trigger-id="{{ category.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can"></i> </p>
+                        <p data-trigger-id="{{ category.id }}" class="js-popup-confirmation-delete"> <i class="fa-regular fa-trash-can cursor-pointer"></i> </p>
 
                     </td>
                 </tr>
@@ -52,6 +51,8 @@
 
 {% block javascript %}
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
     <script src="https://cdn.datatables.net/2.1.4/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.1.4/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('asset/js/datatable.js') }}"></script>
 {% endblock %}

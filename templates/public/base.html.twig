@@ -64,7 +64,7 @@
 
         <div id="headerMainBar">
             <nav class="header-nav">
-                <a class="logo" href="{{ path('home') }}"><img src="{{ asset('asset/images/logo-HB-clair.png') }}" alt="logo Hello Bordeaux"></a>
+                <a class="logo" href="{{ path('home') }}"><img src="{{ asset('asset/images/logo-HB-clair-font.png') }}" alt="logo Hello Bordeaux"></a>
 
                 <ul class="menu-burger">
                     <li></li>
@@ -86,7 +86,7 @@
         </div>
     </header>
 
-    <main>
+    <main {% block classMain %}{% endblock %}>
         {# vérifie si des messages flashes ont été enregistrés par un controleur. Si oui, on les affiche #}
         {% for message in app.flashes('success') %}
             <div class="success-message">
@@ -141,11 +141,14 @@
     <script>
         let burger = document.querySelector('.menu-burger');
         let menu = document.querySelector('.nav');
+        let search = document.querySelector('.search-container');
 
         burger.addEventListener('click', () => {
                 menu.classList.toggle('active');
+                search.classList.toggle('active');
             }
-        )
+        );
+
     </script>
 
 {% block javascript %} {% endblock %}

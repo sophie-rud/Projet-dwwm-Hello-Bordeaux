@@ -16,16 +16,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" >
     {% block bootstrap %} {% endblock %}
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.4/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.4/css/responsive.dataTables.min.css">
+
     <link href="{{ asset('asset/css/app.css') }}" rel="stylesheet" />
 </head>
 
 
-<body>
+<body class="hb-body">
 
     <header>
 
         <div id="headerTopBar">
-            <div class="search-container">
+            <div class="search-container display-search">
                 <form class="search-bar" action="/search" method="GET">
                     <input type="text" placeholder="Rechercher..." name="search">
                     <button type="submit"> <i class="fa-solid fa-magnifying-glass"></i> </button>
@@ -35,7 +38,22 @@
             <div class="rightPart">
 
                 <div class="loginBlock">
-                <a href="{{ path('app_login') }}"> <i class="fa-solid fa-circle-user"></i>
+                    {% block username %}
+                        {% if app.user %}
+                        <a href="{{ path('admin_show_profile', { 'id': app.user.id }) }}">
+                            <i class="fa-solid fa-circle-user"></i>
+                            {{ app.user.username }}
+                        </a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}">
+                                <i class="fa-solid fa-circle-user"></i>
+                                Se connecter
+                            </a>
+                            {# <a class="btn-inscrire" href="{{ path('inscription_user') }}"> S'inscrire </a> #}
+                        {% endif %}
+                    {% endblock %}
+
+                {# <a href="{{ path('app_admin_login') }}"> <i class="fa-solid fa-circle-user"></i>
                     {% block username %}
                         {% if app.user %}
                             {{ app.user.username }}
@@ -43,10 +61,14 @@
                             Espace utilisateur
                         {% endif %}
                     {% endblock %} </a>
+                #}
 
                 {% block deconnection %}
                     {% if app.user %}
-                        <a class="deconnection" href="{{ path('app_logout') }}"> <i class="fa-solid fa-right-to-bracket"></i> Se déconnecter </a>
+                        <a class="deconnection" href="{{ path('app_logout') }}">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Se déconnecter
+                        </a>
                     {% endif %}
                 {% endblock %}
                 </div>
@@ -58,7 +80,7 @@
 
         <div id="headerMainBar">
             <nav class="header-nav">
-                <a class="logo" href="{{ path('home') }}"> <img src="{{ asset('asset/images/logo-HB-clair.png') }}" alt="logo Hello Bordeaux"> </a>
+                <a class="logo" href="{{ path('home') }}"> <img src="{{ asset('asset/images/logo-HB-clair-font.png') }}" alt="logo Hello Bordeaux"> </a>
 
                 <ul class="menu-burger">
                     <li></li>
@@ -125,9 +147,11 @@
     <script>
         let burger = document.querySelector('.menu-burger');
         let menu = document.querySelector('.nav');
+        let search = document.querySelector('.search-container');
 
         burger.addEventListener('click', () => {
                 menu.classList.toggle('active');
+                search.classList.toggle('active');
             }
         )
     </script>
